@@ -30,13 +30,6 @@ public class TextFileIn
     private BufferedReader mReader = null;
 
     /**
-     * Default constructor is private. Use constructor with FileName
-     */
-    private TextFileIn()
-    {
-    }
-
-    /**
      * Constructor opens named file for input
      * 
      * @param fileName
