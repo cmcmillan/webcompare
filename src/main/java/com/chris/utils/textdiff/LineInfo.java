@@ -3,9 +3,14 @@
  */
 package com.chris.utils.textdiff;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.chris.utils.textdiff.exceptions.InvalidLineStateException;
 
 /**
+ * Wrapper class to provide information about a line and its state
+ * 
  * @author cjmcmill
  * 
  */
@@ -15,6 +20,37 @@ public class LineInfo
     private int lineNumber;
     private int otherLine;
     private String line;
+
+    /**
+     * Convert a {@link String}[] to a {@code List<LineInfo>}. {@link LineInfo}
+     * objects are initialized using the line index and line.
+     * 
+     * @param lines
+     *            {@link String}[]
+     * @return {@code List<LineInfo>}
+     * @throws InvalidLineStateException
+     */
+    public static List<LineInfo> asLineInfo(String[] lines, LineState initialState)
+	    throws InvalidLineStateException
+    {
+	switch (initialState)
+	{
+	    case UniqueMatch:
+		throw new IllegalArgumentException("initialState," + initialState
+			+ " , is invalid.");
+	    default:
+		break;
+	}
+
+	List<LineInfo> lineInfos = new ArrayList<LineInfo>(lines.length);
+
+	for (int i = 0; i < lines.length; i++)
+	{
+	    lineInfos.add(new LineInfo(i, lines[i], initialState, -1));
+	}
+
+	return lineInfos;
+    }
 
     /**
      * @param lineNumber
@@ -49,15 +85,11 @@ public class LineInfo
     }
 
     /**
-     * @return the state
-     * @throws InvalidLineStateException
-     *             OtherLine must be a non-negative integer if state is not
-     *             {@link LineState.PrimaryOnly} or
-     *             {@link LineState.SecondaryOnly}
+     * @return the line
      */
-    public LineState getState() throws InvalidLineStateException
+    public String getLine()
     {
-	return state;
+	return line;
     }
 
     /**
@@ -77,11 +109,59 @@ public class LineInfo
     }
 
     /**
-     * @return the line
+     * @return the state
+     * @throws InvalidLineStateException
+     *             OtherLine must be a non-negative integer if state is not
+     *             {@link LineState.PrimaryOnly} or
+     *             {@link LineState.SecondaryOnly}
      */
-    public String getLine()
+    public LineState getState() throws InvalidLineStateException
     {
-	return line;
+	return state;
+    }
+
+    /**
+     * Check if inputLine matches line and it is not already a unique match.
+     * 
+     * @param inputLine
+     *            line to compare to this.line
+     * @return true if inputLine matches line and it is not already a unique
+     *         match.
+     */
+    public boolean isMatch(String inputLine)
+    {
+	boolean match = false;
+	// Verify the new LineState and OtherLine values
+	switch (state)
+	{
+	    case UniqueMatch:
+		// this LineInfo is already matched
+		match = false;
+		break;
+	    case PrimaryOnly:
+	    case SecondaryOnly:
+	    default:
+		// Check if this.line is equal to the inputLine
+		match = this.line.equals(inputLine);
+		break;
+	}
+	return match;
+    }
+
+    /**
+     * Returns a string representation of the object values in the a tab
+     * delimited format:
+     * 
+     * <pre>
+     * {@code state}	{@code lineNumber}	{@code otherLine}	{@code line}
+     * </pre>
+     * 
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString()
+    {
+	return String.format("%1$s\t%2$s\t%3$s\t%4$s", state, lineNumber, otherLine, line);
     }
 
     /**
