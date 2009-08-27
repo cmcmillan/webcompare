@@ -3,16 +3,20 @@
  */
 package com.chris.utils.text;
 
-import com.chris.utils.Convert;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
-import junit.framework.TestCase;
+import org.junit.Test;
+
+import com.chris.utils.Convert;
 
 /**
  * @author cjmcmill
  * 
  */
-public class TextFileInTest extends TestCase
+public class TextFileInTest
 {
+    @Test
     public void testReadLine()
     {
 	String line;
@@ -30,7 +34,7 @@ public class TextFileInTest extends TestCase
 	catch (Exception e)
 	{
 	    e.printStackTrace();
-	    fail(e.getMessage());
+	    fail(e.getLocalizedMessage());
 	}
     }
 }
