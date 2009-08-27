@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Utility class for converting objects to different formats
+ * 
  * @author cjmcmill
  * 
  */
@@ -17,7 +19,6 @@ public class Convert
 		    "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen",
 		    "eighteen", "nineteen" };
     /**
-     * 
      * Note: 10-19 are "special" and use digits
      */
     static final String[] TENS_DIGITS =
@@ -29,7 +30,9 @@ public class Convert
 
     /**
      * Convert an int to its numeral name equivalent
-     * @param n Number
+     * 
+     * @param n
+     *            Number
      * @return numeral name as String
      */
     public static String getNumeralName(int n)
@@ -52,7 +55,7 @@ public class Convert
 	    // Get the numeral value
 	    int primaryNumeral = Integer.parseInt(numerals.get(i));
 	    int numeral = primaryNumeral;
-	    	    
+
 	    if (digitPlace == 2 && primaryNumeral == 1)
 	    {
 		// Numeral is between 10 - 19
@@ -62,7 +65,7 @@ public class Convert
 		// Move into the DIGITS array
 		digitPlace--;
 	    }
-	    
+
 	    if (digitPlace == 0)
 	    {
 		digit.append(DIGITS[numeral] + " " + SCALE_DIGITS[primaryNumeral] + " ");
@@ -108,4 +111,5 @@ public class Convert
 	}
 	return digits;
     }
+
 }

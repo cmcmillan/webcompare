@@ -30,6 +30,17 @@ public class TextFileIn
     private BufferedReader mReader = null;
 
     /**
+     * Constructor opens provided file for input.
+     * 
+     * @param file
+     * @throws FileNotFoundException
+     */
+    public TextFileIn(File file) throws FileNotFoundException
+    {
+	mReader = new BufferedReader(new FileReader(file));
+    }
+
+    /**
      * Constructor opens named file for input
      * 
      * @param fileName
@@ -41,14 +52,21 @@ public class TextFileIn
     }
 
     /**
-     * Constructor opens provided file for input.
+     * Returns contents of a file as an array of Strings.
      * 
-     * @param file
-     * @throws FileNotFoundException
+     * @return java.lang.String[]
+     * @throws IOException
+     *             java.io.IOException
      */
-    public TextFileIn(File file) throws FileNotFoundException
+    public String[] asArray() throws IOException
     {
-	mReader = new BufferedReader(new FileReader(file));
+	String line;
+	List<String> lineList = new ArrayList<String>();
+	while ((line = this.readLine()) != null)
+	{
+	    lineList.add(line);
+	}
+	return lineList.toArray(new String[0]);
     }
 
     /**
@@ -72,24 +90,6 @@ public class TextFileIn
     }
 
     /**
-     * Returns contents of a file as an array of Strings.
-     * 
-     * @return java.lang.String[]
-     * @throws IOException
-     *             java.io.IOException
-     */
-    public String[] asArray() throws IOException
-    {
-	String line;
-	List<String> lineList = new ArrayList<String>();
-	while ((line = this.readLine()) != null)
-	{
-	    lineList.add(line);
-	}
-	return lineList.toArray(new String[0]);
-    }
-
-    /**
      * Close the input file. This is not necessary if the client reads to the
      * end of file.
      */
@@ -108,23 +108,24 @@ public class TextFileIn
 	{
 	}
     }
-    
+
     /**
-     * Read one line from input file. On read past end of file
-     * closes the file and returns null.
+     * Read one line from input file. On read past end of file closes the file
+     * and returns null.
+     * 
      * @return java.lang.String
      * @throws IOException
      */
     public String readLine() throws IOException
     {
-	if(mReader == null)
+	if (mReader == null)
 	{
 	    throw new IOException();
 	}
-	
+
 	String line = mReader.readLine();
-	
-	if(line == null)
+
+	if (line == null)
 	{
 	    this.close();
 	}
