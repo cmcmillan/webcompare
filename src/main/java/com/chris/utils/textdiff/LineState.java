@@ -6,7 +6,11 @@ package com.chris.utils.textdiff;
 public enum LineState
 {
     /**
-     * Line only exists in the Primary file 
+     * Initial Line state
+     */
+    Fresh,
+    /**
+     * Line only exists in the Primary file
      */
     PrimaryOnly,
     /**
