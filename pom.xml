@@ -77,6 +77,22 @@
 		<!--			<artifactId>logback-classic</artifactId>-->
 		<!--			<version>0.9.17</version>-->
 		<!--		</dependency>-->
+
+		<dependency>
+			<groupId>org.jdom</groupId>
+			<artifactId>jdom</artifactId>
+			<version>1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>jaxen</groupId>
+			<artifactId>jaxen</artifactId>
+			<version>1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jdom</groupId>
+			<artifactId>saxpath</artifactId>
+			<version>1.0-FCS</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
