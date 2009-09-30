@@ -280,10 +280,12 @@ public class TestDBUtils
 	{
 	    LOGGER.debug("Creating connection");
 	    conn = ds.getConnection();
+	    conn.setCatalog("public");
 	    LOGGER.debug("Creating statement");
 	    stmt = conn.createStatement();
 	    LOGGER.debug("Executing statement");
 	    rset = stmt.executeQuery("SELECT * FROM MVN_DATA");
+	    // rset = conn.getMetaData().getTables(null, null, null, null);
 	    LOGGER.debug("Results:");
 	    numcols = rset.getMetaData().getColumnCount();
 	    while (rset.next())
@@ -293,7 +295,7 @@ public class TestDBUtils
 		{
 		    sBuilder.append("\t" + rset.getString(i));
 		}
-		LOGGER.debug(sBuilder.toString());
+		LOGGER.info(sBuilder.toString());
 	    }
 	}
 	catch (SQLException e)
