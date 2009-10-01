@@ -33,15 +33,15 @@
 		<!-- SLF4J bindings -->
 		<!-- Only one of these should be enabled at a time -->
 
-		<dependency>
-			<!--
-				Outputs all events to System.err. Only messages of level INFO and
-				higher are printed
-			-->
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-simple</artifactId>
-			<version>1.5.8</version>
-		</dependency>
+		<!--		<dependency>-->
+		<!--
+			Outputs all events to System.err. Only messages of level INFO and
+			higher are printed
+		-->
+		<!--			<groupId>org.slf4j</groupId>-->
+		<!--			<artifactId>slf4j-simple</artifactId>-->
+		<!--			<version>1.5.8</version>-->
+		<!--		</dependency>-->
 
 		<!--		<dependency>-->
 		<!--			 log4j 1.2 logging framework -->
@@ -71,12 +71,12 @@
 		<!--			<version>1.5.8</version>-->
 		<!--		</dependency>-->
 <!---->
-		<!--		<dependency>-->
-		<!--			 SLF4J direct implementation -->
-		<!--			<groupId>ch.qos.logback</groupId>-->
-		<!--			<artifactId>logback-classic</artifactId>-->
-		<!--			<version>0.9.17</version>-->
-		<!--		</dependency>-->
+		<dependency>
+			<!-- SLF4J direct implementation -->
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>0.9.17</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.jdom</groupId>
