@@ -72,13 +72,14 @@ public final class DBUtils
 	    String password, String connectURI)
     {
 	BasicDataSource ds = new BasicDataSource();
-	LOGGER.debug("Driver Class Name: " + driverClassName);
+	// LOGGER.debug(String.format("Driver Class Name: %0$s",
+	// bds.getDriverClassName()));
 	ds.setDriverClassName(driverClassName);
-	LOGGER.debug("Username: " + userName);
+	// LOGGER.debug(String.format("Username: %0$s", bds.getUsername()));
 	ds.setUsername(userName);
-	LOGGER.debug("Password: " + password);
+	// LOGGER.debug(String.format("Password: %0$s", bds.getPassword()));
 	ds.setPassword(password);
-	LOGGER.debug("Connect URI: " + connectURI);
+	// LOGGER.debug(String.format("Connection URI: %0$s", bds.getUrl()));
 	ds.setUrl(connectURI);
 	return ds;
     }
@@ -93,24 +94,19 @@ public final class DBUtils
      */
     public static void printDataSourceStats(DataSource ds) throws SQLException
     {
-	StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
-	if (stackTrace.length > 0)
-	{
-	    LOGGER.debug("%0$s : %1$d : %2$s", new Object[] { stackTrace[0].getFileName(),
-		    stackTrace[0].getLineNumber(), stackTrace[0].getMethodName() });
-	}
+	// LOGGER formatting does not seem to work
 	LOGGER.info("--------------------------------");
 	BasicDataSource bds = (BasicDataSource) ds;
 	// Output the Driver
-	LOGGER.debug("Driver Class Name: %0$s", bds.getDriverClassName());
+	LOGGER.debug(String.format("Driver Class Name: %0$s", bds.getDriverClassName()));
 	// Output the User Name
-	LOGGER.debug("Username: %0$s", bds.getUsername());
+	LOGGER.debug(String.format("Username: %0$s", bds.getUsername()));
 	// Output the Connection URI
-	LOGGER.info("Connection URI: %0$s", bds.getUrl());
+	LOGGER.info(String.format("Connection URI: %0$s", bds.getUrl()));
 	// Output the Number of Active Connections
-	LOGGER.info("NumActive: %0$s", Integer.valueOf(bds.getNumActive()));
+	LOGGER.info(String.format("NumActive: %0$s", bds.getNumActive()));
 	// Output the Number of Idle Connections
-	LOGGER.info("NumIdle: %0$d", (Object) Integer.valueOf(bds.getNumIdle()));
+	LOGGER.info(String.format("NumIdle: %0$d", bds.getNumIdle()));
 	LOGGER.info("--------------------------------");
     }
 
