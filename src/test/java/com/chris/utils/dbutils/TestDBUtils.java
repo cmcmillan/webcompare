@@ -28,26 +28,32 @@ public class TestDBUtils
      * Test Oracle JDBC Driver
      */
     private static final String PG_DRIVER = "org.postgresql.Driver";
+
     /**
      * Test PostgreSQL Host
      */
     private static final String PG_HOST = "localhost";
+
     /**
      * Test PostgreSQL Port
      */
     private static final String PG_PORT = "5433";
+
     /**
      * Test PostgreSQL Database
      */
     private static final String PG_DATABASE = "postgres";
+
     /**
      * Test PostgreSQL User Name
      */
     private static final String PG_USERNAME = "postgres";
+
     /**
      * Test PostgreSQL Password
      */
     private static final String PG_PASSWORD = "GoodDog1";
+
     /**
      * Test PostgreSQL Connection URL.
      * <p>
@@ -64,26 +70,32 @@ public class TestDBUtils
      * Test Oracle JDBC Driver
      */
     private static final String ORCL_DRIVER = "oracle.jdbc.driver.OracleDriver";
+
     /**
      * Test Oracle Host
      */
     private static final String ORCL_HOST = "daytongis";
+
     /**
      * Test Oracle Port
      */
     private static final String ORCL_PORT = "1521";
+
     /**
      * Test Oracle Database
      */
     private static final String ORCL_DATABASE = "devgis";
+
     /**
      * Test Oracle User Name
      */
     private static final String ORCL_USERNAME = "geodb";
+
     /**
      * Test Oracle Password
      */
     private static final String ORCL_PASSWORD = "geodb";
+
     /**
      * Test Oracle Connection URL. Note that both the ":" and "@" characters are
      * necessary.
@@ -204,19 +216,16 @@ public class TestDBUtils
 	}
 	finally
 	{
-	    if (conn != null)
+	    try
 	    {
-		try
-		{
-		    conn.close();
-		}
-		catch (SQLException e)
-		{
-		}
-		finally
-		{
-		    conn = null;
-		}
+		conn.close();
+	    }
+	    catch (SQLException e)
+	    {
+	    }
+	    finally
+	    {
+		conn = null;
 	    }
 	}
     }
@@ -238,19 +247,16 @@ public class TestDBUtils
 	}
 	finally
 	{
-	    if (conn != null)
+	    try
 	    {
-		try
-		{
-		    conn.close();
-		}
-		catch (SQLException e)
-		{
-		}
-		finally
-		{
-		    conn = null;
-		}
+		conn.close();
+	    }
+	    catch (SQLException e)
+	    {
+	    }
+	    finally
+	    {
+		conn = null;
 	    }
 	}
     }
@@ -284,7 +290,7 @@ public class TestDBUtils
 	    LOGGER.debug("Creating statement");
 	    stmt = conn.createStatement();
 	    LOGGER.debug("Executing statement");
-	    rset = stmt.executeQuery("SELECT * FROM MVN_DATA");
+	    rset = stmt.executeQuery("SELECT * FROM mvn_data");
 	    // rset = conn.getMetaData().getTables(null, null, null, null);
 	    LOGGER.debug("Results:");
 	    numcols = rset.getMetaData().getColumnCount();
@@ -328,5 +334,4 @@ public class TestDBUtils
 	}
 	assertTrue("No columns exist in the table", numcols > 0);
     }
-
 }
