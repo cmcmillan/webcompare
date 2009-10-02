@@ -4,9 +4,12 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.sql.DataSource;
 
@@ -16,6 +19,8 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.chris.utils.text.TextFileIn;
 
 public class TestDBUtils
 {
@@ -333,5 +338,110 @@ public class TestDBUtils
 	    }
 	}
 	assertTrue("No columns exist in the table", numcols > 0);
+    }
+
+    public void testLoadMVNData()
+    {
+	String regex = ".*-(([^:]*):([^:]*):([^:]*):([^:])*:([^:]*)$)";
+	String input = "";
+	Pattern pattern = Pattern.compile(regex);
+	Matcher matcher = pattern.matcher(input);
+
+	Connection conn = null;
+	PreparedStatement stmt = null;
+	ResultSet rset = null;
+
+	try
+	{
+
+	    LOGGER.debug("Creating connection");
+	    conn = ds.getConnection();
+	    conn.setCatalog("public");
+	    LOGGER.debug("Creating statement");
+
+	    String sql =
+		    "INSERT INTO mvn_data( raw_text, dependency, trimmed, package_name, class_name,"
+			    + "file_type, ver, phase) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+	    stmt = conn.prepareStatement(sql);
+
+	    // Get the input text file
+	    TextFileIn txtFile = new TextFileIn("deptree.txt");
+	    String myLine;
+	    String trimmedGroup;
+	    while ((myLine = txtFile.readLine()) != null)
+	    {
+		matcher = pattern.matcher(myLine);
+		if (matcher.matches())
+		{
+		    // Clear out any parameters from last time
+		    stmt.clearParameters();
+		    // Add the raw input string for in case we need it later
+		    stmt.setNString(0, myLine);
+		    // is it a dependency? yes, assuming the Regex is correct
+		    // and Maven doesn't throw weirdness in
+		    stmt.setBoolean(1, true);
+		    for (int j = 1; j <= matcher.groupCount(); j++)
+		    {
+			trimmedGroup = matcher.group(j).trim();
+			LOGGER.debug(String.format("Group %1$s: %2$s", j, trimmedGroup));
+
+			// Populate the remaining parameters
+			switch (j)
+			{
+			    case 1:
+				// GroupId which corresponds
+				stmt.setNString(j, trimmedGroup);
+			    case 2:
+				// Trim version of the main group
+				stmt.setNString(j, trimmedGroup);
+			    case 3:
+				// Trim version of the main group
+				stmt.setNString(j, trimmedGroup);
+			    case 4:
+				// Packaging of the dependency
+				stmt.setNString(j, trimmedGroup);
+			    case 5:
+				// Packaging
+				stmt.setNString(j, trimmedGroup);
+			    case 6:
+				// Phase of the main group
+				stmt.setNString(j, trimmedGroup);
+			    default:
+				break;
+			}
+		    }
+		    // Add the parameter set to batch
+		    stmt.addBatch();
+		}
+	    }
+	}
+	catch (Exception e)
+	{
+	    fail(e.getLocalizedMessage());
+	}
+	finally
+	{
+	    try
+	    {
+		rset.close();
+	    }
+	    catch (Exception e)
+	    {
+	    }
+	    try
+	    {
+		stmt.close();
+	    }
+	    catch (Exception e)
+	    {
+	    }
+	    try
+	    {
+		conn.close();
+	    }
+	    catch (Exception e)
+	    {
+	    }
+	}
     }
 }
