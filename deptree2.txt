@@ -1,0 +1,26 @@
+com.chris:webcompare:jar:1.0-SNAPSHOT
++- junit:junit:jar:4.6:test
++- org.slf4j:slf4j-api:jar:1.5.8:compile
++- ch.qos.logback:logback-classic:jar:0.9.17:compile
+|  \- ch.qos.logback:logback-core:jar:0.9.17:compile
++- org.jdom:jdom:jar:1.1:compile
++- jaxen:jaxen:jar:1.1:compile
+|  +- dom4j:dom4j:jar:1.6.1:compile
+|  +- jdom:jdom:jar:1.0:compile
+|  +- xml-apis:xml-apis:jar:1.3.02:compile
+|  +- xerces:xercesImpl:jar:2.6.2:compile
+|  \- xom:xom:jar:1.0:compile
+|     +- xerces:xmlParserAPIs:jar:2.6.2:compile
+|     +- xalan:xalan:jar:2.6.0:compile
+|     \- com.ibm.icu:icu4j:jar:2.6.1:compile
++- org.jdom:saxpath:jar:1.0-FCS:compile
++- org.apache.poi:poi:jar:3.5-FINAL:compile
+|  +- commons-logging:commons-logging:jar:1.1:runtime
+|  |  +- logkit:logkit:jar:1.0.1:runtime
+|  |  +- avalon-framework:avalon-framework:jar:4.1.3:runtime
+|  |  \- javax.servlet:servlet-api:jar:2.3:runtime
+|  \- log4j:log4j:jar:1.2.13:runtime
++- commons-dbutils:commons-dbutils:jar:1.2:compile
++- commons-dbcp:commons-dbcp:jar:1.2.2:compile
++- commons-pool:commons-pool:jar:1.5.2:compile
+\- postgresql:postgresql:jar:8.3-603.jdbc4:compile
