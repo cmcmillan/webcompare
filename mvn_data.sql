@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
--- Started on 2009-10-02 17:57:30
+-- Started on 2009-10-05 14:16:44
 
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = off;
@@ -25,10 +25,10 @@ SET default_with_oids = false;
 CREATE TABLE mvn_data (
     dependency_id integer NOT NULL,
     raw_text character varying,
-    "groupId" character varying,
-    "artifactId" character varying,
-    "artifactType" character varying,
-    "artifactVersion" character varying,
+    group_id character varying,
+    artifact_id character varying,
+    artifact_type character varying,
+    artifact_version character varying,
     scope character varying,
     classifier character varying DEFAULT ''::character varying
 );
@@ -57,28 +57,28 @@ COMMENT ON COLUMN mvn_data.raw_text IS 'The raw text supplied to the parser.';
 --
 -- TOC entry 1749 (class 0 OID 0)
 -- Dependencies: 1473
--- Name: COLUMN mvn_data."groupId"; Type: COMMENT; Schema: public; Owner: postgres
+-- Name: COLUMN mvn_data.group_id; Type: COMMENT; Schema: public; Owner: postgres
 --
 
-COMMENT ON COLUMN mvn_data."groupId" IS 'Usually the package containing the artifact';
+COMMENT ON COLUMN mvn_data.group_id IS 'Usually the package containing the artifact';
 
 
 --
 -- TOC entry 1750 (class 0 OID 0)
 -- Dependencies: 1473
--- Name: COLUMN mvn_data."artifactId"; Type: COMMENT; Schema: public; Owner: postgres
+-- Name: COLUMN mvn_data.artifact_id; Type: COMMENT; Schema: public; Owner: postgres
 --
 
-COMMENT ON COLUMN mvn_data."artifactId" IS 'Name of the project';
+COMMENT ON COLUMN mvn_data.artifact_id IS 'Name of the project';
 
 
 --
 -- TOC entry 1751 (class 0 OID 0)
 -- Dependencies: 1473
--- Name: COLUMN mvn_data."artifactType"; Type: COMMENT; Schema: public; Owner: postgres
+-- Name: COLUMN mvn_data.artifact_type; Type: COMMENT; Schema: public; Owner: postgres
 --
 
-COMMENT ON COLUMN mvn_data."artifactType" IS 'Type of the artifact for example : 
+COMMENT ON COLUMN mvn_data.artifact_type IS 'Type of the artifact for example : 
 
 java-source, jar, war';
 
@@ -86,10 +86,10 @@ java-source, jar, war';
 --
 -- TOC entry 1752 (class 0 OID 0)
 -- Dependencies: 1473
--- Name: COLUMN mvn_data."artifactVersion"; Type: COMMENT; Schema: public; Owner: postgres
+-- Name: COLUMN mvn_data.artifact_version; Type: COMMENT; Schema: public; Owner: postgres
 --
 
-COMMENT ON COLUMN mvn_data."artifactVersion" IS 'Version of the artifact';
+COMMENT ON COLUMN mvn_data.artifact_version IS 'Version of the artifact';
 
 
 --
@@ -150,7 +150,7 @@ ALTER TABLE mvn_data ALTER COLUMN dependency_id SET DEFAULT nextval('mvn_data_de
 -- Data for Name: mvn_data; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY mvn_data (dependency_id, raw_text, "groupId", "artifactId", "artifactType", "artifactVersion", scope, classifier) FROM stdin;
+COPY mvn_data (dependency_id, raw_text, group_id, artifact_id, artifact_type, artifact_version, scope, classifier) FROM stdin;
 \.
 
 
@@ -164,7 +164,7 @@ ALTER TABLE ONLY mvn_data
     ADD CONSTRAINT mvn_data_prim_key PRIMARY KEY (dependency_id);
 
 
--- Completed on 2009-10-02 17:57:30
+-- Completed on 2009-10-05 14:16:44
 
 --
 -- PostgreSQL database dump complete
