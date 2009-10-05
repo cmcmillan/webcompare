@@ -4,6 +4,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 
 import org.apache.oro.text.regex.MalformedPatternException;
@@ -41,6 +43,7 @@ public final class RegexUtils
      */
     public static final String A_START_GARBAGE =
 	    "^\\S+" + A_SPACE_COLON + "*(" + A_NO_COLON_SPACE + "*)";
+
     /**
      * regex fragment to look for some spaces
      */
@@ -50,14 +53,220 @@ public final class RegexUtils
      */
     public static final String A_START_PHRASE = "^.*\\s";
 
+    /**
+     * regex to parse out coordinates from a maven log line
+     */
+    public static final String MAVEN_LINE_COORD =
+	    "(" + RegexUtils.A_START_GARBAGE + ")*(" + RegexUtils.A_MVN_COORD + ")";
+
+    /**
+     * Map of regular expressions that have been initialized.
+     */
+    private static Map<String, Pattern> patterns = new HashMap<String, Pattern>();
     private static final PatternCompiler compiler = new Perl5Compiler();;
     private static final PatternMatcher matcher = new Perl5Matcher();
 
     /**
-     * @param pattern
-     * @param input
+     * Assert the provided Regular Expression is false
+     * 
+     * @param javaMatcher
+     *            {@link Matcher} Regular Expression Match to check
      */
-    public static final void outputMatchResults(Pattern pattern, PatternMatcherInput input)
+    public static final void assertRegexFalse(Matcher javaMatcher)
+    {
+	// Reset the Matcher in case it has been used
+	javaMatcher.reset();
+	// This madness is needed to get the search input text
+	StringBuffer input = new StringBuffer();
+	javaMatcher.appendTail(input);
+	// Run the Assert statement
+	assertRegex(javaMatcher.pattern().pattern(), input.toString(), false, javaMatcher.find());
+    }
+
+    /**
+     * Assert the provided Regular Expression is false
+     * 
+     * @param regex
+     *            Regular Expression to test
+     * @param inputString
+     *            Input to be parsed
+     */
+    public static void assertRegexFalse(String regex, String inputString)
+    {
+	// Initialize the pattern
+	try
+	{
+	    Pattern pattern = initPattern(regex);
+	    PatternMatcherInput input = new PatternMatcherInput(inputString);
+	    assertRegexFalse(pattern, input);
+	}
+	catch (MalformedPatternException e)
+	{
+	    LOGGER.error("Invalid regular expression", e);
+	    fail(e.getLocalizedMessage());
+	}
+    }
+
+    /**
+     * Assert the provided Regular Expression is false
+     * 
+     * @param pattern
+     *            Regular Expression to test
+     * @param input
+     *            Input to be parsed
+     */
+    public static final void assertRegexFalse(Pattern pattern, PatternMatcherInput input)
+    {
+	// Run the Assert statement
+	assertRegex(pattern.getPattern(), String.valueOf(input.getInput()), false, matcher
+		.contains(input, pattern));
+    }
+
+    /**
+     * Assert the provided Regular Expression is true
+     * 
+     * @param javaMatcher
+     *            {@link Matcher} Regular Expression Match to check
+     */
+    public static final void assertRegexTrue(Matcher javaMatcher)
+    {
+	// Reset the Matcher in case it has been used
+	javaMatcher.reset();
+	// This madness is needed to get the search input text
+	StringBuffer input = new StringBuffer();
+	javaMatcher.appendTail(input);
+	// Run the Assert statement
+	assertRegex(javaMatcher.pattern().pattern(), input.toString(), true, javaMatcher.find());
+    }
+
+    /**
+     * Assert the provided Regular Expression is true
+     * 
+     * @param regex
+     *            Regular Expression to test
+     * @param inputString
+     *            Input to be parsed
+     */
+    public static void assertRegexTrue(String regex, String inputString)
+    {
+	// Initialize the pattern
+	try
+	{
+	    Pattern pattern = initPattern(regex);
+	    PatternMatcherInput input = new PatternMatcherInput(inputString);
+	    assertRegexTrue(pattern, input);
+	}
+	catch (MalformedPatternException e)
+	{
+	    LOGGER.error("Invalid regular expression", e);
+	    fail(e.getLocalizedMessage());
+	}
+    }
+
+    /**
+     * Assert the provided Regular Expression is true
+     * 
+     * @param pattern
+     *            Regular Expression to test
+     * @param input
+     *            Input to be parsed
+     */
+    public static final void assertRegexTrue(Pattern pattern, PatternMatcherInput input)
+    {
+	// Run the Assert statement
+	assertRegex(pattern.getPattern(), String.valueOf(input.getInput()), true, matcher.contains(
+	    input, pattern));
+    }
+
+    /**
+     * Assert the provided Regular Expression is true or false
+     * 
+     * @param pattern
+     *            Regular Expression to test
+     * @param inputText
+     *            Input to be parsed
+     * @param assertType
+     *            Type of assert to run
+     * @param condition
+     *            Condition to be tested
+     */
+    private static final void assertRegex(String pattern, String inputText, boolean assertType,
+	    boolean condition)
+    {
+	String message =
+		String.format("Regex should%1$s have a match.\r%2$s\rSearch text:\r%3$s",
+		    assertType ? "" : " not", pattern, inputText);
+	// Run the Assert statement
+	if (assertType)
+	    assertTrue(message, condition);
+	else
+	    assertFalse(message, condition);
+    }
+
+    /**
+     * Get a pattern associated with {@code regex}
+     * 
+     * @param regex
+     *            Regular Expression
+     * @throws MalformedPatternException
+     *             {@code regex} is not a valid pattern.
+     */
+    public static final Pattern initPattern(String regex) throws MalformedPatternException
+    {
+	if (!patterns.containsKey(regex))
+	{
+	    // Create a new pattern, and stash a copy for reuse.
+	    try
+	    {
+		patterns.put(regex, compiler.compile(regex));
+	    }
+	    catch (MalformedPatternException e)
+	    {
+		String errMsg =
+			String.format("Invalid regular expression pattern, %1$s, %2$s", regex, e
+				.getLocalizedMessage());
+		LOGGER.error(errMsg, e);
+		// fail(errMsg);
+		throw e;
+	    }
+	}
+	return patterns.get(regex);
+    }
+
+    /**
+     * Output the results of using {@code regex} on {@code inputString}
+     * 
+     * @param regex
+     *            Regular Expression
+     * @param inputString
+     *            Input to be parsed
+     * @param verbose
+     *            Enable more verbose logging of Regex match information
+     * @throws MalformedPatternException
+     *             {@code regex} is not a valid pattern.
+     */
+    public static final void debugRegex(String regex, String inputString, boolean verbose)
+	    throws MalformedPatternException
+    {
+	// Initialize the pattern
+	Pattern pattern = initPattern(regex);
+	PatternMatcherInput input = new PatternMatcherInput(inputString);
+	// Output the Match results using the Logger
+	outputMatchResults(pattern, input, verbose);
+    }
+
+    /**
+     * Output the {@link MatchResult} information
+     * 
+     * @param pattern
+     *            Regular Expression Pattern
+     * @param input
+     *            Input to be parsed
+     * @param verbose
+     *            Enable more verbose logging of Regex match information
+     */
+    public static final void outputMatchResults(Pattern pattern, PatternMatcherInput input,
+	    boolean verbose)
     {
 	int groups;
 	MatchResult result;
@@ -74,19 +283,24 @@ public final class RegexUtils
 		// methods are used.
 
 		LOGGER.debug("Match: {}", result.toString());
-		// LOGGER.debug("Length: {}" , result.length());
 		groups = result.groups();
-		// LOGGER.debug("Groups: {}" , groups);
-		// LOGGER.debug("Begin offset: {}" , result.beginOffset(0));
-		// LOGGER.debug("End offset: {}" , result.endOffset(0));
-		// LOGGER.debug("Saved Groups: ");
-		//
+		LOGGER.debug("Groups: {}", groups);
+		if (verbose)
+		{
+		    LOGGER.debug("Length: {}", result.length());
+		    LOGGER.debug("Begin offset: {}", result.beginOffset(0));
+		    LOGGER.debug("End offset: {}", result.endOffset(0));
+		}
+		LOGGER.debug("Saved Groups: ");
 		// Start at 1 because we just printed out group 0
 		for (int group = 1; group < groups; group++)
 		{
 		    LOGGER.debug(group + ": {}", result.group(group));
-		    // LOGGER.debug("Begin: {}" , result.begin(group));
-		    // LOGGER.debug("End: {}" , result.end(group));
+		    if (verbose)
+		    {
+			LOGGER.debug("Begin: {}", result.begin(group));
+			LOGGER.debug("End: {}", result.end(group));
+		    }
 		}
 	    }
 	    while (matcher.contains(input, pattern));
@@ -99,98 +313,55 @@ public final class RegexUtils
     }
 
     /**
-     * @param regex
-     * @throws MalformedPatternException
-     *             Bad pattern
-     */
-    public static final Pattern initPattern(String regex) throws MalformedPatternException
-    {
-	Pattern pattern;
-	try
-	{
-	    pattern = compiler.compile(regex);
-	}
-	catch (MalformedPatternException e)
-	{
-	    LOGGER.error("Bad pattern.", e);
-	    fail(e.getMessage());
-	    throw e;
-	}
-	return pattern;
-    }
-
-    /**
-     * @param regex
-     * @param inputString
-     * @throws MalformedPatternException
-     */
-    public static final void debugRegex(String regex, String inputString)
-	    throws MalformedPatternException
-    {
-	Pattern pattern = initPattern(regex);
-	PatternMatcherInput input = new PatternMatcherInput(inputString);
-
-	outputMatchResults(pattern, input);
-    }
-
-    /**
-     * Assert the provided Regular Expression is false
+     * Print the groups of the {@link Matcher} {@code javaMatcher} match.
      * 
-     * @param matcher
-     *            Regular Expression Match to check
-     */
-    public static final void assertRegexFalse(Matcher matcher)
-    {
-	// Reset the Matcher in case it has been used
-	matcher.reset();
-	// This madness is needed to get the search input text
-	StringBuffer sb = new StringBuffer();
-	matcher.appendTail(sb);
-	// Run the Assert statement
-	assertFalse(String.format("Regex should not have a match.\r%1$s\rSearch text:\r%2$s",
-	    matcher.pattern().pattern(), sb), matcher.find());
-    }
-
-    /**
-     * Assert the provided Regular Expression is true
-     * 
-     * @param matcher
-     *            Regular Expression Match to check
-     */
-    public static final void assertRegexTrue(Matcher matcher)
-    {
-	// Reset the Matcher in case it has been used
-	matcher.reset();
-	// This madness is needed to get the search input text
-	StringBuffer sb = new StringBuffer();
-	matcher.appendTail(sb);
-	// Run the Assert statement
-	assertTrue(String.format("Regex should have a match.\r%1$s\rSearch text:\r%2$s", matcher
-		.pattern().pattern(), sb), matcher.find());
-    }
-
-    /**
-     * @param matcher
+     * @param javaMatcher
+     *            {@link Matcher} Regular Expression Match to check
      * @param found
+     *            Number of matches that have been found
      * @param showGroupCount
+     *            Print the number of groups in the match and group(0) if true,
+     *            otherwise prints only nested groups
      * @throws IndexOutOfBoundsException
      *             More than 100 matches have been found.
-     * @return
+     * @return Number of matches that have been found
      */
-    public static final int printRegexGroups(Matcher matcher, int found, boolean showGroupCount)
-	    throws IndexOutOfBoundsException
+    public static final int outputJavaRegexGroups(Matcher javaMatcher, int found,
+	    boolean showGroupCount) throws IndexOutOfBoundsException
+    {
+	return outputJavaRegexGroups(javaMatcher, found, showGroupCount, LOGGER);
+    }
+
+    /**
+     * Print the groups of the {@link Matcher} {@code javaMatcher} match.
+     * 
+     * @param javaMatcher
+     *            {@link Matcher} Regular Expression Match to check
+     * @param found
+     *            Number of matches that have been found
+     * @param showGroupCount
+     *            Print the number of groups in the match and group(0) if true,
+     *            otherwise prints only nested groups
+     * @param LOGGER
+     *            Logger to output debug information
+     * @throws IndexOutOfBoundsException
+     *             More than 100 matches have been found.
+     * @return Number of matches that have been found
+     */
+    public static final int outputJavaRegexGroups(Matcher javaMatcher, int found,
+	    boolean showGroupCount, Logger LOGGER) throws IndexOutOfBoundsException
     {
 	// Skip Group(0) by default since it is the entire match
 	int groupStart = 1;
 	if (showGroupCount)
 	{
-	    LOGGER.debug("Match {}: Group Count {}", found + 1, matcher.groupCount());
+	    LOGGER.debug("Match {}: Group Count {}", found + 1, javaMatcher.groupCount());
 	    groupStart = 0;
 	}
-	for (int groupNum = groupStart; groupNum <= matcher.groupCount(); groupNum++)
+	for (int groupNum = groupStart; groupNum <= javaMatcher.groupCount(); groupNum++)
 	{
 	    LOGGER.debug("Match {}: Group {}: {}", new Object[] { found + 1, groupNum,
-		    matcher.group(groupNum) });
+		    javaMatcher.group(groupNum) });
 	}
 	found++;
 	if (found > 100)
