@@ -8,11 +8,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.sql.DataSource;
 
+import org.apache.oro.text.regex.MalformedPatternException;
+import org.apache.oro.text.regex.MatchResult;
+import org.apache.oro.text.regex.Pattern;
+import org.apache.oro.text.regex.PatternMatcher;
+import org.apache.oro.text.regex.PatternMatcherInput;
+import org.apache.oro.text.regex.Perl5Matcher;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -21,6 +25,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.chris.utils.text.TextFileIn;
+import com.chris.utils.text.regex.RegexUtils;
 
 public class TestDBUtils
 {
@@ -30,164 +35,6 @@ public class TestDBUtils
     private static final Logger LOGGER = LoggerFactory.getLogger(TestDBUtils.class);
 
     /**
-     * Test Oracle JDBC Driver
-     */
-    private static final String PG_DRIVER = "org.postgresql.Driver";
-
-    /**
-     * Test PostgreSQL Host
-     */
-    private static final String PG_HOST = "localhost";
-
-    /**
-     * Test PostgreSQL Port
-     */
-    private static final String PG_PORT = "5433";
-
-    /**
-     * Test PostgreSQL Database
-     */
-    private static final String PG_DATABASE = "postgres";
-
-    /**
-     * Test PostgreSQL User Name
-     */
-    private static final String PG_USERNAME = "postgres";
-
-    /**
-     * Test PostgreSQL Password
-     */
-    private static final String PG_PASSWORD = "GoodDog1";
-
-    /**
-     * Test PostgreSQL Connection URL.
-     * <p>
-     * Possible connection URL forms are:
-     * <ul>
-     * <li>jdbc:postgresql:database</li>
-     * <li>jdbc:postgresql://host[:port]/database</li>
-     * </ul>
-     */
-    private static final String PG_CONNECTION_URL =
-	    String.format("jdbc:postgresql://%1$s:%2$s/%3$s", PG_HOST, PG_PORT, PG_DATABASE);
-
-    /**
-     * Test Oracle JDBC Driver
-     */
-    private static final String ORCL_DRIVER = "oracle.jdbc.driver.OracleDriver";
-
-    /**
-     * Test Oracle Host
-     */
-    private static final String ORCL_HOST = "daytongis";
-
-    /**
-     * Test Oracle Port
-     */
-    private static final String ORCL_PORT = "1521";
-
-    /**
-     * Test Oracle Database
-     */
-    private static final String ORCL_DATABASE = "devgis";
-
-    /**
-     * Test Oracle User Name
-     */
-    private static final String ORCL_USERNAME = "geodb";
-
-    /**
-     * Test Oracle Password
-     */
-    private static final String ORCL_PASSWORD = "geodb";
-
-    /**
-     * Test Oracle Connection URL. Note that both the ":" and "@" characters are
-     * necessary.
-     * <p>
-     * Possible connection URL forms are:
-     * <ul>
-     * <li>Oracle Thin Client</li>
-     * <ul>
-     * <li>
-     * <code>jdbc:oracle:thin:[user/password]@[host][:port]:SID
-     * </code></li>
-     * <li>
-     * <code>jdbc:oracle:thin:[user/password]@//[host][:port]/SID
-     * </code>
-     * </li>
-     * </ul>
-     * <li>
-     * Oracle OCI
-     * <ul>
-     * <li><code>jdbc:oracle:oci:[user/password]@TNSNames_Entry
-     * </code></li>
-     * </ul>
-     * </li>
-     * <li>Oracle Net keyword-value pair
-     * <ul>
-     * <li>
-     * <code>
-     * jdbc:oracle:(thin|oci|oci8):[user/password]@(DESCRIPTION=
-     *                        (ADDRESS_LIST= 
-     *                            (ADDRESS=(PROTOCOL=TCP)  
-     *                                     (HOST=host)
-     *                                     (PORT=port)
-     *                            )
-     *                        )
-     *                        (CONNECT_DATA=
-     *                            (SERVICE_NAME=SID)
-     *                            (SERVER=DEDICATED)
-     *                        )
-     *                      )
-     * </code></li>
-     * </ul>
-     * </li>
-     * </ul>
-     * <ul>
-     * <li>user - The login user name defined in the Oracle server.
-     * <ul>
-     * <li>Optional</li></li>
-     * </ul>
-     * <li>password - The password for the login user.
-     * <ul>
-     * <li>Optional</li>
-     * </ul>
-     * </li>
-     * <li>host - The host name where Oracle server is running.
-     * <ul>
-     * <li>Optional</li>
-     * <li>Default - 127.0.0.1 - IP address of localhost</li>
-     * </ul>
-     * </li>
-     * <li>port - The port number where Oracle is listening for connection.
-     * <ul>
-     * <li>Optional</li>
-     * <li>Default - 1521</li>
-     * </ul>
-     * </li>
-     * <li>SID - System ID of the Oracle server database instance.
-     * <ul>
-     * <li>Required*</li>
-     * <li>By default, Oracle Database 10g Express Edition creates one database
-     * called XE.</li>
-     * </ul>
-     * </li>
-     * <li>TNSNames_Entry - TNSNAMES entry of the Oracle database instance.
-     * <ul>
-     * <li>Required*</li>
-     * <li>You can find the available TNSNAMES entries listed in the file
-     * tnsnames.ora on the client computer from which you are connecting.</li>
-     * </ul>
-     * </li>
-     * <li>* This is less readable than a TNSNAMES entry but does not depend on
-     * the accuracy of the TNSNAMES.ORA file. The Oracle Net keyword-value pair
-     * works with all of the Oracle JDBC drivers.</li> </ul>
-     */
-    private static final String ORCL_CONNECTION_URL =
-	    String.format("jdbc:oracle:thin:@%1$s:%2$s:%3$s", ORCL_HOST, ORCL_PORT, ORCL_DATABASE);
-
-    /**
      * Common DataSource
      */
     private DataSource ds;
@@ -195,7 +42,9 @@ public class TestDBUtils
     @Before
     public void setUp() throws Exception
     {
-	ds = DBUtils.setupPostgreSQLDataSource(PG_USERNAME, PG_PASSWORD, PG_CONNECTION_URL);
+	ds =
+		DBUtils.setupPostgreSQLDataSource(DBConstant.PG_USERNAME, DBConstant.PG_PASSWORD,
+		    DBConstant.PG_CONNECTION_URL);
     }
 
     @After
@@ -207,7 +56,9 @@ public class TestDBUtils
     @Ignore("Oracle Drivers need to be in local repository")
     public void testSetupOracleDataSource()
     {
-	ds = DBUtils.setupOracleDataSource(ORCL_USERNAME, ORCL_PASSWORD, ORCL_CONNECTION_URL);
+	ds =
+		DBUtils.setupOracleDataSource(DBConstant.ORCL_USERNAME, DBConstant.ORCL_PASSWORD,
+		    DBConstant.ORCL_CONNECTION_URL);
 	Connection conn = null;
 	try
 	{
@@ -238,7 +89,9 @@ public class TestDBUtils
     @Test
     public void testSetupPostgreSQLDataSource()
     {
-	ds = DBUtils.setupPostgreSQLDataSource(PG_USERNAME, PG_PASSWORD, PG_CONNECTION_URL);
+	ds =
+		DBUtils.setupPostgreSQLDataSource(DBConstant.PG_USERNAME, DBConstant.PG_PASSWORD,
+		    DBConstant.PG_CONNECTION_URL);
 	Connection conn = null;
 	try
 	{
@@ -340,12 +193,12 @@ public class TestDBUtils
 	assertTrue("No columns exist in the table", numcols > 0);
     }
 
-    public void testLoadMVNData()
+    public void testLoadMVNData() throws MalformedPatternException
     {
 	String regex = ".*-(([^:]*):([^:]*):([^:]*):([^:])*:([^:]*)$)";
-	String input = "";
-	Pattern pattern = Pattern.compile(regex);
-	Matcher matcher = pattern.matcher(input);
+	String inputString = "";
+	Pattern pattern = RegexUtils.initPattern(regex);// Pattern.compile(regex);
+	PatternMatcherInput input = new PatternMatcherInput(inputString);// pattern.matcher(input);
 
 	Connection conn = null;
 	PreparedStatement stmt = null;
@@ -353,15 +206,16 @@ public class TestDBUtils
 
 	try
 	{
-
 	    LOGGER.debug("Creating connection");
 	    conn = ds.getConnection();
 	    conn.setCatalog("public");
 	    LOGGER.debug("Creating statement");
 
 	    String sql =
-		    "INSERT INTO mvn_data( raw_text, dependency, trimmed, package_name, class_name,"
-			    + "file_type, ver, phase) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+		    "INSERT INTO mvn_data( raw_text, group_id, artifact_id, artifact_type, "
+			    + "artifact_version, scope, classifier) "
+			    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+
 	    stmt = conn.prepareStatement(sql);
 
 	    // Get the input text file
@@ -370,9 +224,10 @@ public class TestDBUtils
 	    String trimmedGroup;
 	    while ((myLine = txtFile.readLine()) != null)
 	    {
-		matcher = pattern.matcher(myLine);
-		if (matcher.matches())
+		PatternMatcher matcher = new Perl5Matcher();
+		while (matcher.contains(input, pattern))
 		{
+		    MatchResult result = matcher.getMatch();
 		    // Clear out any parameters from last time
 		    stmt.clearParameters();
 		    // Add the raw input string for in case we need it later
@@ -380,10 +235,10 @@ public class TestDBUtils
 		    // is it a dependency? yes, assuming the Regex is correct
 		    // and Maven doesn't throw weirdness in
 		    stmt.setBoolean(1, true);
-		    for (int j = 1; j <= matcher.groupCount(); j++)
+		    for (int j = 1; j <= result.groups(); j++)
 		    {
-			trimmedGroup = matcher.group(j).trim();
-			LOGGER.debug(String.format("Group %1$s: %2$s", j, trimmedGroup));
+			trimmedGroup = result.group(j).trim();
+			LOGGER.debug("Group {}: {}", j, trimmedGroup);
 
 			// Populate the remaining parameters
 			switch (j)
@@ -442,6 +297,225 @@ public class TestDBUtils
 	    catch (Exception e)
 	    {
 	    }
+	}
+    }
+
+    class MavenData
+    {
+	String rawText;
+	String groupID;
+	String artifactID;
+	String artifactType;
+	String artifactVersion;
+	String scope;
+	String classifier = "";
+
+	/**
+	 * 
+	 */
+	public MavenData()
+	{
+	    rawText = "";
+	    groupID = "";
+	    artifactID = "";
+	    artifactType = "";
+	    artifactVersion = "";
+	    scope = "";
+	    classifier = "";
+	}
+
+	public MavenData(String line) throws IllegalArgumentException, MalformedPatternException
+	{
+	    String regex = "\\S+";
+	    String inputString = "[INFO] +- commons-pool-C:commons-pool-A:jar:1.5.2:compile";
+
+	    // Initialize the pattern
+	    Pattern pattern = RegexUtils.initPattern(regex);
+	    PatternMatcherInput input = new PatternMatcherInput(inputString);
+
+	    PatternMatcher matcher = new Perl5Matcher();
+	    MatchResult result;
+
+	    rawText = line;
+
+	    int match = 0;
+	    while (matcher.contains(input, pattern))
+	    {
+		result = matcher.getMatch();
+		String value = result.group(5);
+		switch (match)
+		{
+		    case (0):
+			groupID = value;
+			break;
+		    case (1):
+			artifactID = value;
+			break;
+		    case (2):
+			artifactType = value;
+			break;
+		    case (3):
+			artifactVersion = value;
+			break;
+		    case (4):
+			scope = value;
+			break;
+		    case (5):
+			classifier = value;
+			break;
+		    default:
+			break;
+		}
+		;
+		match++;
+		LOGGER.debug("Match ({}), Group ({}): \"{}\" ", new Object[] { match, 5, value });
+	    }
+	    LOGGER.debug("Total Matches: {}", match);
+	    if (match < 5 || match > 6)
+	    {
+		throw new IllegalArgumentException(String.format(
+		    "Unable to parse \"%1$s\". Invalid Maven output line.", line));
+	    }
+	}
+
+	/**
+	 * @param rawText
+	 * @param groupID
+	 * @param artifactID
+	 * @param artifactType
+	 * @param artifactVersion
+	 * @param scope
+	 * @param classifier
+	 */
+	public MavenData(String rawText, String groupID, String artifactID, String artifactType,
+		String artifactVersion, String scope, String classifier)
+	{
+	    this.rawText = rawText;
+	    this.groupID = groupID;
+	    this.artifactID = artifactID;
+	    this.artifactType = artifactType;
+	    this.artifactVersion = artifactVersion;
+	    this.scope = scope;
+	    this.classifier = classifier;
+	}
+
+	/**
+	 * @return the rawText
+	 */
+	public String getRawText()
+	{
+	    return rawText;
+	}
+
+	/**
+	 * @return the groupID
+	 */
+	public String getGroupID()
+	{
+	    return groupID;
+	}
+
+	/**
+	 * @return the artifactID
+	 */
+	public String getArtifactID()
+	{
+	    return artifactID;
+	}
+
+	/**
+	 * @return the artifactType
+	 */
+	public String getArtifactType()
+	{
+	    return artifactType;
+	}
+
+	/**
+	 * @return the artifactVersion
+	 */
+	public String getArtifactVersion()
+	{
+	    return artifactVersion;
+	}
+
+	/**
+	 * @return the scope
+	 */
+	public String getScope()
+	{
+	    return scope;
+	}
+
+	/**
+	 * @return the classifier
+	 */
+	public String getClassifier()
+	{
+	    return classifier;
+	}
+
+	/**
+	 * @param rawText
+	 *            the rawText to set
+	 */
+	public void setRawText(String rawText)
+	{
+	    this.rawText = rawText;
+	}
+
+	/**
+	 * @param groupID
+	 *            the groupID to set
+	 */
+	public void setGroupID(String groupID)
+	{
+	    this.groupID = groupID;
+	}
+
+	/**
+	 * @param artifactID
+	 *            the artifactID to set
+	 */
+	public void setArtifactID(String artifactID)
+	{
+	    this.artifactID = artifactID;
+	}
+
+	/**
+	 * @param artifactType
+	 *            the artifactType to set
+	 */
+	public void setArtifactType(String artifactType)
+	{
+	    this.artifactType = artifactType;
+	}
+
+	/**
+	 * @param artifactVersion
+	 *            the artifactVersion to set
+	 */
+	public void setArtifactVersion(String artifactVersion)
+	{
+	    this.artifactVersion = artifactVersion;
+	}
+
+	/**
+	 * @param scope
+	 *            the scope to set
+	 */
+	public void setScope(String scope)
+	{
+	    this.scope = scope;
+	}
+
+	/**
+	 * @param classifier
+	 *            the classifier to set
+	 */
+	public void setClassifier(String classifier)
+	{
+	    this.classifier = classifier;
 	}
     }
 }
