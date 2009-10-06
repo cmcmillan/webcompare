@@ -3,6 +3,7 @@ package com.chris.utils.dbutils;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.security.InvalidParameterException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -29,6 +30,146 @@ import com.chris.utils.text.regex.RegexUtils;
 
 public class TestDBUtils
 {
+    class MavenData
+    {
+	String rawText = "";
+	String groupID = "";
+	String artifactID = "";
+	String artifactType = "";
+	String artifactVersion = "";
+	String scope = "";
+	String classifier = "";
+
+	public MavenData(String line) throws IllegalArgumentException, MalformedPatternException
+	{
+	    String regex = RegexUtils.A_MVN_LINE;
+
+	    // Initialize the pattern
+	    Pattern pattern = RegexUtils.initPattern(regex);
+	    PatternMatcherInput input = new PatternMatcherInput(line);
+
+	    PatternMatcher matcher = new Perl5Matcher();
+	    MatchResult result;
+
+	    if (!matcher.matches(input, pattern))
+	    {
+		throw new InvalidParameterException(String.format(
+		    "Unable to parse \"%1$s\". Invalid Maven output line.", line));
+	    }
+	    else
+	    {
+		result = matcher.getMatch();
+		rawText = line;
+		outputResultGroup(0, result);
+		groupID = result.group(1);
+		outputResultGroup(1, result);
+		if (result.group(3) != null && !result.group(3).isEmpty())
+		{
+		    artifactID = result.group(3);
+		    outputResultGroup(3, result);
+		    artifactType = result.group(4);
+		    outputResultGroup(4, result);
+		    artifactVersion = result.group(12);
+		    outputResultGroup(12, result);
+		}
+		else if (result.group(5) != null && !result.group(5).isEmpty())
+		{
+		    artifactID = result.group(5);
+		    outputResultGroup(5, result);
+		    artifactType = result.group(6);
+		    outputResultGroup(6, result);
+		    artifactVersion = result.group(7);
+		    outputResultGroup(7, result);
+		    scope = result.group(12);
+		    outputResultGroup(12, result);
+		}
+		else if (result.group(8) != null && !result.group(8).isEmpty())
+		{
+		    artifactID = result.group(8);
+		    outputResultGroup(8, result);
+		    artifactType = result.group(9);
+		    outputResultGroup(9, result);
+		    artifactVersion = result.group(10);
+		    outputResultGroup(10, result);
+		    scope = result.group(11);
+		    outputResultGroup(11, result);
+		    classifier = result.group(12);
+		    outputResultGroup(12, result);
+		}
+	    }
+	}
+
+	/**
+	 * Output the group contents.
+	 * 
+	 * @param group
+	 *            Pattern subgroup, Group 0 always refers to the entire
+	 *            match
+	 * @param result
+	 *            PatternMatch result
+	 */
+	private void outputResultGroup(int group, MatchResult result)
+	{
+	    LOGGER.debug("Group ({}): \"{}\"", group, result.group(group));
+	}
+
+	/**
+	 * @return the rawText
+	 */
+	public String getRawText()
+	{
+	    return rawText;
+	}
+
+	/**
+	 * @return the groupID
+	 */
+	public String getGroupID()
+	{
+	    return groupID;
+	}
+
+	/**
+	 * @return the artifactID
+	 */
+	public String getArtifactID()
+	{
+	    return artifactID;
+	}
+
+	/**
+	 * @return the artifactType
+	 */
+	public String getArtifactType()
+	{
+	    return artifactType;
+	}
+
+	/**
+	 * @return the artifactVersion
+	 */
+	public String getArtifactVersion()
+	{
+	    return artifactVersion;
+	}
+
+	/**
+	 * @return the scope
+	 */
+	public String getScope()
+	{
+	    return scope;
+	}
+
+	/**
+	 * @return the classifier
+	 */
+	public String getClassifier()
+	{
+	    return classifier;
+	}
+    }
+
     /**
      * Logging interface
      */
@@ -53,86 +194,7 @@ public class TestDBUtils
 	DBUtils.shutdownDataSource(ds);
     }
 
-    @Ignore("Oracle Drivers need to be in local repository")
-    public void testSetupOracleDataSource()
-    {
-	ds =
-		DBUtils.setupOracleDataSource(DBConstant.ORCL_USERNAME, DBConstant.ORCL_PASSWORD,
-		    DBConstant.ORCL_CONNECTION_URL);
-	Connection conn = null;
-	try
-	{
-	    conn = ds.getConnection();
-	    assertTrue("Connection is closed", conn != null && !conn.isClosed());
-	}
-	catch (SQLException e)
-	{
-	    LOGGER.error("Connection to Oracle DataSource failed.", e);
-	    fail(e.toString());
-	}
-	finally
-	{
-	    try
-	    {
-		conn.close();
-	    }
-	    catch (SQLException e)
-	    {
-	    }
-	    finally
-	    {
-		conn = null;
-	    }
-	}
-    }
-
-    @Test
-    public void testSetupPostgreSQLDataSource()
-    {
-	ds =
-		DBUtils.setupPostgreSQLDataSource(DBConstant.PG_USERNAME, DBConstant.PG_PASSWORD,
-		    DBConstant.PG_CONNECTION_URL);
-	Connection conn = null;
-	try
-	{
-	    conn = ds.getConnection();
-	    assertTrue("Connection is closed", conn != null && !conn.isClosed());
-	}
-	catch (SQLException e)
-	{
-	    LOGGER.error("Connection to PostgreSQL DataSource failed.", e);
-	    fail(e.toString());
-	}
-	finally
-	{
-	    try
-	    {
-		conn.close();
-	    }
-	    catch (SQLException e)
-	    {
-	    }
-	    finally
-	    {
-		conn = null;
-	    }
-	}
-    }
-
-    @Test
-    public void testPrintDataSourceStats()
-    {
-	try
-	{
-	    DBUtils.printDataSourceStats(ds);
-	}
-	catch (Exception e)
-	{
-	    LOGGER.error("Unable to print DataSource stats.", e);
-	    fail(e.toString());
-	}
-    }
-
+    @Ignore
     @Test
     public void testDataSource()
     {
@@ -193,16 +255,11 @@ public class TestDBUtils
 	assertTrue("No columns exist in the table", numcols > 0);
     }
 
+    @Test
     public void testLoadMVNData() throws MalformedPatternException
     {
-	String regex = ".*-(([^:]*):([^:]*):([^:]*):([^:])*:([^:]*)$)";
-	String inputString = "";
-	Pattern pattern = RegexUtils.initPattern(regex);// Pattern.compile(regex);
-	PatternMatcherInput input = new PatternMatcherInput(inputString);// pattern.matcher(input);
-
 	Connection conn = null;
 	PreparedStatement stmt = null;
-	ResultSet rset = null;
 
 	try
 	{
@@ -212,77 +269,64 @@ public class TestDBUtils
 	    LOGGER.debug("Creating statement");
 
 	    String sql =
-		    "INSERT INTO mvn_data( raw_text, group_id, artifact_id, artifact_type, "
+		    "INSERT INTO mvn_data(raw_text, group_id, artifact_id, artifact_type, "
 			    + "artifact_version, scope, classifier) "
-			    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+			    + "VALUES (?, ?, ?, ?, ?, ?, ?);";
 
 	    stmt = conn.prepareStatement(sql);
 
 	    // Get the input text file
 	    TextFileIn txtFile = new TextFileIn("deptree.txt");
 	    String myLine;
-	    String trimmedGroup;
+	    MavenData data;
 	    while ((myLine = txtFile.readLine()) != null)
 	    {
-		PatternMatcher matcher = new Perl5Matcher();
-		while (matcher.contains(input, pattern))
+		try
 		{
-		    MatchResult result = matcher.getMatch();
-		    // Clear out any parameters from last time
-		    stmt.clearParameters();
-		    // Add the raw input string for in case we need it later
-		    stmt.setNString(0, myLine);
-		    // is it a dependency? yes, assuming the Regex is correct
-		    // and Maven doesn't throw weirdness in
-		    stmt.setBoolean(1, true);
-		    for (int j = 1; j <= result.groups(); j++)
-		    {
-			trimmedGroup = result.group(j).trim();
-			LOGGER.debug("Group {}: {}", j, trimmedGroup);
-
-			// Populate the remaining parameters
-			switch (j)
-			{
-			    case 1:
-				// GroupId which corresponds
-				stmt.setNString(j, trimmedGroup);
-			    case 2:
-				// Trim version of the main group
-				stmt.setNString(j, trimmedGroup);
-			    case 3:
-				// Trim version of the main group
-				stmt.setNString(j, trimmedGroup);
-			    case 4:
-				// Packaging of the dependency
-				stmt.setNString(j, trimmedGroup);
-			    case 5:
-				// Packaging
-				stmt.setNString(j, trimmedGroup);
-			    case 6:
-				// Phase of the main group
-				stmt.setNString(j, trimmedGroup);
-			    default:
-				break;
-			}
-		    }
-		    // Add the parameter set to batch
+		    data = new MavenData(myLine);
+		    stmt.setString(1, data.getRawText());
+		    stmt.setString(2, data.getGroupID());
+		    stmt.setString(3, data.getArtifactID());
+		    stmt.setString(4, data.getArtifactType());
+		    stmt.setString(5, data.getArtifactVersion());
+		    stmt.setString(6, data.getScope());
+		    stmt.setString(7, data.getClassifier());
+		    // Add the Prepared statement to the batch
 		    stmt.addBatch();
 		}
+		catch (SQLException e)
+		{
+		    LOGGER.debug("SQL Error: " + e.getLocalizedMessage());
+		}
+		catch (IllegalArgumentException e)
+		{
+		    LOGGER.debug("Unable to parse line: " + myLine);
+		}
+		catch (Exception e)
+		{
+		    LOGGER.debug("Error: " + e.getLocalizedMessage());
+		}
+		finally
+		{
+		    // Clear the old parameters
+		    stmt.clearParameters();
+		}
 	    }
+	    int[] results = stmt.executeBatch();
+	    LOGGER.debug("Batch Statements Executed: " + results.length);
+	}
+	catch (SQLException e)
+	{
+	    LOGGER.error("SQL Exception", e);
+	    fail(e.getLocalizedMessage());
 	}
 	catch (Exception e)
 	{
+	    LOGGER.error("Exception", e);
 	    fail(e.getLocalizedMessage());
 	}
 	finally
 	{
-	    try
-	    {
-		rset.close();
-	    }
-	    catch (Exception e)
-	    {
-	    }
 	    try
 	    {
 		stmt.close();
@@ -300,222 +344,85 @@ public class TestDBUtils
 	}
     }
 
-    class MavenData
+    @Ignore
+    @Test
+    public void testPrintDataSourceStats()
     {
-	String rawText;
-	String groupID;
-	String artifactID;
-	String artifactType;
-	String artifactVersion;
-	String scope;
-	String classifier = "";
-
-	/**
-	 * 
-	 */
-	public MavenData()
+	try
 	{
-	    rawText = "";
-	    groupID = "";
-	    artifactID = "";
-	    artifactType = "";
-	    artifactVersion = "";
-	    scope = "";
-	    classifier = "";
+	    DBUtils.printDataSourceStats(ds);
 	}
-
-	public MavenData(String line) throws IllegalArgumentException, MalformedPatternException
+	catch (Exception e)
 	{
-	    String regex = "\\S+";
-	    String inputString = "[INFO] +- commons-pool-C:commons-pool-A:jar:1.5.2:compile";
+	    LOGGER.error("Unable to print DataSource stats.", e);
+	    fail(e.toString());
+	}
+    }
 
-	    // Initialize the pattern
-	    Pattern pattern = RegexUtils.initPattern(regex);
-	    PatternMatcherInput input = new PatternMatcherInput(inputString);
-
-	    PatternMatcher matcher = new Perl5Matcher();
-	    MatchResult result;
-
-	    rawText = line;
-
-	    int match = 0;
-	    while (matcher.contains(input, pattern))
+    @Ignore("Oracle Drivers need to be in local repository")
+    public void testSetupOracleDataSource()
+    {
+	ds =
+		DBUtils.setupOracleDataSource(DBConstant.ORCL_USERNAME, DBConstant.ORCL_PASSWORD,
+		    DBConstant.ORCL_CONNECTION_URL);
+	Connection conn = null;
+	try
+	{
+	    conn = ds.getConnection();
+	    assertTrue("Connection is closed", conn != null && !conn.isClosed());
+	}
+	catch (SQLException e)
+	{
+	    LOGGER.error("Connection to Oracle DataSource failed.", e);
+	    fail(e.toString());
+	}
+	finally
+	{
+	    try
 	    {
-		result = matcher.getMatch();
-		String value = result.group(5);
-		switch (match)
-		{
-		    case (0):
-			groupID = value;
-			break;
-		    case (1):
-			artifactID = value;
-			break;
-		    case (2):
-			artifactType = value;
-			break;
-		    case (3):
-			artifactVersion = value;
-			break;
-		    case (4):
-			scope = value;
-			break;
-		    case (5):
-			classifier = value;
-			break;
-		    default:
-			break;
-		}
-		;
-		match++;
-		LOGGER.debug("Match ({}), Group ({}): \"{}\" ", new Object[] { match, 5, value });
+		conn.close();
 	    }
-	    LOGGER.debug("Total Matches: {}", match);
-	    if (match < 5 || match > 6)
+	    catch (SQLException e)
 	    {
-		throw new IllegalArgumentException(String.format(
-		    "Unable to parse \"%1$s\". Invalid Maven output line.", line));
+	    }
+	    finally
+	    {
+		conn = null;
 	    }
 	}
+    }
 
-	/**
-	 * @param rawText
-	 * @param groupID
-	 * @param artifactID
-	 * @param artifactType
-	 * @param artifactVersion
-	 * @param scope
-	 * @param classifier
-	 */
-	public MavenData(String rawText, String groupID, String artifactID, String artifactType,
-		String artifactVersion, String scope, String classifier)
+    @Ignore
+    @Test
+    public void testSetupPostgreSQLDataSource()
+    {
+	ds =
+		DBUtils.setupPostgreSQLDataSource(DBConstant.PG_USERNAME, DBConstant.PG_PASSWORD,
+		    DBConstant.PG_CONNECTION_URL);
+	Connection conn = null;
+	try
 	{
-	    this.rawText = rawText;
-	    this.groupID = groupID;
-	    this.artifactID = artifactID;
-	    this.artifactType = artifactType;
-	    this.artifactVersion = artifactVersion;
-	    this.scope = scope;
-	    this.classifier = classifier;
+	    conn = ds.getConnection();
+	    assertTrue("Connection is closed", conn != null && !conn.isClosed());
 	}
-
-	/**
-	 * @return the rawText
-	 */
-	public String getRawText()
+	catch (SQLException e)
 	{
-	    return rawText;
+	    LOGGER.error("Connection to PostgreSQL DataSource failed.", e);
+	    fail(e.toString());
 	}
-
-	/**
-	 * @return the groupID
-	 */
-	public String getGroupID()
+	finally
 	{
-	    return groupID;
-	}
-
-	/**
-	 * @return the artifactID
-	 */
-	public String getArtifactID()
-	{
-	    return artifactID;
-	}
-
-	/**
-	 * @return the artifactType
-	 */
-	public String getArtifactType()
-	{
-	    return artifactType;
-	}
-
-	/**
-	 * @return the artifactVersion
-	 */
-	public String getArtifactVersion()
-	{
-	    return artifactVersion;
-	}
-
-	/**
-	 * @return the scope
-	 */
-	public String getScope()
-	{
-	    return scope;
-	}
-
-	/**
-	 * @return the classifier
-	 */
-	public String getClassifier()
-	{
-	    return classifier;
-	}
-
-	/**
-	 * @param rawText
-	 *            the rawText to set
-	 */
-	public void setRawText(String rawText)
-	{
-	    this.rawText = rawText;
-	}
-
-	/**
-	 * @param groupID
-	 *            the groupID to set
-	 */
-	public void setGroupID(String groupID)
-	{
-	    this.groupID = groupID;
-	}
-
-	/**
-	 * @param artifactID
-	 *            the artifactID to set
-	 */
-	public void setArtifactID(String artifactID)
-	{
-	    this.artifactID = artifactID;
-	}
-
-	/**
-	 * @param artifactType
-	 *            the artifactType to set
-	 */
-	public void setArtifactType(String artifactType)
-	{
-	    this.artifactType = artifactType;
-	}
-
-	/**
-	 * @param artifactVersion
-	 *            the artifactVersion to set
-	 */
-	public void setArtifactVersion(String artifactVersion)
-	{
-	    this.artifactVersion = artifactVersion;
-	}
-
-	/**
-	 * @param scope
-	 *            the scope to set
-	 */
-	public void setScope(String scope)
-	{
-	    this.scope = scope;
-	}
-
-	/**
-	 * @param classifier
-	 *            the classifier to set
-	 */
-	public void setClassifier(String classifier)
-	{
-	    this.classifier = classifier;
+	    try
+	    {
+		conn.close();
+	    }
+	    catch (SQLException e)
+	    {
+	    }
+	    finally
+	    {
+		conn = null;
+	    }
 	}
     }
 }

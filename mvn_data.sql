@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
--- Started on 2009-10-05 14:16:44
+-- Started on 2009-10-06 15:05:58
 
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = off;
@@ -108,7 +108,6 @@ COMMENT ON COLUMN mvn_data.classifier IS 'Used to distinguish artifacts that wer
 --
 
 CREATE SEQUENCE mvn_data_dependency_id_seq
-    START WITH 1
     INCREMENT BY 1
     NO MAXVALUE
     NO MINVALUE
@@ -132,7 +131,7 @@ ALTER SEQUENCE mvn_data_dependency_id_seq OWNED BY mvn_data.dependency_id;
 -- Name: mvn_data_dependency_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('mvn_data_dependency_id_seq', 1, false);
+SELECT pg_catalog.setval('mvn_data_dependency_id_seq', 26, true);
 
 
 --
@@ -142,17 +141,6 @@ SELECT pg_catalog.setval('mvn_data_dependency_id_seq', 1, false);
 --
 
 ALTER TABLE mvn_data ALTER COLUMN dependency_id SET DEFAULT nextval('mvn_data_dependency_id_seq'::regclass);
-
-
---
--- TOC entry 1744 (class 0 OID 19331)
--- Dependencies: 1473
--- Data for Name: mvn_data; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY mvn_data (dependency_id, raw_text, group_id, artifact_id, artifact_type, artifact_version, scope, classifier) FROM stdin;
-\.
-
 
 --
 -- TOC entry 1743 (class 2606 OID 19339)
@@ -164,7 +152,7 @@ ALTER TABLE ONLY mvn_data
     ADD CONSTRAINT mvn_data_prim_key PRIMARY KEY (dependency_id);
 
 
--- Completed on 2009-10-05 14:16:44
+-- Completed on 2009-10-06 15:06:00
 
 --
 -- PostgreSQL database dump complete
