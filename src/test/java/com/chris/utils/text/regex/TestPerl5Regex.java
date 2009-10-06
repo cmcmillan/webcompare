@@ -22,10 +22,42 @@ public class TestPerl5Regex
      */
     private static final Logger LOGGER = LoggerFactory.getLogger(TestPerl5Regex.class);
 
+    /**
+     * Initialize an invalid pattern. {@link MalformedPatternException}
+     * expected.
+     * 
+     * @throws MalformedPatternException
+     *             Regular expression pattern is not a valid pattern.
+     */
+    @Ignore
+    @Test(expected = MalformedPatternException.class)
+    public void initInvalidPattern() throws MalformedPatternException
+    {
+	// Get the Pattern for the provided regular expression.
+
+	// 0-5 letters or numbers followed by optional white space
+	String regex = "[a-zA-Z0-9]{,5)(\\s*)";
+	try
+	{
+	    // 0-5 letters or numbers followed by optional white space
+	    RegexUtils.initPattern(regex);
+	}
+	catch (MalformedPatternException e)
+	{
+	    String errMsg =
+		    String.format("Invalid regular expression pattern, %1$s, %2$s", regex, e
+			    .getLocalizedMessage());
+	    LOGGER.error(errMsg, e);
+	    throw e;
+	}
+	fail("Invalid pattern initialized.");
+    }
+
+    @Ignore
     @Test
     public void parseMavenCoordinates() throws MalformedPatternException
     {
-	String regex = "(" + RegexUtils.A_START_GARBAGE + ")*(" + RegexUtils.A_MVN_COORD + ")";
+	String regex = "(" + RegexUtils.A_START_GARBAGE + "\\s*)*(" + RegexUtils.A_MVN_COORD + ")";
 	String inputString = "[INFO] +- commons-pool-C:commons-pool-A:jar:1.5.2:compile";
 	String[][] expectedResults =
 		new String[][] {
@@ -72,12 +104,19 @@ public class TestPerl5Regex
 	    match), expectedResults.length, match);
     }
 
-    @Ignore
-    public void simpleRegex() throws MalformedPatternException
+    @Test
+    public void parseMavenLine() throws MalformedPatternException
     {
-	// NOT A BLANK SPACE
-	String regex = "\\S+";
-	String inputString = "[INFO] +- commons-pool-C:commons-pool-A:jar:1.5.2:compile";
+	String regex =
+		RegexUtils.A_MVN_COORD_START + RegexUtils.A_MVN_COORD_CENTER
+			+ RegexUtils.A_MVN_COORD_END;
+
+	String inputString = "[INFO] +- commons-pool-C:commons pool-A:jar:1.5.2:compile:xy";
+	// inputString =
+	// "[INFO] +- commons-pool-C:commons pool-A:jar:1.5.2:compile";
+	// inputString = "[INFO] com.chris:webcompare:jar:1.0-SNAPSHOT";
+	// inputString = "com.chris:webcompare:jar:1.0-SNAPSHOT";
+	// inputString = "commons-pool-C:commons pool-A:jar:1.5.2:compile";
 
 	// Initialize the pattern
 	Pattern pattern = RegexUtils.initPattern(regex);
@@ -86,47 +125,71 @@ public class TestPerl5Regex
 	PatternMatcher matcher = new Perl5Matcher();
 	MatchResult result;
 
+	if (matcher.matches(input, pattern))
+	{
+	    result = matcher.getMatch();
+	    for (int i = 0; i < result.groups(); i++)
+		LOGGER.debug("Group ({}): \"{}\" ", new Object[] { i, result.group(i) });
+	}
+	else
+	{
+	    LOGGER.debug("No match");
+	}
 	int match = 0;
 	while (matcher.contains(input, pattern))
 	{
 	    result = matcher.getMatch();
 	    match++;
-	    LOGGER.debug("Match ({}): \"{}\" : Groups({})", new Object[] { match, result.group(0),
-		    result.groups() });
+	    // LOGGER.debug("Match ({}): \"{}\" : Groups({})", new Object[] {
+	    // match, result.group(0),
+	    // result.groups() });
+	    for (int i = 0; i < result.groups(); i++)
+		LOGGER.debug("Match ({}, {}): \"{}\" ", new Object[] { match, i, result.group(i) });
 	}
 	LOGGER.debug("Total Matches: {}", match);
 	assertTrue("No match found in simpleRegex.", match > 0);
     }
 
-    /**
-     * Initialize an invalid pattern. {@link MalformedPatternException}
-     * expected.
-     * 
-     * @throws MalformedPatternException
-     *             Regular expression pattern is not a valid pattern.
-     */
     @Ignore
-    @Test(expected = MalformedPatternException.class)
-    public void initInvalidPattern() throws MalformedPatternException
+    @Test
+    public void simpleRegex() throws MalformedPatternException
     {
-	// Get the Pattern for the provided regular expression.
+	// NOT A BLANK SPACE
+	String regex = "\\S+";
+	String inputString = "[INFO] +- commons-pool-C:commons pool-A:jar:1.5.2:compile:xy";
+	inputString = "[INFO] +- commons-pool-C:commons pool-A:jar:1.5.2:compile";
+	// inputString = "commons-pool-C:commons pool-A:jar:1.5.2:compile";
 
-	// 0-5 letters or numbers followed by optional white space
-	String regex = "[a-zA-Z0-9]{,5)(\\s*)";
-	try
+	// Initialize the pattern
+	Pattern pattern = RegexUtils.initPattern(regex);
+	PatternMatcherInput input = new PatternMatcherInput(inputString);
+
+	PatternMatcher matcher = new Perl5Matcher();
+	MatchResult result;
+
+	if (matcher.matches(input, pattern))
 	{
-	    // 0-5 letters or numbers followed by optional white space
-	    RegexUtils.initPattern(regex);
+	    result = matcher.getMatch();
+	    for (int i = 0; i < result.groups(); i++)
+		LOGGER.debug("Group ({}): \"{}\" ", new Object[] { i, result.group(i) });
 	}
-	catch (MalformedPatternException e)
+	else
 	{
-	    String errMsg =
-		    String.format("Invalid regular expression pattern, %1$s, %2$s", regex, e
-			    .getLocalizedMessage());
-	    LOGGER.error(errMsg, e);
-	    throw e;
+	    LOGGER.debug("No match");
 	}
-	fail("Invalid pattern initialized.");
+	int match = 0;
+	while (matcher.contains(input, pattern))
+	{
+	    result = matcher.getMatch();
+	    match++;
+	    // LOGGER.debug("Match ({}): \"{}\" : Groups({})", new Object[] {
+	    // match, result.group(0),
+	    // result.groups() });
+	    for (int i = 0; i < result.groups(); i++)
+		LOGGER.debug("Match ({}, {}): \"{}\" ", new Object[] { match, i, result.group(i) });
+	}
+	LOGGER.debug("Total Matches: {}", match);
+	assertTrue("No match found in simpleRegex.", match > 0);
     }
 
 }
