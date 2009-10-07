@@ -1,6 +1,10 @@
 package com.chris.utils.dbutils;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.sql.DataSource;
 
@@ -11,6 +15,136 @@ import org.slf4j.LoggerFactory;
 public final class DBUtils
 {
     private static final Logger LOGGER = LoggerFactory.getLogger(DBUtils.class);
+
+    /**
+     * Close the connections for the cleanup in the finally section of a SQL
+     * query section
+     * 
+     * @param conn
+     *            {@link Connection} to the database
+     * @param stmt
+     *            SQL {@link Statement} used in querying the database on conn
+     * @param results
+     *            Optional array of {@link ResultSet} objects returned by the
+     *            SQL Statement
+     */
+    public static final void cleanupConnections(Connection conn, NamedParameterStatement stmt,
+	    ResultSet... results)
+    {
+	try
+	{
+	    // Close all {@link ResultSets}
+	    for (ResultSet rSet : results)
+	    {
+		rSet.close();
+	    }
+	}
+	catch (Exception e)
+	{
+	}
+	try
+	{
+	    stmt.close();
+	}
+	catch (Exception e)
+	{
+	}
+	try
+	{
+	    conn.close();
+	}
+	catch (Exception e)
+	{
+	}
+    }
+
+    /**
+     * Close resultSets as part of cleanup of {@link Connection} closing
+     * 
+     * @param resultSets
+     *            List of {@link ResultSet} objects that need to be closed
+     *            during cleanup
+     */
+    public static final void closeResultSets(ResultSet... resultSets)
+    {
+	try
+	{
+	    // Close all {@link ResultSets}
+	    for (ResultSet rSet : resultSets)
+	    {
+		rSet.close();
+	    }
+	}
+	catch (Exception e)
+	{
+	}
+    }
+
+    /**
+     * Close statements as part of cleanup of {@link Connection} closing
+     * 
+     * @param statements
+     *            List of {@link NamedParameterStatement} objects that need to
+     *            be closed during cleanup
+     */
+    public static final void closeStatements(NamedParameterStatement... statements)
+    {
+	try
+	{
+	    // Close all of the {@link NamedParameterStatement}
+	    for (NamedParameterStatement statement : statements)
+	    {
+		statement.close();
+	    }
+	}
+	catch (Exception e)
+	{
+	}
+    }
+
+    /**
+     * Close statements as part of cleanup of {@link Connection} closing
+     * 
+     * @param statements
+     *            List of {@link PreparedStatement} objects that need to be
+     *            closed during cleanup
+     */
+    public static final void closeStatements(PreparedStatement... statements)
+    {
+	try
+	{
+	    // Close all of the {@link ParameterStatement}
+	    for (PreparedStatement statement : statements)
+	    {
+		statement.close();
+	    }
+	}
+	catch (Exception e)
+	{
+	}
+    }
+
+    /**
+     * Close statements as part of cleanup of {@link Connection} closing
+     * 
+     * @param statements
+     *            List of {@link Statement} objects that need to be closed
+     *            during cleanup
+     */
+    public static final void closeStatements(Statement... statements)
+    {
+	try
+	{
+	    // Close all of the {@link ParameterStatement}
+	    for (Statement statement : statements)
+	    {
+		statement.close();
+	    }
+	}
+	catch (Exception e)
+	{
+	}
+    }
 
     /**
      * Print basic information about the {@link DataSource}

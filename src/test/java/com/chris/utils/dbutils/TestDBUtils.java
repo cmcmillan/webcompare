@@ -1,14 +1,18 @@
 package com.chris.utils.dbutils;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.io.FileInputStream;
 import java.security.InvalidParameterException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.sql.DataSource;
 
@@ -18,6 +22,7 @@ import org.apache.oro.text.regex.Pattern;
 import org.apache.oro.text.regex.PatternMatcher;
 import org.apache.oro.text.regex.PatternMatcherInput;
 import org.apache.oro.text.regex.Perl5Matcher;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -174,7 +179,10 @@ public class TestDBUtils
      * Logging interface
      */
     private static final Logger LOGGER = LoggerFactory.getLogger(TestDBUtils.class);
-
+    /**
+     * Name of the GIAT Required Tools Excel File
+     */
+    private static final String GIAT_REQ_TOOLS_XLS = "RequiredTools_20090907_0939.xls";
     /**
      * Common DataSource
      */
@@ -211,7 +219,6 @@ public class TestDBUtils
 	    stmt = conn.createStatement();
 	    LOGGER.debug("Executing statement");
 	    rset = stmt.executeQuery("SELECT * FROM mvn_data");
-	    // rset = conn.getMetaData().getTables(null, null, null, null);
 	    LOGGER.debug("Results:");
 	    numcols = rset.getMetaData().getColumnCount();
 	    while (rset.next())
@@ -255,6 +262,7 @@ public class TestDBUtils
 	assertTrue("No columns exist in the table", numcols > 0);
     }
 
+    @Ignore
     @Test
     public void testLoadMVNData() throws MalformedPatternException
     {
@@ -342,6 +350,192 @@ public class TestDBUtils
 	    {
 	    }
 	}
+    }
+
+    @Test
+    public void testLoadCategories() throws Exception
+    {
+	Connection conn = null;
+	NamedParameterStatement stmt = null;
+	ResultSet results = null;
+	String worksheetName;
+	// Create a work book reference
+	HSSFWorkbook workbook = new HSSFWorkbook(new FileInputStream(GIAT_REQ_TOOLS_XLS));
+
+	try
+	{
+	    // Initialize the connection
+	    LOGGER.debug("Creating connection");
+	    conn = ds.getConnection();
+	    conn.setCatalog("public");
+	    LOGGER.debug("Creating statement");
+
+	    String categoriesSql =
+	    // "INSERT INTO giat_categories(category) "
+		    // + "VALUES (:category) "
+		    // +
+		    // "WHERE not exists(SELECT * FROM giat_categories WHERE category <> \":category\");"
+		    "SELECT category_id, category FROM giat_categories WHERE category = :category;";
+
+	    stmt = new NamedParameterStatement(conn, categoriesSql);
+
+	    for (int sheetIndex = 0; sheetIndex < workbook.getNumberOfSheets(); sheetIndex++)
+	    {
+		worksheetName = workbook.getSheetName(sheetIndex);
+		LOGGER.debug("Worksheet ({}): {}", sheetIndex, worksheetName);
+		// Set the Named Parameter
+		stmt.setString("category", worksheetName);
+		stmt.addBatch();
+		// Add the GIAT Workbook Categories
+		// Get the Category ID of the category
+		results = stmt.executeQuery();
+		if (results != null && results.next())
+		{
+		    // categoryIDs.put(worksheetName, results.getInt(1));
+		    LOGGER.debug("Category ({}): {}", results.getInt(1), worksheetName);
+		    assertEquals("Database category does not match", worksheetName, results
+			    .getString(2));
+		}
+	    }
+	}
+	catch (SQLException e)
+	{
+	    fail(e.toString());
+	}
+	finally
+	{
+	    DBUtils.cleanupConnections(conn, stmt, results);
+	}
+    }
+
+    @Ignore
+    @Test
+    public void testLoadXLSData() throws Exception
+    {
+	Connection conn = null;
+	NamedParameterStatement namedStmt = null;
+	ResultSet results = null;
+	Map<String, Integer> categoryIDs = new HashMap<String, Integer>();
+	String worksheetName = "";
+	// Create a work book reference
+	HSSFWorkbook workbook = new HSSFWorkbook(new FileInputStream(GIAT_REQ_TOOLS_XLS));
+
+	// Initialize the connection
+	LOGGER.debug("Creating connection");
+	conn = ds.getConnection();
+	conn.setCatalog("public");
+	LOGGER.debug("Creating statement");
+
+	String categoriesSql =
+		"INSERT INTO giat_categories(category) "
+			+ "VALUES (:category) "
+			+ "WHERE not exists(SELECT * FROM giat_categories WHERE category <> \":category\");"
+			+ "SELECT category_id FROM giat_categories WHERE category = \":category\";";
+
+	namedStmt = new NamedParameterStatement(conn, categoriesSql);
+
+	for (int sheetIndex = 0; sheetIndex < workbook.getNumberOfSheets(); sheetIndex++)
+	{
+	    worksheetName = workbook.getSheetName(sheetIndex);
+	    LOGGER.debug("Worksheet ({}): {}", sheetIndex, worksheetName);
+
+	    namedStmt.setString("category", workbook.getSheetName(sheetIndex));
+
+	    namedStmt.addBatch();
+	    // Add the GIAT Workbook Categories
+	    // Get the Category ID of the category
+	    results = namedStmt.executeQuery();
+	    if (results != null)
+	    {
+		// categoryIDs.put(worksheetName, results.getInt(1));
+		LOGGER.debug("Category ({}): {}", results.getInt(1), worksheetName);
+	    }
+	}
+
+	// // Refer to the sheet. Put the Name of the sheet to be referred from
+	// // Alternative you can also refer the sheet by index using
+	// // getSheetAt(int index)
+	// HSSFSheet sheet = workbook.getSheet("Dependecies");
+	// // Reading the TOP LEFT CELL
+	// HSSFRow row = sheet.getRow(0);
+	// // Create a cell at index zero ( Top Left)
+	// HSSFCell cell = row.getCell(0);
+	// // Type the content
+	// LOGGER.info("THE TOP LEFT CELL--> " + cell.getStringCellValue());
+	// // Cell should not be empty
+	// assertFalse("Cell", cell.getStringCellValue().isEmpty());
+	//	
+	// try
+	// {
+
+	//
+	// // Get the input text file
+	// TextFileIn txtFile = new TextFileIn("deptree.txt");
+	// String myLine;
+	// MavenData data;
+	// while ((myLine = txtFile.readLine()) != null)
+	// {
+	// try
+	// {
+	// data = new MavenData(myLine);
+	// stmt.setString(1, data.getRawText());
+	// stmt.setString(2, data.getGroupID());
+	// stmt.setString(3, data.getArtifactID());
+	// stmt.setString(4, data.getArtifactType());
+	// stmt.setString(5, data.getArtifactVersion());
+	// stmt.setString(6, data.getScope());
+	// stmt.setString(7, data.getClassifier());
+	// // Add the Prepared statement to the batch
+	// stmt.addBatch();
+	// }
+	// catch (SQLException e)
+	// {
+	// LOGGER.debug("SQL Error: " + e.getLocalizedMessage());
+	// }
+	// catch (IllegalArgumentException e)
+	// {
+	// LOGGER.debug("Unable to parse line: " + myLine);
+	// }
+	// catch (Exception e)
+	// {
+	// LOGGER.debug("Error: " + e.getLocalizedMessage());
+	// }
+	// finally
+	// {
+	// // Clear the old parameters
+	// stmt.clearParameters();
+	// }
+	// }
+	// int[] results = stmt.executeBatch();
+	// LOGGER.debug("Batch Statements Executed: " + results.length);
+	// }
+	// catch (SQLException e)
+	// {
+	// LOGGER.error("SQL Exception", e);
+	// fail(e.getLocalizedMessage());
+	// }
+	// catch (Exception e)
+	// {
+	// LOGGER.error("Exception", e);
+	// fail(e.getLocalizedMessage());
+	// }
+	// finally
+	// {
+	// try
+	// {
+	// stmt.close();
+	// }
+	// catch (Exception e)
+	// {
+	// }
+	// try
+	// {
+	// conn.close();
+	// }
+	// catch (Exception e)
+	// {
+	// }
+	// }
     }
 
     @Ignore
