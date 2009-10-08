@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 
 import javax.sql.DataSource;
 
@@ -22,8 +23,51 @@ public final class DBUtils
      * 
      * @param conn
      *            {@link Connection} to the database
+     * @param stmts
+     *            List of SQL {@link Statement}s used in querying the database
+     *            on conn
+     * @param results
+     *            List of {@link ResultSet} objects returned by the SQL
+     *            Statement
+     */
+    public static final void cleanupConnections(Connection conn, List<Statement> stmts,
+	    List<ResultSet> results)
+    {
+	closeResultSets(results);
+	closeStatements(stmts);
+	closeConnections(conn);
+    }
+
+    /**
+     * Close the connections for the cleanup in the finally section of a SQL
+     * query section
+     * 
+     * @param conn
+     *            {@link Connection} to the database
+     * @param stmts
+     *            List of SQL {@link Statement}s used in querying the database
+     *            on conn
+     * @param results
+     *            Optional array of {@link ResultSet} objects returned by the
+     *            SQL Statement
+     */
+    public static final void cleanupConnections(Connection conn, List<Statement> stmts,
+	    ResultSet... results)
+    {
+	closeResultSets(results);
+	closeStatements(stmts);
+	closeConnections(conn);
+    }
+
+    /**
+     * Close the connections for the cleanup in the finally section of a SQL
+     * query section
+     * 
+     * @param conn
+     *            {@link Connection} to the database
      * @param stmt
-     *            SQL {@link Statement} used in querying the database on conn
+     *            SQL {@link NamedParameterStatement} used in querying the
+     *            database on conn
      * @param results
      *            Optional array of {@link ResultSet} objects returned by the
      *            SQL Statement
@@ -31,27 +75,130 @@ public final class DBUtils
     public static final void cleanupConnections(Connection conn, NamedParameterStatement stmt,
 	    ResultSet... results)
     {
+	closeResultSets(results);
+	closeStatements(stmt);
+	closeConnections(conn);
+    }
+
+    /**
+     * Close the connections for the cleanup in the finally section of a SQL
+     * query section
+     * 
+     * @param conn
+     *            {@link Connection} to the database
+     * @param stmts
+     *            SQL {@link NamedParameterStatement}s used in querying the
+     *            database on conn
+     * @param results
+     *            Optional array of {@link ResultSet} objects returned by the
+     *            SQL Statement
+     */
+    public static final void cleanupConnections(Connection conn, NamedParameterStatement[] stmts,
+	    ResultSet... results)
+    {
+	closeResultSets(results);
+	closeStatements(stmts);
+	closeConnections(conn);
+    }
+
+    /**
+     * Close the connections for the cleanup in the finally section of a SQL
+     * query section
+     * 
+     * @param conn
+     *            {@link Connection} to the database
+     * @param stmt
+     *            SQL {@link PreparedStatement} used in querying the database on
+     *            conn
+     * @param results
+     *            Optional array of {@link ResultSet} objects returned by the
+     *            SQL Statement
+     */
+    public static final void cleanupConnections(Connection conn, PreparedStatement stmt,
+	    ResultSet... results)
+    {
+	closeResultSets(results);
+	closeStatements(stmt);
+	closeConnections(conn);
+    }
+
+    /**
+     * Close the connections for the cleanup in the finally section of a SQL
+     * query section
+     * 
+     * @param conn
+     *            {@link Connection} to the database
+     * @param stmts
+     *            SQL {@link PreparedStatement}s used in querying the database
+     *            on conn
+     * @param results
+     *            Optional array of {@link ResultSet} objects returned by the
+     *            SQL Statement
+     */
+    public static final void cleanupConnections(Connection conn, PreparedStatement[] stmts,
+	    ResultSet... results)
+    {
+	closeResultSets(results);
+	closeStatements(stmts);
+	closeConnections(conn);
+    }
+
+    /**
+     * Close the connections for the cleanup in the finally section of a SQL
+     * query section
+     * 
+     * @param conn
+     *            {@link Connection} to the database
+     * @param stmt
+     *            SQL {@link Statement} used in querying the database on conn
+     * @param results
+     *            Optional array of {@link ResultSet} objects returned by the
+     *            SQL Statement
+     */
+    public static final void cleanupConnections(Connection conn, Statement stmt,
+	    ResultSet... results)
+    {
+	closeResultSets(results);
+	closeStatements(stmt);
+	closeConnections(conn);
+    }
+
+    /**
+     * Close the connections for the cleanup in the finally section of a SQL
+     * query section
+     * 
+     * @param conn
+     *            {@link Connection} to the database
+     * @param stmts
+     *            SQL {@link Statement}s used in querying the database on conn
+     * @param results
+     *            Optional array of {@link ResultSet} objects returned by the
+     *            SQL Statement
+     */
+    public static final void cleanupConnections(Connection conn, Statement[] stmts,
+	    ResultSet... results)
+    {
+	closeResultSets(results);
+	closeStatements(stmts);
+	closeConnections(conn);
+    }
+
+    /**
+     * Close all of the connections as part of cleanup
+     * 
+     * @param connections
+     *            List of {@link Connection} objects that need to be closed
+     *            during cleanup
+     */
+    public static final void closeConnections(Connection... connections)
+    {
 	try
 	{
-	    // Close all {@link ResultSets}
-	    for (ResultSet rSet : results)
+	    // Close all of the {@link Connection}
+	    for (Connection connection : connections)
 	    {
-		rSet.close();
+		connection.close();
 	    }
-	}
-	catch (Exception e)
-	{
-	}
-	try
-	{
-	    stmt.close();
-	}
-	catch (Exception e)
-	{
-	}
-	try
-	{
-	    conn.close();
 	}
 	catch (Exception e)
 	{
@@ -59,7 +206,70 @@ public final class DBUtils
     }
 
     /**
-     * Close resultSets as part of cleanup of {@link Connection} closing
+     * Close statements as part of cleanup of {@link Connection} closing
+     * 
+     * @param statements
+     *            List of {@link NamedParameterStatement} objects that need to
+     *            be closed during cleanup
+     */
+    public static final void closeNamedParameterStatements(List<NamedParameterStatement> statements)
+    {
+	if (statements != null && statements.size() > 0)
+	{
+	    NamedParameterStatement[] x = new NamedParameterStatement[statements.size()];
+	    int i = 0;
+	    for (NamedParameterStatement statement : statements)
+	    {
+		x[i++] = statement;
+	    }
+	    closeStatements(x);
+	}
+    }
+
+    /**
+     * Close statements as part of cleanup of {@link Connection} closing
+     * 
+     * @param statements
+     *            List of {@link PreparedStatement} objects that need to be
+     *            closed during cleanup
+     */
+    public static final void closePreparedStatements(List<PreparedStatement> statements)
+    {
+	if (statements != null && statements.size() > 0)
+	{
+	    PreparedStatement[] x = new PreparedStatement[statements.size()];
+	    int i = 0;
+	    for (PreparedStatement statement : statements)
+	    {
+		x[i++] = statement;
+	    }
+	    closeStatements(x);
+	}
+    }
+
+    /**
+     * Close result sets as part of cleanup of {@link Connection} closing
+     * 
+     * @param resultSets
+     *            List of {@link ResultSet} objects that need to be closed
+     *            during cleanup
+     */
+    public static final void closeResultSets(List<ResultSet> resultSets)
+    {
+	if (resultSets != null && resultSets.size() > 0)
+	{
+	    ResultSet[] x = new ResultSet[resultSets.size()];
+	    int i = 0;
+	    for (ResultSet statement : resultSets)
+	    {
+		x[i++] = statement;
+	    }
+	    closeResultSets(x);
+	}
+    }
+
+    /**
+     * Close result sets as part of cleanup of {@link Connection} closing
      * 
      * @param resultSets
      *            List of {@link ResultSet} objects that need to be closed
@@ -79,6 +289,78 @@ public final class DBUtils
 	{
 	}
     }
+
+    /**
+     * Close the statement and results for the cleanup in the finally section of
+     * a SQL query section
+     * 
+     * @param stmt
+     *            SQL {@link NamedParameterStatement} used in querying the
+     *            database
+     * @param results
+     *            Optional array of {@link ResultSet} objects returned by the
+     *            SQL Statement
+     */
+    public static final void closeStatement(NamedParameterStatement stmt, ResultSet... results)
+    {
+	closeResultSets(results);
+	closeStatements(stmt);
+    }
+
+    /**
+     * Close the connections for the cleanup in the finally section of a SQL
+     * query section
+     * 
+     * @param stmt
+     *            SQL {@link PreparedStatement} used in querying the database
+     * @param results
+     *            Optional array of {@link ResultSet} objects returned by the
+     *            SQL Statement
+     */
+    public static final void closeStatement(PreparedStatement stmt, ResultSet... results)
+    {
+	closeResultSets(results);
+	closeStatements(stmt);
+    }
+
+    /**
+     * Close the connections for the cleanup in the finally section of a SQL
+     * query section
+     * 
+     * @param stmt
+     *            SQL {@link Statement} used in querying the database
+     * @param results
+     *            Optional array of {@link ResultSet} objects returned by the
+     *            SQL Statement
+     */
+    public static final void closeStatement(Statement stmt, ResultSet... results)
+    {
+	closeResultSets(results);
+	closeStatements(stmt);
+    }
+
+    /**
+     * Close statements as part of cleanup of {@link Connection} closing
+     * 
+     * @param statements
+     *            List of {@link Statement} objects that need to be closed
+     *            during cleanup
+     */
+    public static final void closeStatements(List<Statement> statements)
+    {
+	if (statements != null && statements.size() > 0)
+	{
+	    Statement[] x = new Statement[statements.size()];
+	    int i = 0;
+	    for (Statement statement : statements)
+	    {
+		x[i++] = statement;
+	    }
+	    closeStatements(x);
+	}
+    }
+
+
 
     /**
      * Close statements as part of cleanup of {@link Connection} closing
@@ -101,6 +383,7 @@ public final class DBUtils
 	{
 	}
     }
+
 
     /**
      * Close statements as part of cleanup of {@link Connection} closing
