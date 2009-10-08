@@ -16,8 +16,7 @@ import org.slf4j.LoggerFactory;
 public class TestExcelReader
 {
     private static final Logger LOGGER = LoggerFactory.getLogger(TestExcelReader.class);
-    private static String fileToBeRead =
-	    "\\\\daytonfile\\users$\\cjmcmill\\My Documents\\GIAT\\Dependencies.xls";
+    private static String fileToBeRead = "RequiredTools_20090907_0939.xls";
 
     // Create a work book reference
     private HSSFWorkbook workbook;
@@ -35,7 +34,7 @@ public class TestExcelReader
 	// Refer to the sheet. Put the Name of the sheet to be referred from
 	// Alternative you can also refer the sheet by index using
 	// getSheetAt(int index)
-	HSSFSheet sheet = workbook.getSheet("Dependecies");
+	HSSFSheet sheet = workbook.getSheetAt(0);
 	// Reading the TOP LEFT CELL
 	HSSFRow row = sheet.getRow(0);
 	// Create a cell at index zero ( Top Left)
@@ -49,12 +48,25 @@ public class TestExcelReader
     @Test
     public void outputWorksheetNames() throws Exception
     {
-	// Create a work book reference
-	HSSFWorkbook workbook = new HSSFWorkbook(new FileInputStream(fileToBeRead));
 	// Loop through the worksheets
 	for (int sheetIndex = 0; sheetIndex < workbook.getNumberOfSheets(); sheetIndex++)
 	{
 	    LOGGER.debug("Worksheet ({}): {}", sheetIndex, workbook.getSheetName(sheetIndex));
+	}
+    }
+
+    @Test
+    public void outputRowRange() throws Exception
+    {
+	HSSFSheet currSheet = null;
+	String worksheetName;
+	// Loop through the worksheets
+	for (int sheetIndex = 0; sheetIndex < workbook.getNumberOfSheets(); sheetIndex++)
+	{
+	    currSheet = workbook.getSheetAt(sheetIndex);
+	    worksheetName = currSheet.getSheetName();
+	    LOGGER.debug("Worksheet ({}) First Row: {}", worksheetName, currSheet.getFirstRowNum());
+	    LOGGER.debug("Worksheet ({}) Last Row: {}", worksheetName, currSheet.getLastRowNum());
 	}
     }
 }
