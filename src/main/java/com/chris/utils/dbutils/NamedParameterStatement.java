@@ -44,10 +44,11 @@ import java.util.Map;
  * 
  * <pre>
  * 
- * @since 03 April 2007 - Adam Crume - Original Java World article
- * @since 07 September 2009 - Chris McMillan - Updated to use generics
+ * @since 1.0 - 03 April 2007 - Adam Crume - Original Java World article
+ * @since 1.1 - 07 September 2009 - Chris McMillan - Updated to use generics
+ * @since 1.2 - 08 September 2009 - Chris McMillan - Filled out overloads of PreparedStatement 
  * 
- * @version %I%
+ * @version 1.2
  * 
  * @author Adam Crume, JavaWorld.com
  * @author Chris McMillan, Ball Aerospace
