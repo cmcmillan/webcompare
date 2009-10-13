@@ -11,7 +11,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.sql.DataSource;
@@ -22,6 +24,8 @@ import org.apache.oro.text.regex.Pattern;
 import org.apache.oro.text.regex.PatternMatcher;
 import org.apache.oro.text.regex.PatternMatcherInput;
 import org.apache.oro.text.regex.Perl5Matcher;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.junit.After;
 import org.junit.Before;
@@ -187,6 +191,8 @@ public class TestDBUtils
      * Common DataSource
      */
     private DataSource ds;
+    private final Map<String, Integer> giatCategoryCache = new HashMap<String, Integer>();
+    private final Map<String, Integer> statusCodeCache = new HashMap<String, Integer>();
 
     @Before
     public void setUp() throws Exception
@@ -194,6 +200,8 @@ public class TestDBUtils
 	ds =
 		DBUtils.setupPostgreSQLDataSource(DBConstant.PG_USERNAME, DBConstant.PG_PASSWORD,
 		    DBConstant.PG_CONNECTION_URL);
+	giatCategoryCache.clear();
+	statusCodeCache.clear();
     }
 
     @After
@@ -371,11 +379,11 @@ public class TestDBUtils
 	    LOGGER.debug("Creating statement");
 
 	    String categoriesSql =
-	    // "INSERT INTO giat_categories(category) "
-		    // + "VALUES (:category) "
-		    // +
-		    // "WHERE not exists(SELECT * FROM giat_categories WHERE category <> \":category\");"
-		    "SELECT category_id, category FROM giat_categories WHERE category = :category;";
+		    "INSERT INTO giat_categories(category) "
+			    + "SELECT :category "
+			    + "WHERE not exists(SELECT category FROM giat_categories WHERE category <> :category);"
+			    // Get the category id
+			    + "SELECT category_id, category FROM giat_categories WHERE category = :category;";
 
 	    stmt = new NamedParameterStatement(conn, categoriesSql);
 
@@ -393,8 +401,8 @@ public class TestDBUtils
 		{
 		    // categoryIDs.put(worksheetName, results.getInt(1));
 		    LOGGER.debug("Category ({}): {}", results.getInt(1), worksheetName);
-		    assertEquals("Database category does not match", worksheetName, results
-			    .getString(2));
+		    assertEquals("Database category does not match worksheet name.", worksheetName,
+			results.getString(2));
 		}
 	    }
 	}
@@ -408,134 +416,166 @@ public class TestDBUtils
 	}
     }
 
-    @Ignore
     @Test
-    public void testLoadXLSData() throws Exception
+    public void testLoadRequiredToolsXLS() throws Exception
     {
 	Connection conn = null;
-	NamedParameterStatement namedStmt = null;
-	ResultSet results = null;
-	Map<String, Integer> categoryIDs = new HashMap<String, Integer>();
-	String worksheetName = "";
+	List<Statement> stmts = new ArrayList<Statement>();
+	List<ResultSet> results = new ArrayList<ResultSet>();
+	String worksheetName;
 	// Create a work book reference
 	HSSFWorkbook workbook = new HSSFWorkbook(new FileInputStream(GIAT_REQ_TOOLS_XLS));
 
-	// Initialize the connection
-	LOGGER.debug("Creating connection");
-	conn = ds.getConnection();
-	conn.setCatalog("public");
-	LOGGER.debug("Creating statement");
-
-	String categoriesSql =
-		"INSERT INTO giat_categories(category) "
-			+ "VALUES (:category) "
-			+ "WHERE not exists(SELECT * FROM giat_categories WHERE category <> \":category\");"
-			+ "SELECT category_id FROM giat_categories WHERE category = \":category\";";
-
-	namedStmt = new NamedParameterStatement(conn, categoriesSql);
-
-	for (int sheetIndex = 0; sheetIndex < workbook.getNumberOfSheets(); sheetIndex++)
+	try
 	{
-	    worksheetName = workbook.getSheetName(sheetIndex);
-	    LOGGER.debug("Worksheet ({}): {}", sheetIndex, worksheetName);
+	    // Initialize the connection
+	    LOGGER.debug("Creating connection");
+	    conn = ds.getConnection();
+	    conn.setCatalog("public");
+	    LOGGER.debug("Creating statement");
 
-	    namedStmt.setString("category", workbook.getSheetName(sheetIndex));
+	    String categoriesSql =
+		    "INSERT INTO giat_categories(category) "
+			    + "SELECT :category "
+			    + "WHERE not exists(SELECT category FROM giat_categories WHERE category <> :category);"
+			    // Get the category id
+			    + "SELECT category_id, category FROM giat_categories WHERE category = :category;";
+	    String statusSql =
+		    "INSERT INTO giat_status(status) "
+			    + "SELECT :status "
+			    + "WHERE not exists(SELECT status FROM giat_status WHERE status <> :status);"
+			    // Get the status code and estimated time
+			    + "SELECT status_code, status FROM giat_status WHERE status = :status;";
 
-	    namedStmt.addBatch();
-	    // Add the GIAT Workbook Categories
-	    // Get the Category ID of the category
-	    results = namedStmt.executeQuery();
-	    if (results != null)
+	    String requiredToolsSql =
+		    "INSERT INTO giat_required_tools("
+			    + "priority, artifact_name, artifact_version, website, status_code, category_id)"
+			    + "VALUES (:priority, :name, :version, :website, :statusCode, :categoryID);"
+			    + "WHERE not exists(SELECT artifact_name, artifact_version FROM required_tools "
+			    + "WHERE artifact_name <> :name AND artifact_version <> :version);";
+
+	    NamedParameterStatement categoriesStmt =
+		    new NamedParameterStatement(conn, categoriesSql);
+	    stmts.add(categoriesStmt.getStatement());
+
+	    NamedParameterStatement statusStmt = new NamedParameterStatement(conn, statusSql);
+	    stmts.add(statusStmt.getStatement());
+
+	    NamedParameterStatement requiredToolsStmt =
+		    new NamedParameterStatement(conn, requiredToolsSql);
+	    stmts.add(requiredToolsStmt.getStatement());
+
+	    HSSFSheet currSheet = null;
+	    HSSFRow currRow = null;
+	    String priority;
+	    String name;
+	    String version;
+	    String website;
+	    String status;
+
+	    for (int sheetIndex = 0; sheetIndex < workbook.getNumberOfSheets(); sheetIndex++)
 	    {
-		// categoryIDs.put(worksheetName, results.getInt(1));
-		LOGGER.debug("Category ({}): {}", results.getInt(1), worksheetName);
+		currSheet = workbook.getSheetAt(sheetIndex);
+		worksheetName = currSheet.getSheetName();
+		LOGGER.debug("Worksheet ({}): {}", sheetIndex, worksheetName);
+
+		int categoryID = getCategoryID(worksheetName, categoriesStmt);
+		LOGGER.debug("{} CategoryID: {}", worksheetName, categoryID);
+
+		// Get the last row number
+		int lastRowNum = currSheet.getLastRowNum();
+		// Skip the first row since it is the header row
+		for (int rowNum = 1; rowNum < lastRowNum; rowNum++)
+		{
+		    currRow = currSheet.getRow(rowNum);
+		    priority = currRow.getCell(0).getStringCellValue();
+		    name = currRow.getCell(1).getStringCellValue();
+		    version = currRow.getCell(2).getStringCellValue();
+		    website = currRow.getCell(3).getStringCellValue();
+		    status = currRow.getCell(4).getStringCellValue();
+		    int statusCode = getStatusCode(status, statusStmt);
+		}
+	    }
+
+	}
+	catch (SQLException e)
+	{
+	    fail(e.toString());
+	}
+	finally
+	{
+	    DBUtils.cleanupConnections(conn, stmts, results);
+	}
+    }
+
+    /**
+     * @param worksheetName
+     * @param categoriesStmt
+     * @return
+     * @throws SQLException
+     */
+    private int getCategoryID(String worksheetName, NamedParameterStatement categoriesStmt)
+	    throws SQLException
+    {
+	if (!giatCategoryCache.containsKey(worksheetName))
+	{
+	    // Set the Named Parameter
+	    categoriesStmt.setString("category", worksheetName);
+	    // Add the GIAT Workbook Categories, if it does not already exist
+	    // Get the Category ID of the category
+	    ResultSet categoryIDResults = categoriesStmt.executeQuery();
+
+	    int categoryID = -9999;
+	    if (categoryIDResults != null && categoryIDResults.next())
+	    {
+		// Get the CategoryID
+		categoryID = categoryIDResults.getInt(1);
+		LOGGER.debug("Category ({}): {}", categoryID, worksheetName);
+		assertEquals("Database category does not match worksheet name.", worksheetName,
+		    categoryIDResults.getString(2));
+		giatCategoryCache.put(worksheetName, categoryID);
+	    }
+	    else
+	    {
+		throw new SQLException("Unable to retrieve categoryID, " + worksheetName);
 	    }
 	}
+	return giatCategoryCache.get(worksheetName);
+    }
 
-	// // Refer to the sheet. Put the Name of the sheet to be referred from
-	// // Alternative you can also refer the sheet by index using
-	// // getSheetAt(int index)
-	// HSSFSheet sheet = workbook.getSheet("Dependecies");
-	// // Reading the TOP LEFT CELL
-	// HSSFRow row = sheet.getRow(0);
-	// // Create a cell at index zero ( Top Left)
-	// HSSFCell cell = row.getCell(0);
-	// // Type the content
-	// LOGGER.info("THE TOP LEFT CELL--> " + cell.getStringCellValue());
-	// // Cell should not be empty
-	// assertFalse("Cell", cell.getStringCellValue().isEmpty());
-	//	
-	// try
-	// {
+    /**
+     * @param status
+     * @param statusCodeStmt
+     * @return
+     * @throws SQLException
+     */
+    private int getStatusCode(String status, NamedParameterStatement statusCodeStmt)
+	    throws SQLException
+    {
+	if (!statusCodeCache.containsKey(status))
+	{
+	    // Set the Named Parameter
+	    statusCodeStmt.setString("status", status);
+	    // Add the GIAT Status, if it does not already exist
+	    // Get the Status Code of the status
+	    ResultSet statusCodeResults = statusCodeStmt.executeQuery();
 
-	//
-	// // Get the input text file
-	// TextFileIn txtFile = new TextFileIn("deptree.txt");
-	// String myLine;
-	// MavenData data;
-	// while ((myLine = txtFile.readLine()) != null)
-	// {
-	// try
-	// {
-	// data = new MavenData(myLine);
-	// stmt.setString(1, data.getRawText());
-	// stmt.setString(2, data.getGroupID());
-	// stmt.setString(3, data.getArtifactID());
-	// stmt.setString(4, data.getArtifactType());
-	// stmt.setString(5, data.getArtifactVersion());
-	// stmt.setString(6, data.getScope());
-	// stmt.setString(7, data.getClassifier());
-	// // Add the Prepared statement to the batch
-	// stmt.addBatch();
-	// }
-	// catch (SQLException e)
-	// {
-	// LOGGER.debug("SQL Error: " + e.getLocalizedMessage());
-	// }
-	// catch (IllegalArgumentException e)
-	// {
-	// LOGGER.debug("Unable to parse line: " + myLine);
-	// }
-	// catch (Exception e)
-	// {
-	// LOGGER.debug("Error: " + e.getLocalizedMessage());
-	// }
-	// finally
-	// {
-	// // Clear the old parameters
-	// stmt.clearParameters();
-	// }
-	// }
-	// int[] results = stmt.executeBatch();
-	// LOGGER.debug("Batch Statements Executed: " + results.length);
-	// }
-	// catch (SQLException e)
-	// {
-	// LOGGER.error("SQL Exception", e);
-	// fail(e.getLocalizedMessage());
-	// }
-	// catch (Exception e)
-	// {
-	// LOGGER.error("Exception", e);
-	// fail(e.getLocalizedMessage());
-	// }
-	// finally
-	// {
-	// try
-	// {
-	// stmt.close();
-	// }
-	// catch (Exception e)
-	// {
-	// }
-	// try
-	// {
-	// conn.close();
-	// }
-	// catch (Exception e)
-	// {
-	// }
-	// }
+	    int statusCode = -9999;
+	    if (statusCodeResults != null && statusCodeResults.next())
+	    {
+		// Get the CategoryID
+		statusCode = statusCodeResults.getInt(1);
+		LOGGER.debug("Category ({}): {}", statusCode, status);
+		assertEquals("Database category does not match worksheet name.", status,
+		    statusCodeResults.getString(2));
+		statusCodeCache.put(status, statusCode);
+	    }
+	    else
+	    {
+		throw new SQLException("Unable to retrieve status code, " + status);
+	    }
+	}
+	return statusCodeCache.get(status);
     }
 
     @Ignore

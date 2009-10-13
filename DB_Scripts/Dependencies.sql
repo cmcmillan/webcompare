@@ -1,22 +1,62 @@
--- Table: "DEPENDENCIES"
+--
+-- PostgreSQL database dump
+--
 
--- DROP TABLE "DEPENDENCIES";
+-- Started on 2009-10-13 11:17:46
 
-CREATE TABLE "DEPENDENCIES"
-(
-  "DEPENDENCY_ID" oid NOT NULL,
-  "PACKAGE" character varying,
-  "VERSION" character varying,
-  "WEBSITE" character varying,
-  "MVN_DATA_ID" oid,
-  "WEBSITE_ID" oid,
-  CONSTRAINT "DEPENDENCIES_PRIM_KEY" PRIMARY KEY ("DEPENDENCY_ID"),
-  CONSTRAINT "FK_MVN_DATA" FOREIGN KEY ("MVN_DATA_ID")
-      REFERENCES "MVN_DATA" ("DEP_ID") MATCH SIMPLE
-      ON UPDATE CASCADE ON DELETE SET NULL,
-  CONSTRAINT "FK_WEBSITE" FOREIGN KEY ("WEBSITE_ID")
-      REFERENCES "WEBSITE" ("WID") MATCH SIMPLE
-      ON UPDATE CASCADE ON DELETE SET NULL
-)
-WITH (OIDS=TRUE);
-ALTER TABLE "DEPENDENCIES" OWNER TO postgres;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = off;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET escape_string_warning = off;
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- TOC entry 1486 (class 1259 OID 19295)
+-- dependencies: 3
+-- Name: dependencies; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE "dependencies" (
+    "dependency_id" SERIAL NOT NULL,
+    "dep_package" character varying,
+    "dep_version" character varying,
+    "dep_website" character varying,
+    "mvn_data_id" INTEGER,
+    "dep_website_id" INTEGER
+);
+
+
+ALTER TABLE public."dependencies" OWNER TO postgres;
+
+--
+-- TOC entry 1765 (class 0 OID 19295)
+-- dependencies: 1486
+-- Data for Name: dependencies; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY "dependencies" ("dependency_id", "dep_package", "dep_version", "dep_website", "mvn_data_id", "dep_website_id") FROM stdin;
+--\.
+
+
+--
+-- TOC entry 1764 (class 2606 OID 19302)
+-- dependencies: 1486 1486
+-- Name: dependencies_PRIM_KEY; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY "dependencies"
+    ADD CONSTRAINT "dependencies_PRIM_KEY" PRIMARY KEY ("dependency_id");
+
+
+-- Completed on 2009-10-13 11:17:46
+
+--
+-- PostgreSQL database dump complete
+--
+

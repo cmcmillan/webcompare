@@ -15,22 +15,22 @@ public final class DBConstant
     /**
      * Default PostgreSQL Port
      */
-    public static final String PG_PORT = "5433";
+    public static final String PG_PORT = "5432";
 
     /**
      * Default PostgreSQL Database
      */
-    public static final String PG_DATABASE = "postgres";
+    public static final String PG_DATABASE = "postgis";
 
     /**
      * Default PostgreSQL User Name
      */
-    public static final String PG_USERNAME = "postgres";
+    public static final String PG_USERNAME = "geodb";
 
     /**
      * Default PostgreSQL Password
      */
-    public static final String PG_PASSWORD = "GoodDog1";
+    public static final String PG_PASSWORD = "geodb";
 
     /**
      * Default PostgreSQL Connection URL.
