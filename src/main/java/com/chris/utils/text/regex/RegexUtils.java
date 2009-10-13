@@ -4,8 +4,11 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+<<<<<<< HEAD
 import java.util.HashMap;
 import java.util.Map;
+=======
+>>>>>>> 06a3db8... Created regex package until com.chris.utils.text
 import java.util.regex.Matcher;
 
 import org.apache.oro.text.regex.MalformedPatternException;
@@ -30,7 +33,10 @@ public final class RegexUtils
      * regex snippet for a MAVEN COORDINATE
      */
     public static final String A_MVN_COORD = "([^: ][^:]*)(?::?)";
+<<<<<<< HEAD
 
+=======
+>>>>>>> 06a3db8... Created regex package until com.chris.utils.text
     /**
      * regex fragment to look for a white space or :
      */
@@ -52,6 +58,7 @@ public final class RegexUtils
      * regex fragment to look for a phrase at the start of a line
      */
     public static final String A_START_PHRASE = "^.*\\s";
+<<<<<<< HEAD
     /**
      * regex fragment for any character except a colon
      */
@@ -95,10 +102,14 @@ public final class RegexUtils
      * Map of regular expressions that have been initialized.
      */
     private static Map<String, Pattern> patterns = new HashMap<String, Pattern>();
+=======
+
+>>>>>>> 06a3db8... Created regex package until com.chris.utils.text
     private static final PatternCompiler compiler = new Perl5Compiler();;
     private static final PatternMatcher matcher = new Perl5Matcher();
 
     /**
+<<<<<<< HEAD
      * Assert the provided Regular Expression is false
      * 
      * @param javaMatcher
@@ -151,10 +162,54 @@ public final class RegexUtils
 	{
 	    LOGGER.error("Invalid regular expression", e);
 	    fail(e.getLocalizedMessage());
+=======
+     * @param pattern
+     * @param input
+     */
+    public static final void outputMatchResults(Pattern pattern, PatternMatcherInput input)
+    {
+	int groups;
+	MatchResult result;
+	LOGGER.debug("Pattern: {}", pattern.getPattern());
+	if (matcher.contains(input, pattern))
+	{
+	    int matchCount = 0;
+	    do
+	    {
+		result = matcher.getMatch();
+		matchCount++;
+		// Perform whatever processing on the result you want.
+		// Here we just print out all its elements to show how its
+		// methods are used.
+
+		LOGGER.debug("Match: {}", result.toString());
+		// LOGGER.debug("Length: {}" , result.length());
+		groups = result.groups();
+		// LOGGER.debug("Groups: {}" , groups);
+		// LOGGER.debug("Begin offset: {}" , result.beginOffset(0));
+		// LOGGER.debug("End offset: {}" , result.endOffset(0));
+		// LOGGER.debug("Saved Groups: ");
+		//
+		// Start at 1 because we just printed out group 0
+		for (int group = 1; group < groups; group++)
+		{
+		    LOGGER.debug(group + ": {}", result.group(group));
+		    // LOGGER.debug("Begin: {}" , result.begin(group));
+		    // LOGGER.debug("End: {}" , result.end(group));
+		}
+	    }
+	    while (matcher.contains(input, pattern));
+	    LOGGER.debug("{} matches", matchCount);
+	}
+	else
+	{
+	    LOGGER.debug("No matches.");
+>>>>>>> 06a3db8... Created regex package until com.chris.utils.text
 	}
     }
 
     /**
+<<<<<<< HEAD
      * Assert the provided Regular Expression is true
      * 
      * @param javaMatcher
@@ -300,11 +355,94 @@ public final class RegexUtils
      */
     public static final int outputJavaRegexGroups(Matcher javaMatcher, int found,
 	    boolean showGroupCount, Logger LOGGER) throws IndexOutOfBoundsException
+=======
+     * @param regex
+     * @throws MalformedPatternException
+     *             Bad pattern
+     */
+    public static final Pattern initPattern(String regex) throws MalformedPatternException
+    {
+	Pattern pattern;
+	try
+	{
+	    pattern = compiler.compile(regex);
+	}
+	catch (MalformedPatternException e)
+	{
+	    LOGGER.error("Bad pattern.", e);
+	    fail(e.getMessage());
+	    throw e;
+	}
+	return pattern;
+    }
+
+    /**
+     * @param regex
+     * @param inputString
+     * @throws MalformedPatternException
+     */
+    public static final void debugRegex(String regex, String inputString)
+	    throws MalformedPatternException
+    {
+	Pattern pattern = initPattern(regex);
+	PatternMatcherInput input = new PatternMatcherInput(inputString);
+
+	outputMatchResults(pattern, input);
+    }
+
+    /**
+     * Assert the provided Regular Expression is false
+     * 
+     * @param matcher
+     *            Regular Expression Match to check
+     */
+    public static final void assertRegexFalse(Matcher matcher)
+    {
+	// Reset the Matcher in case it has been used
+	matcher.reset();
+	// This madness is needed to get the search input text
+	StringBuffer sb = new StringBuffer();
+	matcher.appendTail(sb);
+	// Run the Assert statement
+	assertFalse(String.format("Regex should not have a match.\r%1$s\rSearch text:\r%2$s",
+	    matcher.pattern().pattern(), sb), matcher.find());
+    }
+
+    /**
+     * Assert the provided Regular Expression is true
+     * 
+     * @param matcher
+     *            Regular Expression Match to check
+     */
+    public static final void assertRegexTrue(Matcher matcher)
+    {
+	// Reset the Matcher in case it has been used
+	matcher.reset();
+	// This madness is needed to get the search input text
+	StringBuffer sb = new StringBuffer();
+	matcher.appendTail(sb);
+	// Run the Assert statement
+	assertTrue(String.format("Regex should have a match.\r%1$s\rSearch text:\r%2$s", matcher
+		.pattern().pattern(), sb), matcher.find());
+    }
+
+    /**
+     * @param matcher
+     * @param found
+     * @param showGroupCount
+     * @throws IndexOutOfBoundsException
+     *             More than 100 matches have been found.
+     * @return
+     */
+    public static final int printRegexGroups(Matcher matcher, int found, boolean showGroupCount)
+	    throws IndexOutOfBoundsException
+>>>>>>> 06a3db8... Created regex package until com.chris.utils.text
     {
 	// Skip Group(0) by default since it is the entire match
 	int groupStart = 1;
 	if (showGroupCount)
 	{
+<<<<<<< HEAD
 	    LOGGER.debug("Match {}: Group Count {}", found + 1, javaMatcher.groupCount());
 	    groupStart = 0;
 	}
@@ -312,6 +450,15 @@ public final class RegexUtils
 	{
 	    LOGGER.debug("Match {}: Group {}: {}", new Object[] { found + 1, groupNum,
 		    javaMatcher.group(groupNum) });
+=======
+	    LOGGER.debug("Match {}: Group Count {}", found + 1, matcher.groupCount());
+	    groupStart = 0;
+	}
+	for (int groupNum = groupStart; groupNum <= matcher.groupCount(); groupNum++)
+	{
+	    LOGGER.debug("Match {}: Group {}: {}", new Object[] { found + 1, groupNum,
+		    matcher.group(groupNum) });
+>>>>>>> 06a3db8... Created regex package until com.chris.utils.text
 	}
 	found++;
 	if (found > 100)
@@ -320,6 +467,7 @@ public final class RegexUtils
 	}
 	return found;
     }
+<<<<<<< HEAD
 
     /**
      * Output the {@link MatchResult} information
@@ -402,4 +550,6 @@ public final class RegexUtils
 	else
 	    assertFalse(message, condition);
     }
+=======
+>>>>>>> 06a3db8... Created regex package until com.chris.utils.text
 }
