@@ -30,6 +30,7 @@ public final class RegexUtils
      * regex snippet for a MAVEN COORDINATE
      */
     public static final String A_MVN_COORD = "([^: ][^:]*)(?::?)";
+
     /**
      * regex fragment to look for a white space or :
      */
@@ -43,7 +44,6 @@ public final class RegexUtils
      */
     public static final String A_START_GARBAGE =
 	    "^\\S+" + A_SPACE_COLON + "*(" + A_NO_COLON_SPACE + "*)";
-
     /**
      * regex fragment to look for some spaces
      */
@@ -52,13 +52,45 @@ public final class RegexUtils
      * regex fragment to look for a phrase at the start of a line
      */
     public static final String A_START_PHRASE = "^.*\\s";
+    /**
+     * regex fragment for any character except a colon
+     */
+    public static final String A_NO_COLON = "[^:]";
+    /**
+     * regex fragment for a colon boundary
+     */
+    public static final String A_COLON_BOUND = ":\\b";
+    /**
+     * regex fragment for a maven coordinate ending at the end of the line
+     */
+    public static final String A_MVN_COORD_EOL = "(" + A_NO_COLON + "*)$";
+    /**
+     * regex fragment for the initial maven coordinate consists of first word
+     * without a space before a colon
+     */
+    public static final String A_MVN_COORD_START = "^.*?([\\w-.]*)" + A_COLON_BOUND;
+    /**
+     * regex fragment for a maven coordinate bound by a colon
+     */
+    public static final String A_MVN_COORD_COLON = "(" + A_NO_COLON + "*)" + A_COLON_BOUND;
+    /**
+     * regex fragment for the middle maven coordinates consisting of
+     * {@link A_MVN_COORD_COLON} 2-4x
+     */
+    public static final String A_MVN_COORD_CENTER =
+	    "(" + A_MVN_COORD_COLON + A_MVN_COORD_COLON + "|" + A_MVN_COORD_COLON
+		    + A_MVN_COORD_COLON + A_MVN_COORD_COLON + "|" + A_MVN_COORD_COLON
+		    + A_MVN_COORD_COLON + A_MVN_COORD_COLON + A_MVN_COORD_COLON + ")";
+    /**
+     * regex fragment for a maven coordinate ending at the end of the line
+     */
+    public static final String A_MVN_COORD_END = "(" + A_NO_COLON + "*)$";
 
     /**
-     * regex to parse out coordinates from a maven log line
+     * regex fragment to parse out coordinates from a maven log line
      */
-    public static final String MAVEN_LINE_COORD =
-	    "(" + RegexUtils.A_START_GARBAGE + ")*(" + RegexUtils.A_MVN_COORD + ")";
-
+    public static final String A_MVN_LINE =
+	    A_MVN_COORD_START + A_MVN_COORD_CENTER + A_MVN_COORD_END;
     /**
      * Map of regular expressions that have been initialized.
      */
@@ -86,6 +118,21 @@ public final class RegexUtils
     /**
      * Assert the provided Regular Expression is false
      * 
+     * @param pattern
+     *            Regular Expression to test
+     * @param input
+     *            Input to be parsed
+     */
+    public static final void assertRegexFalse(Pattern pattern, PatternMatcherInput input)
+    {
+	// Run the Assert statement
+	assertRegex(pattern.getPattern(), String.valueOf(input.getInput()), false, matcher
+		.contains(input, pattern));
+    }
+
+    /**
+     * Assert the provided Regular Expression is false
+     * 
      * @param regex
      *            Regular Expression to test
      * @param inputString
@@ -108,21 +155,6 @@ public final class RegexUtils
     }
 
     /**
-     * Assert the provided Regular Expression is false
-     * 
-     * @param pattern
-     *            Regular Expression to test
-     * @param input
-     *            Input to be parsed
-     */
-    public static final void assertRegexFalse(Pattern pattern, PatternMatcherInput input)
-    {
-	// Run the Assert statement
-	assertRegex(pattern.getPattern(), String.valueOf(input.getInput()), false, matcher
-		.contains(input, pattern));
-    }
-
-    /**
      * Assert the provided Regular Expression is true
      * 
      * @param javaMatcher
@@ -137,6 +169,21 @@ public final class RegexUtils
 	javaMatcher.appendTail(input);
 	// Run the Assert statement
 	assertRegex(javaMatcher.pattern().pattern(), input.toString(), true, javaMatcher.find());
+    }
+
+    /**
+     * Assert the provided Regular Expression is true
+     * 
+     * @param pattern
+     *            Regular Expression to test
+     * @param input
+     *            Input to be parsed
+     */
+    public static final void assertRegexTrue(Pattern pattern, PatternMatcherInput input)
+    {
+	// Run the Assert statement
+	assertRegex(pattern.getPattern(), String.valueOf(input.getInput()), true, matcher.contains(
+	    input, pattern));
     }
 
     /**
@@ -164,43 +211,25 @@ public final class RegexUtils
     }
 
     /**
-     * Assert the provided Regular Expression is true
+     * Output the results of using {@code regex} on {@code inputString}
      * 
-     * @param pattern
-     *            Regular Expression to test
-     * @param input
+     * @param regex
+     *            Regular Expression
+     * @param inputString
      *            Input to be parsed
+     * @param verbose
+     *            Enable more verbose logging of Regex match information
+     * @throws MalformedPatternException
+     *             {@code regex} is not a valid pattern.
      */
-    public static final void assertRegexTrue(Pattern pattern, PatternMatcherInput input)
+    public static final void debugRegex(String regex, String inputString, boolean verbose)
+	    throws MalformedPatternException
     {
-	// Run the Assert statement
-	assertRegex(pattern.getPattern(), String.valueOf(input.getInput()), true, matcher.contains(
-	    input, pattern));
-    }
-
-    /**
-     * Assert the provided Regular Expression is true or false
-     * 
-     * @param pattern
-     *            Regular Expression to test
-     * @param inputText
-     *            Input to be parsed
-     * @param assertType
-     *            Type of assert to run
-     * @param condition
-     *            Condition to be tested
-     */
-    private static final void assertRegex(String pattern, String inputText, boolean assertType,
-	    boolean condition)
-    {
-	String message =
-		String.format("Regex should%1$s have a match.\r%2$s\rSearch text:\r%3$s",
-		    assertType ? "" : " not", pattern, inputText);
-	// Run the Assert statement
-	if (assertType)
-	    assertTrue(message, condition);
-	else
-	    assertFalse(message, condition);
+	// Initialize the pattern
+	Pattern pattern = initPattern(regex);
+	PatternMatcherInput input = new PatternMatcherInput(inputString);
+	// Output the Match results using the Logger
+	outputMatchResults(pattern, input, verbose);
     }
 
     /**
@@ -234,25 +263,62 @@ public final class RegexUtils
     }
 
     /**
-     * Output the results of using {@code regex} on {@code inputString}
+     * Print the groups of the {@link Matcher} {@code javaMatcher} match.
      * 
-     * @param regex
-     *            Regular Expression
-     * @param inputString
-     *            Input to be parsed
-     * @param verbose
-     *            Enable more verbose logging of Regex match information
-     * @throws MalformedPatternException
-     *             {@code regex} is not a valid pattern.
+     * @param javaMatcher
+     *            {@link Matcher} Regular Expression Match to check
+     * @param found
+     *            Number of matches that have been found
+     * @param showGroupCount
+     *            Print the number of groups in the match and group(0) if true,
+     *            otherwise prints only nested groups
+     * @throws IndexOutOfBoundsException
+     *             More than 100 matches have been found.
+     * @return Number of matches that have been found
      */
-    public static final void debugRegex(String regex, String inputString, boolean verbose)
-	    throws MalformedPatternException
+    public static final int outputJavaRegexGroups(Matcher javaMatcher, int found,
+	    boolean showGroupCount) throws IndexOutOfBoundsException
     {
-	// Initialize the pattern
-	Pattern pattern = initPattern(regex);
-	PatternMatcherInput input = new PatternMatcherInput(inputString);
-	// Output the Match results using the Logger
-	outputMatchResults(pattern, input, verbose);
+	return outputJavaRegexGroups(javaMatcher, found, showGroupCount, LOGGER);
+    }
+
+    /**
+     * Print the groups of the {@link Matcher} {@code javaMatcher} match.
+     * 
+     * @param javaMatcher
+     *            {@link Matcher} Regular Expression Match to check
+     * @param found
+     *            Number of matches that have been found
+     * @param showGroupCount
+     *            Print the number of groups in the match and group(0) if true,
+     *            otherwise prints only nested groups
+     * @param LOGGER
+     *            Logger to output debug information
+     * @throws IndexOutOfBoundsException
+     *             More than 100 matches have been found.
+     * @return Number of matches that have been found
+     */
+    public static final int outputJavaRegexGroups(Matcher javaMatcher, int found,
+	    boolean showGroupCount, Logger LOGGER) throws IndexOutOfBoundsException
+    {
+	// Skip Group(0) by default since it is the entire match
+	int groupStart = 1;
+	if (showGroupCount)
+	{
+	    LOGGER.debug("Match {}: Group Count {}", found + 1, javaMatcher.groupCount());
+	    groupStart = 0;
+	}
+	for (int groupNum = groupStart; groupNum <= javaMatcher.groupCount(); groupNum++)
+	{
+	    LOGGER.debug("Match {}: Group {}: {}", new Object[] { found + 1, groupNum,
+		    javaMatcher.group(groupNum) });
+	}
+	found++;
+	if (found > 100)
+	{
+	    throw new IndexOutOfBoundsException("To many matches, more than 100 matches found.");
+	}
+	return found;
     }
 
     /**
@@ -313,61 +379,27 @@ public final class RegexUtils
     }
 
     /**
-     * Print the groups of the {@link Matcher} {@code javaMatcher} match.
+     * Assert the provided Regular Expression is true or false
      * 
-     * @param javaMatcher
-     *            {@link Matcher} Regular Expression Match to check
-     * @param found
-     *            Number of matches that have been found
-     * @param showGroupCount
-     *            Print the number of groups in the match and group(0) if true,
-     *            otherwise prints only nested groups
-     * @throws IndexOutOfBoundsException
-     *             More than 100 matches have been found.
-     * @return Number of matches that have been found
+     * @param pattern
+     *            Regular Expression to test
+     * @param inputText
+     *            Input to be parsed
+     * @param assertType
+     *            Type of assert to run
+     * @param condition
+     *            Condition to be tested
      */
-    public static final int outputJavaRegexGroups(Matcher javaMatcher, int found,
-	    boolean showGroupCount) throws IndexOutOfBoundsException
+    private static final void assertRegex(String pattern, String inputText, boolean assertType,
+	    boolean condition)
     {
-	return outputJavaRegexGroups(javaMatcher, found, showGroupCount, LOGGER);
-    }
-
-    /**
-     * Print the groups of the {@link Matcher} {@code javaMatcher} match.
-     * 
-     * @param javaMatcher
-     *            {@link Matcher} Regular Expression Match to check
-     * @param found
-     *            Number of matches that have been found
-     * @param showGroupCount
-     *            Print the number of groups in the match and group(0) if true,
-     *            otherwise prints only nested groups
-     * @param LOGGER
-     *            Logger to output debug information
-     * @throws IndexOutOfBoundsException
-     *             More than 100 matches have been found.
-     * @return Number of matches that have been found
-     */
-    public static final int outputJavaRegexGroups(Matcher javaMatcher, int found,
-	    boolean showGroupCount, Logger LOGGER) throws IndexOutOfBoundsException
-    {
-	// Skip Group(0) by default since it is the entire match
-	int groupStart = 1;
-	if (showGroupCount)
-	{
-	    LOGGER.debug("Match {}: Group Count {}", found + 1, javaMatcher.groupCount());
-	    groupStart = 0;
-	}
-	for (int groupNum = groupStart; groupNum <= javaMatcher.groupCount(); groupNum++)
-	{
-	    LOGGER.debug("Match {}: Group {}: {}", new Object[] { found + 1, groupNum,
-		    javaMatcher.group(groupNum) });
-	}
-	found++;
-	if (found > 100)
-	{
-	    throw new IndexOutOfBoundsException("To many matches, more than 100 matches found.");
-	}
-	return found;
+	String message =
+		String.format("Regex should%1$s have a match.\r%2$s\rSearch text:\r%3$s",
+		    assertType ? "" : " not", pattern, inputText);
+	// Run the Assert statement
+	if (assertType)
+	    assertTrue(message, condition);
+	else
+	    assertFalse(message, condition);
     }
 }
