@@ -186,7 +186,7 @@ public class TestDBUtils
     /**
      * Name of the GIAT Required Tools Excel File
      */
-    private static final String GIAT_REQ_TOOLS_XLS = "RequiredTools_20090907_0939.xls";
+    private static final String GIAT_REQ_TOOLS_XLS = "RequiredTools_20091012_1700.xls";
     /**
      * Common DataSource
      */
@@ -378,12 +378,7 @@ public class TestDBUtils
 	    conn.setCatalog("public");
 	    LOGGER.debug("Creating statement");
 
-	    String categoriesSql =
-		    "INSERT INTO giat_categories(category) "
-			    + "SELECT :category "
-			    + "WHERE not exists(SELECT category FROM giat_categories WHERE category <> :category);"
-			    // Get the category id
-			    + "SELECT category_id, category FROM giat_categories WHERE category = :category;";
+	    String categoriesSql = "select giat_init_category(:category);";
 
 	    stmt = new NamedParameterStatement(conn, categoriesSql);
 
@@ -393,7 +388,6 @@ public class TestDBUtils
 		LOGGER.debug("Worksheet ({}): {}", sheetIndex, worksheetName);
 		// Set the Named Parameter
 		stmt.setString("category", worksheetName);
-		stmt.addBatch();
 		// Add the GIAT Workbook Categories
 		// Get the Category ID of the category
 		results = stmt.executeQuery();
@@ -401,14 +395,13 @@ public class TestDBUtils
 		{
 		    // categoryIDs.put(worksheetName, results.getInt(1));
 		    LOGGER.debug("Category ({}): {}", results.getInt(1), worksheetName);
-		    assertEquals("Database category does not match worksheet name.", worksheetName,
-			results.getString(2));
+		    assertEquals("Unexpected category id", sheetIndex + 1, results.getInt(1));
 		}
 	    }
 	}
 	catch (SQLException e)
 	{
-	    fail(e.toString());
+	    fail(e.getMessage());
 	}
 	finally
 	{
@@ -434,25 +427,14 @@ public class TestDBUtils
 	    conn.setCatalog("public");
 	    LOGGER.debug("Creating statement");
 
-	    String categoriesSql =
-		    "INSERT INTO giat_categories(category) "
-			    + "SELECT :category "
-			    + "WHERE not exists(SELECT category FROM giat_categories WHERE category <> :category);"
-			    // Get the category id
-			    + "SELECT category_id, category FROM giat_categories WHERE category = :category;";
-	    String statusSql =
-		    "INSERT INTO giat_status(status) "
-			    + "SELECT :status "
-			    + "WHERE not exists(SELECT status FROM giat_status WHERE status <> :status);"
-			    // Get the status code and estimated time
-			    + "SELECT status_code, status FROM giat_status WHERE status = :status;";
-
+	    String categoriesSql = "select giat_init_category(:category);";
+	    String statusSql = "select giat_init_status(:status);";
+	    String requiredToolsPrioritySql =
+		    "select giat_init_required_tools("
+			    + ":priority, :name, :version, :website, :statusCode, :categoryID);";
 	    String requiredToolsSql =
-		    "INSERT INTO giat_required_tools("
-			    + "priority, artifact_name, artifact_version, website, status_code, category_id)"
-			    + "VALUES (:priority, :name, :version, :website, :statusCode, :categoryID);"
-			    + "WHERE not exists(SELECT artifact_name, artifact_version FROM required_tools "
-			    + "WHERE artifact_name <> :name AND artifact_version <> :version);";
+		    "select giat_init_required_tools("
+			    + ":name, :version, :website, :statusCode, :categoryID);";
 
 	    NamedParameterStatement categoriesStmt =
 		    new NamedParameterStatement(conn, categoriesSql);
@@ -461,17 +443,23 @@ public class TestDBUtils
 	    NamedParameterStatement statusStmt = new NamedParameterStatement(conn, statusSql);
 	    stmts.add(statusStmt.getStatement());
 
+	    NamedParameterStatement requiredToolsPriorityStmt =
+		    new NamedParameterStatement(conn, requiredToolsPrioritySql);
+	    stmts.add(requiredToolsPriorityStmt.getStatement());
+
 	    NamedParameterStatement requiredToolsStmt =
-		    new NamedParameterStatement(conn, requiredToolsSql);
+		    new NamedParameterStatement(conn, requiredToolsPrioritySql);
 	    stmts.add(requiredToolsStmt.getStatement());
 
 	    HSSFSheet currSheet = null;
 	    HSSFRow currRow = null;
-	    String priority;
+	    int priority;
 	    String name;
 	    String version;
 	    String website;
 	    String status;
+
+	    NamedParameterStatement reqToolStmt;
 
 	    for (int sheetIndex = 0; sheetIndex < workbook.getNumberOfSheets(); sheetIndex++)
 	    {
@@ -482,18 +470,38 @@ public class TestDBUtils
 		int categoryID = getCategoryID(worksheetName, categoriesStmt);
 		LOGGER.debug("{} CategoryID: {}", worksheetName, categoryID);
 
+		if (worksheetName.equalsIgnoreCase("Libraries"))
+		{
+		    // Don't include priority from the Libraries page
+		    reqToolStmt = requiredToolsStmt;
+		}
+		else
+		{
+		    reqToolStmt = requiredToolsPriorityStmt;
+		}
+
 		// Get the last row number
 		int lastRowNum = currSheet.getLastRowNum();
 		// Skip the first row since it is the header row
 		for (int rowNum = 1; rowNum < lastRowNum; rowNum++)
 		{
 		    currRow = currSheet.getRow(rowNum);
-		    priority = currRow.getCell(0).getStringCellValue();
+		    priority = Integer.parseInt(currRow.getCell(0).getStringCellValue());
 		    name = currRow.getCell(1).getStringCellValue();
 		    version = currRow.getCell(2).getStringCellValue();
 		    website = currRow.getCell(3).getStringCellValue();
 		    status = currRow.getCell(4).getStringCellValue();
 		    int statusCode = getStatusCode(status, statusStmt);
+		    LOGGER.debug("{} Status Code: {}", status, statusCode);
+		    // Set the Named Parameters
+		    reqToolStmt.setInt("priority", priority);
+		    reqToolStmt.setString("name", name);
+		    reqToolStmt.setString("version", version);
+		    reqToolStmt.setString("website", website);
+		    reqToolStmt.setInt("statusCode", statusCode);
+		    reqToolStmt.setInt("categoryID", categoryID);
+		    // Add the required tool
+		    reqToolStmt.executeQuery();
 		}
 	    }
 
@@ -531,8 +539,6 @@ public class TestDBUtils
 		// Get the CategoryID
 		categoryID = categoryIDResults.getInt(1);
 		LOGGER.debug("Category ({}): {}", categoryID, worksheetName);
-		assertEquals("Database category does not match worksheet name.", worksheetName,
-		    categoryIDResults.getString(2));
 		giatCategoryCache.put(worksheetName, categoryID);
 	    }
 	    else
@@ -566,8 +572,6 @@ public class TestDBUtils
 		// Get the CategoryID
 		statusCode = statusCodeResults.getInt(1);
 		LOGGER.debug("Category ({}): {}", statusCode, status);
-		assertEquals("Database category does not match worksheet name.", status,
-		    statusCodeResults.getString(2));
 		statusCodeCache.put(status, statusCode);
 	    }
 	    else
