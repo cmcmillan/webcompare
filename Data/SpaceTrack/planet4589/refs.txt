@@ -1,0 +1,55 @@
+AVM        Vladimir Agapov, net postings
+AWST       Aviation Week
+Barensky   Stefan Barensky, personal communication
+CCMOPS     Cape Canaveral historical records
+CNES32     CNES history book
+ESAPR      ESA press release
+Energiya   Energiya history book
+ExpInOrbit Explorers In Orbit, MSFC, 1960
+GWU        George Washington Univ. 
+Grahn-WWW  Sven Grahn's web page
+Henderson  B. Henderson, personal comm
+ISIR       Intl. Space Industry Report
+JBIS       Journal of the BIS
+JG         J. Geiger, VAFB History Office
+JPL        JPL technical reports
+Jupiter    Jupiter history, Redstone Arsenal
+KHR-1      KSC Historical Report-1
+KIAM       Vladimir Agapov's web page at KIAM
+LAAFB      Los Angeles AFB history office
+LR         Lompoc Record newspaper
+Lissov     Igor Lissov, personal comm.
+MIR        Chris van den Bergh's Mir News
+MSFCFLASH  NASA MSFC STS flash report
+McDonald-B B. McDonald, personal comm.
+Morton     Morton, Fire across the Desert (Woomera history)
+NASA-TM    NASA Tech Memo
+NezavB     Nezav. Baykonur
+NK         Novosti Kosmonavtiki
+NOTS       NOTS satellite program files, NASM
+NRO        National Reconnaissance Office declassified archives
+NYT        New York Times
+Ransom     Martin Ransom, personal comm.
+PER        National Reconnaissance Office declassified archives
+PH         Peter Hunter, personal comm.
+POES-WWW   POES web site
+PR/AE      Arianespace press release
+Petrov71   G. Petrov, Soviet Space Research 1967-1970
+RAE        Launch time estimated to 0.01 day from RAE tables
+Rosenberg  J. Rosenberg, personal comm
+Rothmund   C. Rothmund, Europa et Cora.
+SAC7383    SAC-7383, DMSP launch history
+SP         NASA special publication
+STSJSC     NASA-JSC Shuttle records
+Seesat-L   Seesat-L email list
+Sergeev96  Sergeev, Plesetsk press release
+Stein      K. Stein, personal comm.
+TASS       TASS wire service
+TLE        Estimated from orbital data
+Thor       Arms, 1972, History of the Thor
+Tiziou     J. Tiziou, personal comm.
+VCR        Vandenberg Launch Commanders Reports, declassified.
+VSA        Sergey Voevodin, net postings
+WWW-FAST   FAST web page
+WWW-NASDA  NASDA web page
+Wire       Wire stories (AP, Reuter, TASS etc)

@@ -1,0 +1,1354 @@
+FORMAT  = 'AF1     '                       / AF1 File Format Aug 1996
+EXTNAME = 'Launch_Refs'                    / File Name
+NAXIS1  =                    141           / Width of table in bytes
+TFIELDS =                      2           / Number of fields
+TTYPE1  = 'Cite    '                       / Citation tag
+TDISP1  = 'A20     '                       / Display format
+TPOS1   =                      1           / Byte start position
+TTYPE2  = 'Reference'                      / Full reference
+TDISP2  = 'A120    '                       / Display format
+TPOS2   =                     22           / Byte start position
+END
+
+#
+# Books
+#
+AirglowAurora        The Airglow and Aurora, 1955 (ed. Bates, D.)
+Alway                P. Alway, Rockets of The World, privately published, 1993.
+Alway-Shadow         Alway, P., In the Shadow of the V-2   
+ROTW2001             Alway, P., ROTW 2001 update
+Alway2002            Alway, P., ROTW 2002 update
+AnimalAst            Animal Astronauts
+Barr-Howard          Barr and Howard. Polaris.
+B-58                 Convair B-58 Hustler, Jay Miller, Aerofax.
+Chang                Chang, I., Thread of the Silkworm
+Chapman              Chapman, J., "Atlas - The Story of a Missile", Harper, 1960.
+Chengappa            R. Chengappa, Weapons of Peace.
+CNES30               Trente Annees de CNES
+Delo                 SP Korolev i ego Delo, 1998
+DeMaes               De Maeseneer, G., The First 100 Years (via C. Rigg)
+Energiya             RKK Energiya im S.P. Korolyova, 1996.
+Gatland1             Gatland, K., Spacecraft and Boosters (1961).
+Gatland2             Gatland, K., Spacecraft and Boosters 2 (1962).
+Glazami              Glazami Ochevidtsev Vospom. Veteranov Baykonura, V 3., Kosmo, 1997.
+Hansen               Hansen, Chuck: US Nuclear Weapons
+Hartt                Hartt, J., The Mighty Thor  (reported by Carl Rigg)
+Harvey               Harvey, B., The Chinese Space Programme              
+Hill                 Hill, C.N., A Vertical Empire
+Hirsh                Glimpsing an Invisible Universe, R. Hirsch, CUP 1983.
+IMSG                 Ordway and Wakeford, International Missile and Spacecraft Guide, 1960
+IMRM                 Isseldovatel'skie i meteorologicheskie Raketi Mira, Gidrometisdat 1979.
+Jenkins-Landis       Jenkins, D. and Landis, A., Hypersonic; Speciality Press, 2002.
+Karpenko98           Karpenko, 1998, Soviet launch vehicles    
+Krunichev            Gorodnichev, Yu. P., et al 1996:GKNITs im Krunichev - 80 let.
+Ley                  Rockets, Missiles and Men in Space, W. Ley.
+Lowther              Lowther, W, 1991: Arms And The Man (Presidio).
+MajorAct60           Major Activities in the NASA Programs, Oct 1 1959 - Mar 31, 1960.
+Massey               Massey, British Space Science.              
+Men'shikov           Men'shikov, V. L., 1994: Baykonur - moya bol' i lyubov'
+Morrow               Morrow and Pines, Small Sounding Rockets.
+Morton               P. Morton, Fire across the Desert
+MRKS                 Meteorologicheskie Raketnie Kompleksi SSSR, A. A. Shidlovskiy, 2003
+NWD-5                Nuclear Weapons Databook, Vol 5.
+Newell               Newell, Sounding Rockets.              
+Neufeld/220          Neufeld, M., Rocket and the Reich, p 220
+NezavB               Nezavivaemiy Baykonur,ed.  K.V. Gerchik, 1998.
+Papagiannis          Papagiannis, M.D., 1964, Ph.D. Thesis, Harvard Univ.
+Pervov               Pervov, M, Raketniye Kompleksi RVSN, 1999.
+Pervov-A             Pervov. M (ABM rockets book)
+Petrov71             Petrov, G., Conquest of Outer Space in the USSR 1967-1970, 1971.
+Podvig               Podvig, P, Strategicheskoe Yadernoe Vooruzhenie Rossii (Moskva, 1998).
+Polmar-Moore         Polmar and Moore, Cold War Submarines
+RAE                  RAE Table of Earth Satellites 1957-1989.
+REUA                 Rocket Exploration of the Upper Atmosphere, J Atm.Terr. Phys Special Suppl 1, 1954
+Ragno                Italy In Space Before and After Sirio, L. Ragno and B. Amatucci (F Palombi).
+Raj                  Reach for the Stars, G. Raj.
+RKAYu                Raketi i Kosmicheskie Apparati KB Yuzhnoe.
+RocketTeam           Ordway F and Sharpe M, the Rocket Team.
+Rosen                Rosen, M, the Viking Story               
+Sergeev96            Sergeev et al 1996, Perviy Kosmosdrom Rossii.
+Stuhlinger           Stuhlinger, E., "Peenemunde" (reported by Carl Rigg)
+Taylor               Taylor, L., "Liftoff" (reported by Carl Rigg)
+TTaylor              Taylor, T., "Rocket Island" (reported by Carl Rigg)
+Thompson             M. Thompson, The Edge of Space
+VKS                  VKS Voenno-istoricheskiy trud, kniga 1,  Moskva 1997
+Villain              Villain, J., La Force de Dissuasion Francaise             
+VonBraun58           VonBraun, W. Start in den Weltraum
+Werrell85            Evolution of the Cruise Missile, K. Werrell, Maxwell AFB, 1985.
+Wilson-SSL           Solar System Log, A. Wilson.
+X-Planes             Miller, J., The X-Planes.
+#
+# Documents
+#
+AdvAstSci34          Apollo Soyuz Mission Report, AdvAstSci vol 34.
+ABMA                 ABMA Redstone History
+ABMA Memo            ABMA Redstone/Jupiter memos, from National Archives, Atlanta.
+AFCRL                AFCRL sounding rocket launch list
+AFCRL2               AFCRL sounding rocket launch memo 
+AFCRL-66-631         AFRCL document
+AFCRL66-738          AFRCL document
+AFMTC                AFMTC launch lists; Unattributed xeroxes found in archive with reference MT60-2544.
+AFT3                 The Air Force Titan III and 34D (booklet)
+AND                  Andoya range launch list
+ANSER                ANSER Corp. launch listing     
+ARGUS                DNA 6039F, Operation Argus 1958
+ApolloMR             Apollo mission reports, NASA JSC.
+BAE                  BAE Skylark Launch List, via J. Wentworth.
+Bermudez             J. Bermudez, manuscript
+Chesser              BAL BB launch list, Hugh Chesser, private communication.
+CBMO                 Chronology of the Ballistic Missile Organization
+CCMOPS               Cape Canaveral, Major Operations List.
+CGWIC-PR             China Great Wall press release
+CNES                 CNES list of sounding rocket launches, Toulouse archives.
+CNES32               CNES Ariane launch list.
+Cleary-Cape          M. Cleary, The Cape - Military Space Operations 1971-1992 (PAFB History Office).
+Cleary95             M. Cleary document, Patrick AFB History Office, 1995
+Cleary96             M. Cleary document, Patrick AFB History Office, 1996
+Cleary02             M. Cleary document, Patrick AFB web site, 2002
+Desind               Desind collection, NASM archives
+Evstaf'ev99          Evstaf'ev, 1999         
+ETR                  ETR launch list document
+ETR-IDX              ETR index of major launches, Patrick AFB
+ETR-IDX-CY77         ETR index of launches, calendar year 1977        
+ETR-IDX-CY78         ETR-IDX-CY78        
+ETR-IDX-FY62         ETR-IDX-FY62        
+ETR-IDX-FY63         ETR-IDX-FY63        
+ETR-IDX-FY70         ETR-IDX-FY70        
+ETR-IDX-FY73         ETR-IDX-FY73        
+ETR-IDX-FY75         ETR-IDX-FY75        
+ETR-IDX-FY76         ETR-IDX-FY76        
+ETR-IDX-FY76B        ETR-IDX-FY76B       
+ExpInOrbit           Explorers In Orbit, ABMA, Huntsville, Alabama, 1959.
+ASAT-doc1            DoD document, Talking Paper on ASAT Point in Space Launch, 23 Jan 1984 courtesy of D. Day
+F1-RPT               ELDO Blue Streak F1 report
+F62-RPT              ELDO F6/2 Report
+F9-RPT               ELDO F9 Report
+FE                   Fort Eustis files on the V2, NASM Garber
+FE/VB158             Document VB158 in Fort Eustis
+FE/VB159             Peenemunde archive, Fort Eustis document
+FE/VB160             Peenemunde archive, Fort Eustis document
+FE/VB161             Peenemunde archive, Fort Eustis document
+FE/VB162             Peenemunde archive, Fort Eustis document
+FE/VB170             Peenemunde archive, Fort Eustis document
+FE/VB171             Peenemunde archive, Fort Eustis document
+FE/VB172             Peenemunde archive, Fort Eustis document
+FE/VB173             Peenemunde archive, Fort Eustis document
+FE/VB174             Peenemunde archive, Fort Eustis document
+FBM                  FBM Chronology, US Navy Dept., 1982 (via J. Powell)
+FDS                  Files of Dr. Frederick D. Seward.
+FE175                Fort Eustis 175, Captured German Documents, NASM Archive
+FOM-JUNO-AM16A       Flight Operations Memo, JUNO AM-16A
+GCA-63-23N           Smith, L.G., Electron Density in the Ionosphere, GCA Tech Report 63-23-N, 
+GCA63-22-N           Smith, L.G, .. Nighttime E.., GCA Tech Report 63-22-N.
+GCA-TR-67-11-N       GCA tech rept.
+GCA-TR-68-14-N       GCA tech rept.
+GD-Atlas             General Dynamics Atlas launch list, 1983.
+GSFC-X-611-69-245    Boldt, E. et al, 1969, NASA GFSC-X-611-69-245.
+GSFC-X-611-69-248    Boldt, E. et al, 1969, NASA GFSC-X-611-69-248.
+GT12PAO              Gemini 12 PAO transcript
+GT5-TEC              Gemini 5 TEC transcript
+GT7-TEC              Gemini 7 TEC transcript
+GT9PAO               Gemini 9 PAO transcript
+GWU-NH74             GWU security archive, declassified document on FOBS.
+Hermes-Rpt           Project Hermes Final Rept., GE (Schenectady) Sep 1952. TIS No. R52A0510.
+Horvath72            UM document, Pitot Probe Techniques, by J Horvath, May 1972
+HSRP-104             Harvard Space Radio Project, Ph.D. thesis by G. R. Huguenin.
+HyshotFailRept       Final Report... Investigation into the anomaly .. HyShot. ATSB Jun 2002.
+ISASRpt635           ISAS Report 635
+ISASRpt679           ISAS Report 679
+ISTS                 International Symposium on Space Technology and Science, Tokyo
+JHU-TR17             Bottema, M. et al, JHU Physics Dept. Tech Rept 17, 1969.
+JPL-FOM-59-10        JPL memo JPL-FOM-59-10       
+JPL-TR32-1086        JPL Tech Rept, TR-32-1086
+JPL-TR-32-1550       JPL Tech Rept.JPL-TR-32-1550      
+JPL4-41              WAC B Sounding Rocket, JPL, 1947 (Report 4-41)
+JPL32-31-2           JPL Technical Report, 32-31, Vol 2
+JPL32-31-3           JPL Technical Report, 32-31, Vol 3.
+JunoFam              The Juno Family, ABMA, 4 Dec 1958
+Jupiter              Grimwood, J.M. and Strowd, F., History of the Jupiter Missile System, US Army Ordnance Missile Command, 1962.
+KPNO                 Kitt Peak rocket program files, collection of Lloyd Wallace, KPNO.
+LAAFB                History Office, Los Angeles AFB, via Peter Hunter.
+LJ-WorkingPaper133   Little Joe, Working Paper 133 (NARA-FW, via Peter McQuillan)
+LJ-WorkingPaper134   LJ-WorkingPaper134  
+LJ-WorkingPaper166   LJ-WorkingPaper166  
+LJ-WorkingPaper173   LJ-WorkingPaper173  
+LRL-ENN73-172        Summary of LLL Sounding Rocket Program 1968-1973, LLL Engineering Note ENN73-172, 1973 Sep 6.
+LTV-PR               LTV press release
+MS-5-65              Redstone Arsenal, MICOM document "Sino-Soviet Bloc Missile and Space Technology", MS-5-65, May 1965.
+MICOM-AHS-143        Redstone Arsenal, document MICOM-AHS-143       
+MM/Titan             Chronological Titan Launch History, Martin Marietta, 1989.
+MND-3283-2           Martin Co., RFD-2 Flight Test Program, 1965.
+MOR                  NASA Mission Operations Report
+MOR + TLE            NASA Mission Operations Report, combined with orbital data.
+MSFCFLASH            MSFC STS Flash Report.
+MT60-2544            Index of Missile Launchings By Missile Program, M. Whipple, AFMTC 1960 et seq.
+MTP-LOD-OIR-61-13.1  Jupiter Program Memo, MTP-LOD-OIR-61-13.1 (National Archives, Atlanta)
+MTP-P&VE-P-62-8      Redstone program memo MTP-P&VE-P-62-8     
+MTR-1                P. Clark, Molniya Tech Rept. 1
+MTR-4                P. Clark, Molniya Tech Rept 4, China's Recoverable Satellites (1994).
+N65-24357            N65-24357 microfiche
+N65-24358            N65-24358 microfiche
+N66-80960            Vehicle D-6 Post Flight Review
+NASAHIST             NASA internal memos in NASA History Office files.
+NASA-5-25-59W-V3     1958 NASA/USAF Space Probes (Able-1) Final Report, Vol 3.
+NOTS                 NOTS files on satellite program, via NASM                
+NRO                  NRO declassified CORONA files.
+NRO2D4               NRO declassified file NRO2D4              
+NRO3E24              NRO3E24             
+NRO3E3               NRO3E3              
+NRO3E88              NRO3E88             
+NZeus                History of the Nike Zeus Program at Vandenberg AFB, Aug 1959-Apr 1963, W.S. Howard, VAFB
+OMNS-T3C-9           Orbital Network Mission Summary, AFETR, Titan IIIC SLV-5 Vehicle No. 9.
+P437                 Program 437 History
+PER                  CORONA Photographic Evaluation Reports (PER).
+PER1052              CORONA PER1052             
+PER1113              CORONA PER1113             
+PFRR                 Poker Flat launch list 
+PSC/C/89-1           P. Clark, Chinese Space Activity 1987-1988.
+PSU-SR335            Quinn, R.G., Penn State U. Ionospheric Research Sci. Rept. 335, 1969.
+PSU-IRL-267          Penn State document
+Philp74              Philp, Alan T., 1974: Eclipse '74 Report.
+Polyot               Kalendar Puskov RN Kosmos, AO Polyot, 1994
+RAE/PSC              Archives formerly at RAE, via Peter Hunter and Phillip Clark
+RVA3                 RV-A-3 report.
+Rothmund             Rothmund, C., Europa et Cora - les fusees oubliees.
+Rothmund-Serra       Rothmund, C., manuscript via J-J. Serra.
+SAC7383              Operation 7383 Launch Vehicle Flight Report, 394th ITMS SAC, VAFB (1980).
+SAMSO                SAMSO History
+SAMSO-LL             SAMSO Launch List        
+SMT011214            Space and Missile Times, 2001 Dec 14.
+SPX-487              Spacewarn Bulletin No. 487
+SRFB-068             Memo SRFB-068            
+STSJSC               STS program documents, Johnson Space Center (via FOIA)
+Safeguard            Safeguard launch list, via SMDC history office.
+Sentinelles          Sentinelles (MSBS article)
+SSP65                US Congress, Soviet Space Programs 1965
+TE                   Thiokol/Elkton launch database
+Thor                 Arms, 1972: Thor history.
+UCRL-50587           Summary of LRL Sounding Rocket Experiments 1963-1968, Seward, F., LRL.
+VAFB                 Vandenberg History Office launch list, 1995 edition.
+VCR                  Commander's Launch Reports, Vandenberg Air Force Base
+Vang-ER-SLV6         Vanguard report Vang-ER-SLV6, via KSC Archives and NARA
+Vang-ER-SLV7         Vang-ER-SLV7        
+Vang-ER10300         Vang-ER10300        
+Vang-ER10301         Vang-ER10301        
+Vang-ER10302         Vang-ER10302        
+Vang-ER10303         Vang-ER10303        
+Vang-ER10304         Vang-ER10304        
+Vang-ER10589         Vang-ER10589        
+Vang-ER9470          Vang-ER9470         
+Vang-ER9948          Vang-ER9948         
+Vang-ER9955          Vang-ER9955         
+Vang-TV0             Vang-TV0            
+WDC                  WDC Rocket File (printout version, supplied 1984; some entries not in WDCRF)
+WISR                 Sounding Rocket Lists, Wallops Island Public Affairs Office (via J. Powell)
+Zapolskiy            Zapolskiy, A.A., 'Missiles Take Off From The Sea', 1994.
+Titan3Review         Titan3Review
+Titan3Review-2h      Titan3Review-2h
+#
+# Conference papers
+#
+AAS195.110.11        E.B. Burgh et al, Poster 110.11, Jan 1999 AAS meeting, Austin, TX.
+AIAA97-3138          AIAA paper 97-3138         
+IAA-00-IAA.2.203     IAA paper IAA-00-IAA.2.203    
+Space98              Galloway, R et al, Space 98, Proc 6th Intl Conf on Engineering, Construction and Operations, ASCE, 1998, p 382.
+ICTS4-193            James G. and Tyc G., 4th International Conference on Tethers in Space, 1995, p 193.
+#
+# Journals and Book Series
+#
+AASH7-2-65           AAS History Series 7, 2, 65
+AAS89-260            AAS History Series 8, 147
+AASH9-191            AAS History Series 9,191
+AASH15-335           AAS History Series 15,335          
+AASH17-131           AAS History Series 17,131
+AASH25-153           AAS History Series 25, 153
+AASH25-201           AAS History Series 25, 201
+AE1915               Aeronautics and Astronautics, 1915-1960        
+AE1960               Aeronautics and Astronautics, 1915-1960 (NASA, 1961).
+AE1961               Aeronautics and Astronautics, 1961  (NASA, 1962).
+AE1961A              Chronology of Missile and Astronautics Events (US House, 1961)
+AE1962               Astronautical and Aeronautical Events of 1962 (US House, 1962).
+APLTD                APL Technical Digest, unknown issue
+APL-TD-1-3           APL Technical Digest, Vol 1, No 3, 1980.
+APL-TD-8-3           APL Technical Digest, Vol 8, No 3.
+APL-TD1-3            APL Technical Digest TD1-3           
+APL-TD3-2-135        APL Technical Digest TD3-2-135       
+APL-TD8-3            APL Technical Digest TD8-3           
+ASR1,2               Advances in Space Research 1,2
+ATWA70-71            Jane's All the World's Aircraft 1970-71          
+AVMDS                V. Agapov, Novosti Kosmonavtiki 1997 No 6, p 54.
+AVMNLJ               V. Agapov and N. Johnson, Appendix A2 in Europe and Asia in Space 1993-4, N Johnson.
+AWST000124-24        Aviation Week, 2000 Jan 24, p 24.
+AWST000918-18        AWST000918-18       
+AWST001009-29        AWST001009-29       
+AWST001127-36        AWST001127-36       
+AWST010205-39        AWST010205-39       
+AWST840813-20        AWST840813-20       
+AWST841119-28        AWST841119-28        
+AWST850923-20        AWST850923-20        
+AWST860512-20        AWST860512-20        
+AWST860901-45        AWST860901-45        
+AWST860915-18        AWST860915-18       
+AWST890522-25        AWST890522-25       
+AWST890828-21        AWST890828-21       
+AWST890904-24        AWST890904-24       
+AWST890911-41        AWST890911-41       
+AWST891002-23        AWST891002-23       
+AWST891030-21        AWST891030-21       
+AWST891120-43        AWST891120-43       
+AWST891127-30        AWST891127-30       
+AWST900205-33        AWST900205-33       
+AWST900730-32        AWST900730-32       
+AWST910204-22        AWST910204-22       
+AWST910520-25        AWST910520-25       
+AWST910624-30        AWST910624-30       
+AWST910715-24        AWST910715-24       
+AWST910722-24        AWST910722-24       
+AWST910826-64        AWST910826-64       
+AWST910909-29        AWST910909-29       
+AWST910916-17        AWST910916-17       
+AWST911118-20        AWST911118-20       
+AWST920706-17        AWST920706-17       
+AWST920713-19        AWST920713-19       
+AWST920831-22        AWST920831-22       
+AWST920907-42        AWST920907-42       
+AWST920914-17        AWST920914-17       
+AWST920921-22        AWST920921-22       
+AWST921109-62        AWST921109-62       
+AWST921207-19        AWST921207-19       
+AWST930301-60        Aviation Week, 1993 Mar 1, p 60.
+AWST930823-26        AWST930823-26       
+AWST930920-39        AWST930920-39       
+AWST931025-30        AWST931025-30       
+AWST940207-17        AWST940207-17       
+AWST940516-17        AWST940516-17       
+AWST940620-26        AWST940620-26       
+AWST940627-26        AWST940627-26       
+AWST940905-47        AWST940905-47       
+AWST940912-19        AWST940912-19       
+AWST941010-19        AWST941010-19       
+AWST950731-23        Aviation Week, 1995 Jul 31, p 23.            
+AWST950807-17        AWST950807-17       
+AWST950807-58        AWST950807-58       
+AWST950807-59        AWST950807-59       
+AWST950821-18        AWST950821-18       
+AWST951204-25        AWST951204-25       
+AWST960219-25        AWST960219-25       
+AWST960226-67        AWST960226-67       
+AWST960311-59        AWST960311-59
+AWST960401-28        AWST960401-28
+AWST960401-28        AWST960401-28
+AWST960617-32        AWST960617-32       
+AWST960708-17        AWST960708-17       
+AWST960826-73        AWST960826-73       
+AWST970324-33        AWST970324-33       
+AWST970324-34        AWST970324-34       
+AWST970512-25        AWST970512-25       
+AWST970825-16        AWST970825-16       
+AWST970901-28        AWST970901-28       
+AWST980126-24        AWST980126-24       
+AWST980309-19        AWST980309-19       
+AWST990809-29        AWST990809-29       
+AdvAstSci62-497      Advances in Astr. Sciences 62, 497
+AdvSpRes4-111        Advances in Space Research 4, 111
+AirEtCosmos          Air Et Cosmos magazine
+AirEtCos199          Air Et Cosmos No. 199
+AnnGeoph18           Ann. Geophys. 18          
+AnnalesGeo17,109     Annales de Geophys. 17, 109
+AnnalesGeo17,134     Annales de Geophys. 17,134
+AnnalesGeo22,225     Annales de Geophys. 22, 225
+AnnalesGeo24,305     Annales de Geophys. 24,305
+AnnalesGeo24,649     Annales de Geophys. 24, 649
+AnnalesGeo25,307     Annales de Geophys. 25, 307
+AnnalesGeo25,393     Annales de Geophys. 25, 393
+AnnalesGeo26,845     Annales de Geophys. 26, 845
+AnnalesGeo27,493     Annales de Geophys. 27, 493
+AnnalesGeo36,271     Annales de Geophys. 36,271
+ApJ136,1             ApJ 136, 1
+ApJ153,L191          ApJ 153,L191         
+ApJ162-287           ApJ 162-287          
+Astronautics5708     Astronautics, Aug 1957
+CASJ20,396           Canadian Aeronautics and Space Journal, 20, 396.
+CurrSci83-1081       Current Science (India), 83, 1081
+ESA-SP76             ESA SP-76
+ESA-SP115            ESASP115            
+ESA-SP115-213        ESASP115-213        
+ESA-SP135-119        ESA-SP135-119       
+ESA-SP135-125        ESA-SP135-125       
+ESA-SP135-277        ESA-SP135-277       
+ESA-SP135-37         ESA-SP135-37        
+ESA-SP135-437        ESA-SP135-437       
+ESA-SP152            ESA-SP152           
+ESA-SP152-117        ESA-SP152-117       
+ESA-SP152-121        ESA-SP152-121       
+ESA-SP152-245        ESA-SP152-245       
+ESA-SP152-257        ESA-SP152-257       
+ESA-SP152-263        ESA-SP152-263       
+ESA-SP152-269        ESA-SP152-269       
+ESA-SP152-301        ESA-SP152-301       
+ESA-SP152-317        ESA-SP152-317      
+ESA-SP152-331        ESA-SP152-331       
+ESA-SP152-407        ESA-SP152-407       
+ESA-SP183            ESASP183            
+ESA-SP183-277        ESASP183-277        
+ESA-SP183-333        ESASP183-333        
+ESA-SP183-479        ESASP183-479        
+ESA-SP183-89         ESASP183-89         
+ESA-SP229-19         ESA-SP229-19        
+ESA-SP229-206        ESA-SP229-206       
+ESA-SP229-351        ESA-SP229-351       
+ESA-SP270-55         ESA-SP270-55        
+ESA-SP270-169        ESASP270-169        
+ESA-SP270-299        ESASP270-299        
+ESA-SP291-153        ESA-SP291-153       
+ESA-SP291-173        ESA-SP291-173       
+ESA-SP291-181        ESA-SP291-181       
+ESA-SP291-24         ESA-SP291-24        
+ESA-SP291-71         ESA-SP291-71        
+ESA-SP291-80         ESA-SP291-80        
+ESA-SP370            ESA-SP370           
+ESA-SP437            ESA-SP437           
+ESA-SP471            ESA-SP471
+ESA-SP530-328        ESA-SP530, p 328
+ESA-SP530-363        ESA-SP530, p 363
+ESA-SP530-395        ESA-SP530, p 395
+ESA-SP1206           ESA SP1206
+ESA78                ESA Annual report 1978               
+ESA79                ESA Annual report 1979
+ESA81                ESA Annual report 1981
+ESA84                ESA Annual report 1984
+ESRO-SP39            ESRO-SP39           
+ESRO64               ESRO Annual report 1964
+ESRO66               ESRO Annual report 1966
+ESRO68               ESRO68              
+ESRO69               ESRO69              
+ESRO70               ESRO70              
+ESRO71               ESRO71              
+ESRO72               ESRO72              
+Eagle0103-4          SMDC Eagle, Mar 2001, p4.
+Falworth             Falworth,G., Satellite News, miscellaneous issues
+FI620405-527         Flight International, 1962 Apr 5 p 527
+FI650107-14          FI650107-14         
+FI910306             Flight International 1991 Mar 6
+FI920826             Flight International 1992 Aug 26
+FI930901             Flight International 1993 Sep 1
+FI980204-22          FI980204-22         
+GeomagAeron15,776    Geomag. and Aeronomy, 15, 776
+GRL26,3581           Geophys Res. Lett. 26, 3581
+IGY36                Annals of the IGY, Vol 36               
+IGY36-579            Annals of the IGY, Vol 36, p 579
+IGY6                 Annals of the IGY, Vol 6
+IGYBull27            IGY Bulletin 27
+IonosEffects438      Effect of the ionosphere on Space and Terrestrial systems, 1978, p 438.
+ISIR980831-3         International Space Industry Report, 1998 Aug 31 p3.
+ISIR981012-6         ISIR981012-6        
+ISR980608-14         ISIR980608-14        
+ISRJ18-329           Ionosphere and Space Research in Japan, 18, 329
+ISRJ20-199           ISRJ20-199          
+ISRJ20-214           ISRJ20-214          
+ISRJ20-223           ISRJ20-223          
+ISRJ20-480           ISRJ20-480          
+ISRJ21-1             ISRJ21-1            
+ISRJ21-68            ISRJ21-68           
+ISRJ21-9             ISRJ21-9            
+ISRJ28-89            ISRJ28-89           
+ISRJ29-1             ISRJ29-1            
+ISRJ29.3.99          ISRJ29.3.99         
+IndJRadioSPhys9,201  Indian J. of Radio and Space Physics, 9, 201
+ISRJ30-1             ISRJ30-1            
+ISST9                9th Intl Symp. on Space Sci and Tech. (Tokyo, 1969).
+ISTS1                1st Intl Symp. on Space Sci and Tech. (Tokyo)
+ISTS2                1st Intl Symp. on Space Sci and Tech. (Tokyo)
+ISTS4                4th Intl Symp. on Space Sci and Tech. (Tokyo)
+ISTS5-1011           5th Intl Symp. on Space Sci and Tech. (Tokyo) p 1011
+ISTS6-8              6th Intl Symp. on Space Sci and Tech. (Tokyo)
+ISTS7                7th Intl Symp. on Space Sci and Tech. (Tokyo)
+ISTS8                8th Intl Symp. on Space Sci and Tech. (Tokyo)
+ISTS9                9th Intl Symp. on Space Sci and Tech. (Tokyo)
+ISTS10               10th Intl Symp. on Space Sci and Tech. (Tokyo)
+ISTS10-1166          10th Intl Symp. on Space Sci and Tech. (Tokyo) p 1166
+ISTS23-450           23rd Intl Symp. on Space Sci and Tech. (Tokyo) p 450
+IonosEffects442      Conference on Ionospheric Effects,p 442
+JASTP45-427          J. Atm and Solar-Terrestrial Physics, 45, 427
+JASTP45-437          JASTP45-437         
+JASTP45-479          JASTP45-479         
+JATP45-461           JATP45-461          
+JATP45-515           JATP45-515          
+JBIS30-272           Journal of the BIS, 30, 272
+JBIS34-10            JBIS34-10           
+JBIS34-12            JBIS34-12           
+JBIS35-22            JBIS35-22           
+JBIS35-462           JBIS35-462
+JBIS45-139           JBIS45-139
+JBIS51-231           JBIS51-231          
+JBIS53-319           JBIS53-319          
+JBIS55-45            JBIS55-45
+JBIS55-226           JBIS55-226
+JGR94,453            JGR94,453
+JIR9902              Jane's Intelligence Review, 1999 Feb
+JPP17,517            J. Propulsion Power, 17,517           
+JRRL13,75            JRRL13,75           
+Janes94-95           Jane's Space Directory, 1994-1995
+JSD97                Jane's Space Directory, 1997
+JSD2000              Jane's Space Directory, 2000
+JScR41,481           J Spacecraft Rockets 41, 481
+JThermHT7,704        J.Therm. Heat Transfer, 7, 704       
+KI8009               Kosmicheskiye Issledovanie, 1980 Sep.
+KI24-941             KI 24, 941
+KI38-244             KI 38, 244
+Kosmodrom            Kosmodrom magazine, Baykonur.
+Kosmodrom-1          Kosmodrom, No. 1         
+Kosmodrom0010        Kosmodrom, 2000 No. 10
+Kosmodrom0012        Kosmodrom 2000 No. 12
+Kosmodrom0101-11     Kosmodrom, 2001 No. 1, p 11.
+Kosmodrom0103-11     Kosmodrom  2001 No. 3 p 11
+Kosmodrom0104-10     Kosmodrom 2001 No 4, p 10
+Kosmodrom0104-12     Kosmodrom, 2001 No. 4 p 12.
+Kosmodrom0105        Kosmodrom  2001 No. 5     
+Kosmodrom0111        Kosmodrom 2001 No 11
+Kosmodrom9803        Kosmodrom 1998 No. 3
+Kosmodrom9805        Kosmodrom 1998 No. 5
+Kosmodrom9904        Kosmodrom, 1999 No. 4
+Kosmodrom9911        Kosmodrom, 1999 No. 11
+Kosmodrom9912        Kosmodrom, 1999 No. 12
+LLETR9407            Energy and Technology Review, LLNL, Jul 1994.
+Launchspace1-3       Launchspace 1-3      
+Launchspace9710-70   Launchspace 97 Oct, p 70
+MWxRev98,402         Monthly Weather Review 98, 402
+MR601010-40          Missiles and Rockets 1960 Oct 10, p 40
+MR610918-11          MR610918-11          
+MR611016-11          MR611016-11          
+MR611204-10          MR611204-10          
+MR61108-09           Missiles and Rockets, 1961 Nov 8, p 9.
+MR620212-10          MR620212-10          
+MR620219-10          MR620219-10          
+MR620326-16          MR620326-16          
+MR620430-10          MR620430-10          
+MR620521-8           MR620521-8           
+MR620618-10          MR620618-10          
+MR620709-10          MR620709-10          
+MR621001-12          MR621001-12          
+MR621024-10          MR621024-10          
+MR621203-10          MR621203-10          
+MR630318-10          MR630318-10          
+MR630401-11          MR630401-11          
+MR630701-10          MR630701-10          
+MR630729             MR630729             
+MR630923-12          Missiles and Rockets, 630923 p 12
+MR640302-12          MR640302-12         
+MR640330-16          MR640330-16         
+MR640727-22          MR640727-22         
+MR640727-25          MR640727-25         
+MR641130-20          MR641130-20         
+MR650104-11          MR650104-11          
+MR650208-08          MR650208-08         
+MR650222-10          MR650222-10         
+MR650301             MR650301            
+MR650301-12          MR650301-12          
+MR650308-11          MR650308-11          
+MR650309-10          MR650309-10          
+MR650405-10          MR650405-10          
+MR650517-13          MR650517-13          
+MR650628-10          MR650628-10         
+MR650707-12          MR650707-12         
+MR650726-29          MR650726-29         
+MR650816-10          MR650816-10          
+MR651122-11          MR651122-11         
+MR651220-10          MR651220-10          
+MR660124-9           MR660124-9           
+MR660207-11          MR660207-11         
+MR660221-12          MR660221-12         
+MR660704-11          MR660704-11         
+MR660801-10          MR660801-10         
+MR661017-34          MR661017-34         
+MR661031-13          MR661031-13         
+MR661107-10          MR661107-10          
+MR661121-08          MR661121-08          
+MR670327-28          MR670327-28         
+MR670410-15          MR670410-15         
+MR670515-16          MR670515-16         
+MR670619-15          MR670619-15         
+NASDARept112         NASDA Report No. 112        
+NK0002-42            Novosti Kosmonavtiki, 2000 No. 2, p 46
+NK0002-46            NK0002-46           
+NK0003-17            NK0003-17           
+NK0004-14            NK0004-14           
+NK0004-17            NK0004-17           
+NK0004-24            NK0004-24           
+NK0004-32            NK0004-32           
+NK0005-20            NK0005-20           
+NK0005-27            NK0005-27           
+NK0006-08            NK0006-08           
+NK0006-16            NK0006-16           
+NK0006-26            NK0006-26           
+NK0007-32            NK0007-32           
+NK0007-41            NK0007-41           
+NK0008-16            NK0008-16           
+NK0008-23            NK0008-23           
+NK0008-25            NK0008-25           
+NK0008-35            NK0008-35           
+NK0008-68            NK0008-68           
+NK0008-71            NK0008-71           
+NK0009-02            NK0009-02           
+NK0009-24            NK0009-24           
+NK0009-29            NK0009-29           
+NK0009-35            NK0009-35           
+NK0009-45            NK0009-45           
+NK0010-02            NK0010-02           
+NK0010-13            NK0010-13           
+NK0010-17            NK0010-17           
+NK0011-29            NK0011-29           
+NK0011-36            NK0011-36           
+NK0011-40            NK0011-40           
+NK0011-46            NK0011-46           
+NK0012-22            NK0012-22           
+NK0012-34            NK0012-34           
+NK0012-38            NK0012-38           
+NK0012-43            NK0012-43           
+NK0101-02            NK0101-02           
+NK0101-21            NK0101-21           
+NK0101-31            NK0101-31           
+NK0102-26            NK0102-26           
+NK0102-35            NK0102-35           
+NK0103-25            NK0103-25           
+NK0104-29            NK0104-29           
+NK0106-30            NK0106-30           
+NK0106-38            NK0106-38           
+NK0107-09            NK0107-09           
+NK0107-22            NK0107-22           
+NK0107-26            NK0107-26           
+NK0108-21            NK0108-21           
+NK0108-23            NK0108-23           
+NK0109-38            NK0109-38           
+NK0109-41            NK0109-41           
+NK0109-45            NK0109-45           
+NK0110-18            NK0110-18           
+NK0110-37            NK0110-37           
+NK0111-06            NK0111-06            
+NK0112-03            NK0112-03            
+NK0112-37            NK0112-37            
+NK0112-45            NK0112-45            
+NK0201-07            NK0201-07            
+NK0202-41            NK0202-41            
+NK0202-45            NK0202-45            
+NK0203-35            NK0203-35            
+NK0204-41            NK0204-41            
+NK0204-71            NK0204-71            
+NK0205-49            NK0205-49            
+NK0206-34            NK0206-34            
+NK0207-30            NK0207-30
+NK0207-36            NK0207-36
+NK0208-33            NK0208-33
+NK0208-36            NK0208-36
+NK0208-38            NK0208-38
+NK0210-19            NK0210-19
+NK0211-40            NK0211-40
+NK0212-34            NK0212-34
+NK0212-40            NK0212-40
+NK0301-07            NK0301-07
+NK0301-40            NK0301-40
+NK0301-50            NK0301-50
+NK0301-54            NK0301-54
+NK0302-34            NK0302-34
+NK0302-38            NK0302-38
+NK0306-02            NK0306-02
+NK0306-30            NK0306-30
+NK0306-40            NK0306-40
+NK0308-28            NK0308-28
+NK0308-29            NK0308-29
+NK0308-37            NK0308-37
+NK0308-42            NK0308-42
+NK0309-05            NK0309-05
+NK0310-08            NK0310-08
+NK0310-22            NK0310-22
+NK0310-24            NK0310-24
+NK0310-29            NK0310-29
+NK0311-36            NK0311-36
+NK0312-34            NK0312-34
+NK0312-36            NK0312-36
+NK0312-44            NK0312-44
+NK0401-19            NK0401-19
+NK0402-13            NK0402-13
+NK0402-17            NK0402-17
+NK0402-23            NK0402-23
+NK0402-26            NK0402-26
+NK0403-09            NK0403-09
+NK0403-17            NK0403-17
+NK0405-23            NK0405-23
+NK0405-28            NK0405-28  
+NK0406-10            NK0406-10
+NK0406-34            NK0406-34
+NK0407-08            NK0407-08
+NK0407-30            NK0407-30
+NK0408-25            NK0408-25
+NK0408-27            NK0408-27
+NK0408-31            NK0408-31   
+NK0408-33            NK0408-33
+NK9611-46            NK9611-46
+NK91-2-4             NK91-2-4            
+NK91-3               NK91-3              
+NK91-3-3             NK91-3-3            
+NK9305-11            NK9305-11           
+NK9317-20            NK9317-20           
+NK9317-22            NK9317-22           
+NK9402-34            NK9402-34           
+NK9404-41            NK9404-41           
+NK9420-5             NK9420-5            
+NK9422-45            NK9422-45           
+NK9422-46            NK9422-46           
+NK9422-47            NK9422-47           
+NK9422-49            NK9422-49           
+NK95-20-29           NK95-20-29          
+NK9501-24            NK9501-24           
+NK9505-47            NK9505-47           
+NK9506-46            NK9506-46           
+NK9507-24            NK9507-24           
+NK9510-30            NK9510-30           
+NK9515-28            NK9515-28           
+NK9516-38            NK9516-38           
+NK9518-35            NK9518-35           
+NK9518-36            NK9518-36           
+NK9521-36            NK9521-36           
+NK9521-43            NK9521-43           
+NK9523-59            NK9523-59           
+NK9524-70            NK9524-70           
+NK9525-30            NK9525-30           
+NK96-10-32           NK96-10-32          
+NK96-10-56           Agapov, V., Novosti Kosmonavtiki, 1996 No. 10, p 56.
+NK96-10-65           NK96-10-65          
+NK96-10-65,AVM       NK96-10-65 plus AVM, personal comm.
+NK96-11-46           NK96-11-46          
+NK96-12              NK96-12             
+NK96-25-41           NK96-25-41          
+NK96-26-34           NK96-26-34          
+NK96-26-40           NK96-26-40          
+NK9602-23            NK9602-23           
+NK9602-24            NK9602-24           
+NK9604-45            NK9604-45           
+NK9606-11            NK9606-11           
+NK9608-29            NK9608-29           
+NK9609-13            NK9609-13           
+NK9611-38            NK9611-38           
+NK9618-23            NK9618-23           
+NK9618-26            NK9618-26           
+NK9620-53            NK9620-53           
+NK9622-25            NK9622-25           
+NK9626-30            NK9626-30           
+NK9701-29            NK9701-29           
+NK9701-40            NK9701-40           
+NK9703-47            NK9703-47           
+NK9703-56            NK9703-56           
+NK9704-54            NK9704-54           
+NK9705-11            NK9705-11           
+NK9707-75            NK9707-75           
+NK9708-30            NK9708-30           
+NK9708-36            NK9708-36           
+NK9708-59            NK9708-59           
+NK9709-63            NK9709-63           
+NK9710-34            NK9710-34           
+NK9710-35            NK9710-35           
+NK9711-18            NK9711-18           
+NK9711-24            NK9711-24           
+NK9711-45            NK9711-45           
+NK9712-20            NK9712-20           
+NK9713-34            NK9713-34           
+NK9713-57            NK9713-57           
+NK9713-61            NK9713-61           
+NK9713-71            NK9713-71           
+NK9715-48            NK9715-48           
+NK9718-55            NK9718-55           
+NK9718-57            NK9718-57           
+NK9718-91            NK9718-91           
+NK9721-34            NK9721-34           
+NK9721-38            NK9721-38           
+NK9723-36            NK9723-36           
+NK9725-35            NK9725-35           
+NK9726-45            NK9726-45           
+NK9801-45            NK9801-45           
+NK9807-46            NK9807-46           
+NK9809-11            NK9809-11           
+NK9810-25            NK9810-25           
+NK9811-03            NK9811-03           
+NK9811-14            NK9811-14           
+NK9811-15            NK9811-15           
+NK9811-23            NK9811-23           
+NK9814-08            NK9814-08           
+NK9814-10            NK9814-10           
+NK9814-26            NK9814-26           
+NK9815-15            NK9815-15           
+NK9815-19            NK9815-19           
+NK9815-25            NK9815-25           
+NK9815-26            NK9815-26           
+NK9817-28            NK9817-28           
+NK9817-36            NK9817-36           
+NK9817-38            NK9817-38           
+NK9821-10            NK9821-10           
+NK9823-01            NK9823-01           
+NK9823-30            NK9823-30           
+NK9901-02            NK9901-02           
+NK9902-17            NK9902-17           
+NK9902-45            NK9902-45           
+NK9903-32            NK9903-32           
+NK9904-03            NK9904-03           
+NK9904-28            NK9904-28           
+NK9904-38            NK9904-38           
+NK9905-01            NK9905-01           
+NK9905-21            NK9905-21           
+NK9906-01            NK9906-01           
+NK9906-09            NK9906-09           
+NK9906-1             NK9906-1            
+NK9906-10            NK9906-10           
+NK9906-11            NK9906-11           
+NK9906-12            NK9906-12           
+NK9906-16            NK9906-16           
+NK9906-19            NK9906-19           
+NK9907-42            NK9907-42           
+NK9908-12            NK9908-12           
+NK9909-05            NK9909-05           
+NK9909-26            NK9909-26           
+NK9909-32            NK9909-32           
+NK9909-34            NK9909-34           
+NK9909-68            NK9909-68           
+NK9910-32            NK9910-32           
+NK9910-34            NK9910-34           
+NK9910-36            NK9910-36           
+NK9911-04            NK9911-04           
+NK9911-08            NK9911-08           
+NK9911-15            NK9911-15           
+NK9911-20            NK9911-20           
+NK9911-24            NK9911-24           
+NK9912-10            NK9912-10           
+NevskiyBastion9901   Nevskiy Bastion magazine, 1999 No 1
+PlanSpaSci36,399     Plan. Spa. Sci. 36,399    
+Quest1-2             Quest Vol 1, No 2            
+Quest3-1-34          Quest Vol 3 No 1 p34         
+Quest6-1-45          Quest Vol 6 No 1 p45         
+RadQElec38,204       Radiophysics and Quantum Electronics 38, 204, 1995
+RevSciIns47,6        Rev. Sci Instruments, 47, 6
+SAO-SR317            Smithsonian Astrophysical Observatory, SAO Special Report SR317           
+SFLT1971-225         Spaceflight 1971, p 225
+SFLT89-2-45          Spaceflight 1989 No 2, p 45
+SFLT89-12-411        Spaceflight 1989 No 12, 411
+SFLT23-161           SFLT23-161
+SFLT38-243           SFLT38-243
+SFLT79-446           SFLT79-446
+SFLT38-257           Spaceflight vol 38, p 257
+SFLT38-49            SFLT38-49           
+SFLT39-302           SFLT39-302          
+SFLT40-207           SFLT40-207          
+SFLT40-28            SFLT40-28           
+SHARNews1,4          SHARNews1,4
+SN030623-4           SN030623-4
+SN03623-4            SN03623-4
+SN040830-4           SN040830-4
+SN041018-20          SN041018-20
+SN900416-45          SN900416-45
+SN961028-33/Wire     SN961028-33/Wire
+SN010507-24          SN010507-24         
+SN910211-2           SN910211-2          
+SN910422-1           SN910422-1          
+SN910715-2           SN910715-2          
+SN910930-20          SN910930-20         
+SN911125-7           SN911125-7          
+SN920406-15          SN920406-15         
+SN920413-3           SN920413-3          
+SN920427             Space News, 1992 Apr 27
+SN920817-2           SN920817-2          
+SN920907-11          SN920907-11         
+SN920914-20          SN920914-20         
+SN921019-11          SN921019-11         
+SN921130-6           SN921130-6          
+SN930208-            SN930208-           
+SN930222-2           SN930222-2          
+SN930222-7           SN930222-7          
+SN930531-9           SN930531-9          
+SN930621-8           SN930621-8          
+SN930712-4           SN930712-4          
+SN930726-9           SN930726-9          
+SN930927-28          SN930927-28         
+SN950403-34          Space News, 1995 Apr 3, p 34.       
+SN950522-8           Space News, 1995 May 22, p 8.          
+SN950619-17          Space News, 1996 Jun 19, p 17.           
+SN950828-2           Space News, 1995 Aug 28, p 2.           
+SN950828-8           Space News, 1995 Aug 28, p 8.
+SN960325-03          SN960325-03         
+SN960527-4           Space News, 1996 May 27, p 4.                  
+SN960610-4           Space News, 1996 Jun 10, p 4.           
+SN960722-16          SN960722-16
+SN960812-11          Space News, 1996 Aug 12, p 11.
+SN961028-20          SN961028-20         
+SN961028-33          SN961028-33         
+SN970120-2           SN970120-2          
+SN970331-9           SN970331-9          
+SN970630-15          SN970630-15         
+SN980316-10          SN980316-10         
+SpaceNews030818-15   SpaceNews030818-15
+SpaceNews040910-10   SpaceNews040910-10
+SN990412-3           SN990412-3          
+SP-219               NASA SP-219
+SP-3095              NASA SP-3095
+SP-4010              SP-4010  
+SP-4016              SP-4016  
+SP-4022              SP-4022  
+SP-4201              SP-4201  
+SP-4205              SP-4205  
+SP4015               SP4015   
+SP4401               SP4401   
+SRJ                  Space Research In Japan
+SRJ80                Space Research in Japan, 1980
+SRctCon2             Second Sounding Rocket Conference
+SRctCon3             SRctCon3            
+SRctCon5             SRctCon5            
+SRctCon6             SRctCon6            
+SRctCon6/err?        SRctCon6/err?       
+SRctCon67-249        SRctCon67-249       
+SRctCon67-271        SRctCon67-271       
+SRctCon67-402        SRctCon67-402       
+SRctCon67-507        SRctCon67-507       
+SRctCon67-54         SRctCon67-54        
+SRctConf67-342       Sounding Rocket Conference 1967, p 342
+SkyTel17-111         Sky and Telescope, 17, 111        
+SpaSciRev13,731      SpaSciRev13,731     
+SpaceWorld           Space World
+TRWSL-24             TRW Space Log, Vol. 24.
+TERLSPrivCom         Private communication, TERLS officials
+TekhVor9711          Shirokorad, A., Tekhnika i Vooruzhenie, Nov-Dec 1997.
+WSL                  P.S. Clark, Worldwide Satellie Launches (monthly)
+#
+# Electronic documents
+#
+deCordemoy           de Cordemoy, J, Les Vecteurs Mer Sol Balistiques Strategiques, www.stratisc.org
+DSI-5850             NOAA Rocketsonde database
+KIAM                 Keldysh Institute launch lists, via WWW site (V. Agapov).
+MIR.323              Mirnews.323, Chris v.d. Berg
+Moraba               DLR Moraba web site, http://www.op.dlr.de/wt-rm/moraba/launches.htm, 2000 Nov.
+Seesat-L             Seesat-L email list.
+Stein                New Space Network, K. Stein. (via WWW)
+VSA                  Sergey A. Voevodin, VSA reports.
+VSA030               VSA030              
+VSA031               VSA031              
+VSA034               VSA034              
+VSA070               VSA070              
+VSA074               Voevodin, S, document VSA 074.
+VSA970430            Voevodin, S., 1997 Apr 30, on FSPACE email list.
+WDCRF                WDC Rocket File (electronic version, supplied 2001)
+WDCRF/Massey         Data combined from WDCRF (with errors) and Massey book
+WDCRF/SP4401         Data combined from WDCRF (with errors) and NASA-SP4401
+Wentworth            J. Wentworth, sci.space.history, 1997 May 22.
+Wotzlaw-fpspace      S. Wotzlaw, posting on FPSPACE bulletin board
+#
+# Newspapers
+#
+Asahi670413          Asahi Shimbun (Tokyo) 1967 Apr 13.
+Asahi700925          Asahi Shimbun (Tokyo) 1970 Sep 25, evening edition
+Asahi760204          Asahi Shimbun (Tokyo) 1976 Feb 4, evening edition
+Asahi770220          Asahi Shimbun (Tokyo) 1977 Feb 20
+Asahi780917          Asahi Shimbun (Tokyo) 1978 Sep 17
+BGlobe970412         Boston Globe, 1997 Apr 12.      
+JerPost000503        Jerusalem Post, 2000 May 3
+LR650712             Lompoc Record 1965 Jul 12.
+LR650930             Lompoc Record 1965 Sep 30.
+LR670203             Lompoc Record 1967 Feb 3.
+LR670426             Lompoc Record 1967 Apr 26.
+LR670524             Lompoc Record 1967 May 24.
+LR671026             Lompoc Record 1967 Oct 26.
+LR680117             Lompoc Record 1968 Jan 17.
+LR680118             Lompoc Record 1968 Jan 18.
+LR680417             Lompoc Record 1968 Apr 17.
+LR680808             Lompoc Record 1968 Aug  8.
+LR680819             Lompoc Record 1968 Aug 19.
+LR680910             Lompoc Record 1968 Sep 10.
+LR681104             Lompoc Record 1968 Nov  4.
+LR681107             Lompoc Record 1968 Nov  7.
+LR681205             Lompoc Record 1968 Dec  5.
+LR681213             Lompoc Record 1968 Dec 13.
+LR690122             Lompoc Record 1969 Jan 22.
+LR690305             Lompoc Record 1969 Mar  5.
+LR690320             Lompoc Record 1969 Mar 20.
+LR690414             Lompoc Record 1969 Apr 14.
+LR690415             Lompoc Record 1969 Apr 15.
+LR690603             Lompoc Record 1969 Jun  3.
+LR690731             Lompoc Record 1969 Jul 31.
+LR690823             Lompoc Record 1969 Aug 23.
+LR700521             Lompoc Record 1970 May 21.
+LR700625             Lompoc Record 1970 Jun 25.
+LR700818             Lompoc Record 1970 Aug 18.
+LR700826             Lompoc Record 1970 Aug 26.
+LR701024             Lompoc Record 1970 Oct 24.
+LR710322             Lompoc Record 1971 Mar 22.
+LR710422             Lompoc Record 1971 Apr 22.
+LR710716             Lompoc Record 1971 Jul 16.
+LR710812             Lompoc Record 1971 Aug 12.
+LR710911             Lompoc Record 1971 Sep 11.
+LR721221             Lompoc Record 1972 Dec 21.
+LR730310             Lompoc Record 1973 Mar 10.
+LR730516             Lompoc Record 1973 May 16.
+LR730626             Lompoc Record 1973 Jun 26.
+LR740606             Lompoc Record 1974 Jun  6.
+LR750410             Lompoc Record 1975 Apr 10.
+LR750609             Lompoc Record 1975 Jun  9.
+LR781220             Lompoc Record 1978 Dec 20; also JG9602.
+LR800208             Lompoc Record 1980 Feb  8.
+LR800211             Lompoc Record 1980 Feb 11.
+LR800303             Lompoc Record 1980 Mar  3.
+LR810426             Lompoc Record 1981 Apr 26.
+LR830209             Lompoc Record 1983 Feb  9.
+LR830328             Lompoc Record 1983 Mar 28.
+LR830415             Lompoc Record 1983 Apr 15.
+LR830526             Lompoc Record 1983 May 26.
+LR830620             Lompoc Record 1983 Jun 20.
+LR830801             Lompoc Record 1983 Aug  1.
+LR840206             Lompoc Record 1984 Feb  6.
+LR840301             Lompoc Record 1984 Mar  1.
+LR840418             Lompoc Record 1984 Apr 18.
+LR840613             Lompoc Record 1984 Jun 13.
+LR840829             Lompoc Record 1984 Aug 29.
+LR840909             Lompoc Record 1984 Sep  9.
+LR850208             Lompoc Record 1985 Feb  8.
+LR850313             Lompoc Record 1985 Mar 13.
+LR850829             Lompoc Record 1985 Aug 29.
+LR870212             Lompoc Record 1987 Feb 12.
+LR880203             Lompoc Record 1988 Feb  3.
+LR881107             Lompoc Record, 1988 Nov 7.
+TheHindu040705       TheHindu040705
+LasVegasSun          Las Vegas Sun         
+LeMonde701213        Le Monde, 1970 Dec 13
+LeMonde730522        Le Monde, 1973 May 22
+NYT610217            
+NYT620413-3          New York Times, 1962 Apr 13 no 3
+NYT960909            NYT960909
+NYT980723-1          NYT980723-1         
+NYT980901-1          NYT980901-1         
+TheHindu991121       The Hindu, 1999 Nov 21 (via WWW).
+#
+# NASA documents
+#
+CR-111987            NASA CR-111987
+CR-112251            NASA CR-112251
+CR-117547            NASA CR-117547
+CR-133401            NASA CR-133401
+CR-61175             NASA CR-61175
+CR-74067             NASA CR-74067
+KHR-1                KSC Historical Report No. 1, 1979, NASA-TM-81106.
+KHR-1X               KHR-1, with daylight savings time amended for suspected error.
+KSC-PR-69-03         KSC press release
+MOR E-610-76-01      NASA Mission Operation Report, MOR E-610-76-01
+MOR E-641-72-01      NASA Mission Operation Report, MOR E-641-72-01
+MOR M-491-201-78-03  NASA Mission Operation Report, MOR M-491-201-78-03
+MOR M-492-206-83-07  NASA Mission Operation Report, MOR M-492-206-83-07
+MOR M-492-206-83-08  NASA Mission Operation Report, MOR M-492-206-83-08
+MOR M-492-210-78-2   NASA Mission Operation Report, MOR M-492-210-78-2
+MOR M-492-302-77-01  NASA Mission Operation Report, MOR M-492-302-77-01
+MOR M-492-302-78-02  NASA Mission Operation Report, MOR M-492-302-78-02
+MOR O-492-206-82-05  NASA Mission Operation Report, MOR O-492-206-82-05
+MOR R-711-64-04      NASA Mission Operation Report, MOR R-711-64-04
+MOR R-711-66-05      NASA Mission Operation Report, MOR R-711-66-05
+MOR R-711-68-06      NASA Mission Operation Report, MOR R-711-68-06
+MOR R-711-71-01      NASA Mission Operation Report, MOR R-711-71-01
+MOR R-730-67-01      NASA Mission Operation Report, MOR R-730-67-01
+MOR R-730-68-02      NASA Mission Operation Report, MOR R-730-68-02
+MOR R-730-70-03      NASA Mission Operation Report, MOR R-730-70-03
+MOR S-850-81-03      NASA Mission Operation Report, MOR S-850-81-03
+MOR S-863-64-02      NASA Mission Operation Report, MOR S-863-64-02
+MOR S-874-71-02      NASA Mission Operation Report, MOR S-874-71-02
+MOR S-877-68-01      NASA Mission Operation Report, MOR S-877-68-01
+MOR S-883-69-03      NASA Mission Operation Report, MOR S-883-69-03
+MPR-SAT-FE-73-3      MPR-SAT-FE-73-3      
+MPR-SAT-FE-73-5      MPR-SAT-FE-73-5
+MPR-SAT-FE-74-1      MPR-SAT-FE-74-1      
+MPR-SAT-WF-61-8      MPR-SAT-WF-61-8      
+MSC-A-R-66-4         NASA MSC-A-R-66-4
+RP-1028              NASA RP-1028             
+SP-39                NASA SP-39               
+SP-4004              NASA SP-4004             
+SP-4005              NASA SP-4005             
+SP-4006              NASA SP4006              
+SP-4007              NASA SP-4007             
+SP-4008              NASA SP-4008             
+SP-4012              NASA SP4012              
+SP-4014              NASA SP4014              
+SP-4015              Astronautics and Aeronautics, 1970. NASA SP-4015.
+SP-4017              NASA SP4017              
+SP-4018              Astronautics and Aeronautics, 1973. NASA SP-4018.
+SP-4020              NASA SP-4020             
+SP-4024              NASA SP-4024             
+SP-4202              NASA SP-4202             
+SP-4203              NASA SP-4203             
+SP-4401              NASA SP-4401, Sounding Rocket Summary             
+TM-104313            TM-104313
+TM-108494            TM-108494
+TM-82578             TM-82578 
+TM-X-72628           TM-X-72628
+TM-X-61215           Preisser and Murrow, 3rd Nat. Conf. Aerospace Meteorology, 1968
+TN-D-1396            TN-D-1396   
+TN-D-1449            TN-D-1449
+TN-D-1466            TN-D-1466
+TN-D-1502            TN-D-1502  
+TN-D-1506            TN-D-1506
+TN-D-1538            TN-D-1538  
+TN-D-1544            TN-D-1544
+TN-D-1611            TN-D-1611
+TN-D-1719            TN-D-1719
+TN-D-1764            TN-D-1764
+TN-D-1818            TN-D-1818
+TN-D-1851            TN-D-1851
+TN-D-1866            TN-D-1866
+TN-D-216             TN-D-216
+TN-D-2996            TN-D-2996   
+TN-D-3930            TN-D-3930
+TN-D-4530            TN-D-4530 
+TN-D-4713            TN-D-4713 
+TN-D-4905            TN-D-4905 
+TN-D-976             TN-D-976
+TR-1022/TLE          TR-1022/TLE
+TR-R-288             TR-R-288  
+TM-X-2934            NASA TM-X-2934           
+NASA-TM-X-3487       NASA-TM-X-3487      
+TM-X-64796           NASA TM-X-64796          
+TN-D-2053            NASA TN-D-2053           
+TN-D-2437            NASA TN-D-2437           
+TN-D-2438            NASA TN-D-2438
+TN-D-4284            NASA TN-D-4284           
+TM-D-4713            NASA TN-D-4713
+TN-D-6469            NASA TN-D-6469
+TR-1022              NASA TR-1022, Technical Summary of Unmanned Launch Operations
+NASA-TR-R131         NASA-TR-R131        
+TT-F303              NASA TT-F303             
+NASA-PR64-202        NASA-PR64-202 press release
+#
+# Press releases
+#
+APL-PR960913         JHU-APL press release PR960913        
+APL-PR970305         JHU-APL press release PR970305        
+CALT-PR              CALT, press release.
+ESAPR                ESA press release
+ESAPR56-95           Press Release, ESA 56-95.
+LMSC                 Lockheed Missiles and Space Corp., press release.
+NASA-PR91-102        NASA press relesae 91-102       
+NASA97-113           NASA Press Release 97-113
+PL06                 Plesetsk bulletin No. 6
+PL27                 PL27                
+PL28                 PL28                
+PL38                 PL38                
+PL39                 PL39                
+PL40                 PL40                
+PL55                 PL55                
+PR/AE960809          Press Releases, Arianespace, 1996 Aug 9.
+PR/OSC960730         Press Release, OSC, 1996 Jul 30.
+UM                   Various U. Michigan internal reports
+VAFB-PAO             Public Affairs Office, Vandenberg AFB
+WSMR-PAO             Public Affairs Office, White Sands Missile Range
+#
+# Personal communications
+#
+AVM                  Vladimir Agapov, private communication.
+AVMP                 Vladimir Agapov, private communication.
+Barensky,pc          Stefan Barensky, personal communication.
+ChenLan              Chen Lan, personal communication.
+Clark                P.S. Clark, personal communication.
+Coleman              Coleman Aerospace Corp, personal communication
+Desobeau             J-M Desobeau, personal communication
+Grahn-pc             Sven Grahn, personal communication
+Henderson            Bruce Henderson, Woomera, personal communication, Jun 1998.
+J.A.Hill             J.A. Hill, Personal comm.
+JG9602               J. Geiger, personal communication.
+Kim9807              Kim, Jhoon, KARI, personal communication.
+Krebs                G. Krebs, web site and personal communication
+Lissov               Igor Lissov, personal communication
+McDonald-B-priv      B. McDonald, personal communication
+LissovC              Igor Lissov, forwarded from Chinese on-line sources.
+Insprucker           Insprucker, John, personal comm.
+O'Callaghan          G. O'Callaghan, personal communication.
+PC/Ransom960912      Martin Ransom, personal communication.
+PH                   Peter Hunter,  personal communication.
+PH960801             Data from J. Pritchard via P. Hunter, letter of 1996 Aug 1.
+Pitfield19           Data from RAE via John Pitfield
+Pitfield             Data via John Pitfield
+Powell               Powell, Joel, personal communication              
+PSC                  P.S. Clark, personal communication.
+RajNotes             Gopal Raj,  personal communication.
+RM                   Dick Martin, private files via Peter Hunter.
+Rigg                 Carl Rigg, personal communication.
+Rosenberg            Rosenberg, E, personal communication.      
+Scala                Keith Scala,  personal communication.      
+Serra                J-J. Serra, personal communication; and www.univ-perp.fr/fuseurop listings.
+Serra/COSPAR         National reports to COSPAR, as quoted by J-J. Serra.
+Siddiqi              A. Siddiqi, personal communication
+SSC25                SSC 25th anniversary report, as cited by Joel Powell, personal comm.
+Tiziou               Jacques Tiziou, personal files.
+Todd,D-pc            David Todd, personal communication.
+Waldron              Harry Waldron, personal communication.
+Zak                  Anatoliy Zak, personal communication
+Zhelez               Aleksandr Zheleznyakov, personal communication
+#
+# Wire services
+#
+Wire                 Wire service and TV news reports.
+AP941221             AP, 1994 Dec 21.
+AP960731             AP, 1996 Jul 31.
+INTERFAX960716       INTERFAX, 1996 Jul 16
+TASS950608           TASS950608          
+TASS950905           TASS, 1995 Sep 5.
+TASS951010           TASS951010          
+TASS961004           TASS961004          
+TASS970117           TASS970117          
+#
+# Other sources
+#
+AD666744             Project Harp, report on Nov 1965 testing series.
+Wroughton            Documents at Science Museum, Wroughton (Black Arrow files)
+AE-TV                Arianespace launch broadcast.
+AVMN                 Vladimir Agapov, posting on SeeSat-L and other lists.
+GSFC-Bldg2Wall       Poster on wall of GSFC building 2, ca. 2001
+JCM                  In JSR private files; original reference mislaid.
+JCM-R1               Note: Assumed close in time to Aerobee launch; rough estimate Crab lunar occultation lasts about 10 min
+JCM-P                Author's personal observation of launch.
+RPC                  private communication from Russian sources; not confirmed.
+TLE                  Calculated by the author based on TLE orbital data.
+MSTIProgRev          MSTI Program Review slides, Sep 1994
+#
+# WWW sites
+#
+WWW                  Unspecified WWW site
+bharat-rakshak.com   www.bharat-rakshak.com  
+crista.uni-wup       www.crista.uni-wup.de
+defensebriefing.com  www.defensebriefing.com 
+hobbes.crc.com       www.hobbes.crc.com      
+jpost.com            www.jpost.com
+lmco.com             www.lmco.com            
+lockheedmartin.com   www.lockheedmartin.com  
+orbireport.com       www.orbireport.com      
+raketenmodellbau.de  Posting by Harald (Lutz?) on the MMR-06 launches from Zingst.
+redstone.army.mil    www.redstone.army.mil   
+russianspaceweb.com  www.russianspaceweb.com 
+sonyaceramics.com    www.sonyaceramics.com   
+spaceflightnow.com   www.spaceflightnow.com  
+users.senet.com.au   users.senet.com.au  
+uxb.cso.uiuc.edu     uxb.cso.uiuc.edu    
+www.acq.osd.mil      www.acq.osd.mil     
+www.cass.usu.edu     www.cass.usu.edu    
+www.cdiss.org        www.cdiss.org       
+www.cesaroni.net     www.cesaroni.net    
+www.chinfo.navy.mil  www.chinfo.navy.mil 
+www.defense.gouv.fr  www.defense.gouv.fr 
+www.dlr.de           www.dlr.de          
+www.dote.osd.mil     www.dote.osd.mil    
+www.eurockot.com     www.eurockot.com    
+www.fas.org          www.fas.org         
+www.hybridraketen.de www.hybridraketen.de
+www.hybrids.com      www.hybrids.com     
+www.iae.cta.br       www.iae.cta.br      
+www.iai.co.il        www.iai.co.il        
+www.indiaserver.com  www.indiaserver.com 
+www.ipclub.ru        www.ipclub.ru       
+www.isas.ac.jp       www.isas.ac.jp
+www.netmarine.net    www.netmarine.net   
+www.op.dlr.de        www.op.dlr.de
+www.orbireport.com   www.orbireport.com  
+www.rocketrange.no   www.rocketrange.no
+www.smdc.army.mil    www.smdc.army.mil   
+www.spacedaily.com   www.spacedaily.com  
+www.spaceline.org    www.spaceline.org   
+www.ssc.se           www.ssc.se
+www.ucsusa.org       www.ucsusa.org      
+www.uq.edu.au        www.uq.edu.au       
+www.univ-perp.fr     www.univ-perp.fr
+www.usu.edu          www.usu.edu         
+www.wff.nasa.gov     www.wff.nasa.gov     
+www.wsmr.army.mil        www.wsmr.army.mil    
+wsmr-history.org     www.wsmr-history.org
+AND-WWW              www.rocketrange.no, Andoya Rocket Range
+ASUSAT-WWW           nasa.asu.edu, Arizona State ASUSAT
+AEB-WWW              www.agespacial.gov.br, AEB 
+Aerospatiale-WWW     www.aerospatiale.fr 
+BMDO-WWW             www.bmdo.mil
+Brookings-WWW        www.brook.edu/FP/projects/nucwcost/sprint.htm     
+CALT-WWW             www.calt.com.cn    
+CGW-WWW              www.cgwic.com.cn  
+CNN-WWW              www.cnn.com
+ESR-WWW              www.ssc.se/esrange    
+Eurockot-WWW         www.eurockot.com 
+Grahn-WWW            www.users.wineasy.se/svengrahn
+Hill-WWW             members.aol.com/nicholashl
+ISAS-WWW             www.isas.ac.jp
+KMR-WWW              www.smdc.army.mil/kmr.html   
+LGARDE-WWW           www.lgarde.com
+LMA-WWW              www.ast.lmco.com
+NASDA-WWW            www.nasda.go.jp
+NK-WWW               www.novosti-kosmonavtiki.ru
+PL-WWW               www.plesetsk.ru (obsolete)
+POES-WWW             poes.gsfc.nasa.gov
+SMDC-WWW             www.smdc.army.mil      
+SPFLA-WWW            www.spaceportflorida.com
+SSC-WWW              www.ssc.se            
+SVC-WWW              www.spacevector.com
+VAFB-WWW             www.vafb.af.mil            
+WFF-WWW              www.wff.nasa.gov
+WSMR-WWW             www-wsmr.army.mil    
+WWW-BMDO             bmdo.mil     
+WWW-CFSCIC           www.rssi.ru/SFCSIC/SFCSIC_main.html
+WWW-Calgary          www.ucalgary.ca
+WWW-FAST             sunland.gsfc.nasa.gov/smex/fast
+WWW-LASP             www.boulder.swri.edu     
+WWW-MSFC             www.msfc.nasa.gov
+WWW-NASDA            www.nasda.go.jp
+WWW-PFRR             www.pfrr.alaska.edu         
+WWW-PSU              www.astro.psu.edu          
+WWW-SSC              www.ssc.se
+WWW-WFF              www.wff.nasa.gov
+Xinhua               www.xinhuanet.com
+astronautix.com      astronautix.com
+bharat-rashshak.com  bharat-rashshak.com
+designation-systems  designation-systems
+floridaspace>.com    floridaspaceport.com
+gulflink.osd.mil     gulflink.osd.mil
+hin2.samfunnet.no    hin2.samfunnet.no
+isas.go.jp           isas.go.jp
+news.bbc.co.uk       news.bbc.co.uk
+patrick.af.mil       patrick.af.mil
+pib.nic.in           pib.nic.in
+rocketservices       rocketservices
+rosaviakosmos.ru     rosaviakosmos.ru
+rusaerog             rusaerog
+scaled.com           scaled.com
+thehindubusinessline thehindubusinessline
+usatoday.com         usatoday.com                     
+vafb.mil             vafb.mil
+vandenberg.af.mil    vandenberg.af.mil
+wff.nasa.gov         wff.nasa.gov
+wisconsinproject.org wisconsinproject.org
+wsmr.history.mil     wsmr.history.mil
+www.aeb.gov.br       www.aeb.gov.br
+www.bellona.no       www.bellona.no
+www.cosmoworld.ru    www.cosmoworld.ru
+www.crc.com          www.crc.com
+www.dcmilitary.com   www.dcmilitary.com
+www.defenselink.mil  www.defenselink.mil
+www.dod.mil          www.dod.mil
+www.energia.ru       www.energia.ru
+www.flatoday.com     www.flatoday.com
+www.gsfc.nasa.gov    www.gsfc.nasa.gov
+www.icrc-hq.com      www.icrc-hq.com
+www.ihi.co.jp        www.ihi.co.jp
+www.isro.org         www.isro.org
+www.laser.inpe.br    www.laser.inpe.br
+www.mfa.gov.il       www.mfa.gov.il
+www.nlr.nl           www.nlr.nl
+www.nti.org          www.nti.org
+www.orbital.com      www.orbital.com
+www.pfrr.alaska.edu  www.pfrr.alaska.edu
+www.phyast.pitt.edu  www.phyast.pitt.edu
+www.sandia.gov       www.sandia.gov
+www.schnapp.org      www.schnapp.org
+www.sea-launch.com   www.sea-launch.com
+www.spaceimaging.com www.spaceimaging.com
+www.timmerman2000    www.timmerman2000
+www.tsenki.com       www.tsenki.com
+www.tsenki.ocm       www.tsenki.ocm
+www.wmsr.army.mil    www.wmsr.army.mil
+www.wsmr-history.org www.wsmr-history.org
+www.xprize.org       www.xprize.org
+xinhuanet.com        xinhuanet.com
+redbannernorthernflt redbannernorthernfleet.blogspot.com
+nsf-koenn            Database (author unknown) posted on nasaspaceflight.com by R. Koenn on 2008 Dec 20.
+Note01               Serial numbers for the launches on this day may be swapped; launch times from nsf-koenn and serials from Cleary 

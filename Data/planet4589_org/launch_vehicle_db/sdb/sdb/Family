@@ -1,0 +1,502 @@
+FORMAT  = 'AF1     '                       / AF1 File Format Aug 1996 
+EXTNAME = 'Stage_Family'                   / File Name 
+NAXIS1  =                    104           / Width of table in bytes 
+TFIELDS =                      9           / Number of fields 
+TTYPE1  = 'SFD'               /           SFD1 family ID
+TDISP1  = 'I4.4'               /
+TPOS1   =                      1    /
+TTYPE2  = 'Family_ID'                      / SFD1 family ID
+TDISP2  = 'I4.4    '                       / Display format 
+TPOS2   =                      6           / Byte start position 
+TTYPE3  = 'Family  '                       / 
+TDISP3  = 'A20     '                       / Display format 
+TPOS3   =                     11           / Byte start position 
+TTYPE4  = 'Family_Filename'                / 
+TDISP4  = 'A20     '                       / Display format 
+TPOS4   =                     32           / Byte start position 
+TTYPE5  = 'Nation  '                       / 
+TDISP5  = 'A12     '                       / Display format 
+TPOS5   =                     53           / Byte start position 
+TTYPE6  = 'Family_Class'                   / Whether orbiter or not 
+TDISP6  = 'A1       '                      / R = sounding rocket U = orbital upper O = orbital family W = weather (small) 
+TPOS6   =                     66          /  S = intermediate stage 1 M = missile T = test rocket X= deleted V = missile test rocket A = astronaut suborbital
+TTYPE7  = 'Date'                         / First launch date
+TDISP7  = 'A11'                          /
+TPOS7   =                     68         /
+TTYPE8  = 'Superfamily'           /  Tentative concept of superfamilies
+TDISP8  = 'A20' 
+TPOS8 =                       80
+TTYPE9  = 'SFDCODE'                   / Stage Family Designator SFD3 family ID name  M=1 L=2 B=3 R=4 W=5 T/A=6 C = 7 U=8 S=9
+TDISP9  = 'A4'              /
+TPOS9   =                    101
+END 
+
+1101 0106 Corporal             Corporal             USA          M 1947 May 22 Corporal             UM01
+1102 0211 Viking               Viking               USA          O 1949 May  3 Viking               UM02
+1103 0101 Sergeant             Sergeant             USA          M 1953 Feb 11 Sergeant             UM03
+1104 0171 Redstone             Redstone             USA          O 1953 Aug 20 Redstone             UM04
+1105 0153 Navaho               Navaho               USA          M 1956 Nov  6 Navaho               UM05
+1106 0112 Thor                 Thor                 USA          O 1957 Jan 25 Thor                 UM06
+1107 0133 Jupiter              Jupiter              USA          O 1957 Mar  1 Redstone             UM07
+1108 0093 Atlas                Atlas                USA          O 1957 Jun 11 Atlas                UM08
+1110 0072 Polaris              Polaris              USA          M 1958 Sep 24 FBM                  UM10
+1111 0135 Titan                Titan                USA          O 1959 Feb  6 Titan                UM11
+1112 0200 Spartan              Spartan              USA          M 1959 Aug 26 Zeus                 UM12
+1113 0139 Minuteman            Minuteman            USA          O 1959 Sep 15 Minuteman            UM13
+1114 0166 Pershing             Pershing             USA          M 1960 Feb 25 Pershing             UM14
+1115 0317 Skybolt              Skybolt              USA/UK       M 1962 Apr 19 Skybolt              UM15
+1116 0174 SR19                 SR19                 USA          M 1964 Sep 24 Minuteman            UM16
+1117 0215 Sprint               Sprint               USA          M 1965 May 26 Zeus                 UM17
+1118 0098 Poseidon             Poseidon             USA          M 1968 Aug 16 FBM                  UM18
+1119 0068 SRAM                 SRAM                 USA          M 1970 Sep 22 SRAM                 UM19
+1120 0206 Trident              Trident              USA          M 1977 Jan 18 FBM                  UM20
+1121 0102 MX                   MX                   USA          O 1983 Jun 17 MX                   UM21
+1122 0151 Trident2             Trident2             USA          M 1987 Jan 15 FBM                  UM22
+1123 0173 SICBM                SICBM                USA          M 1989 May 11 SICBM                UM23
+1124 0117 GEM                  GEM                  USA          M 1990 Nov 26 GEM                  UM24
+1125 0192 THAAD                THAAD                USA          M 1995 Apr 21 THAAD                UM25
+1126 0423 GEM60                GEM60                USA          M 2002 Nov 20 GEM                  UM26
+1127 0451 Squirt               Squirt               USA          M 1965 May 26 Zeus                 UM27
+1201 0035 R-11                 R-11                 Rossiya      M 1953 Apr 18 R-1                  RM01
+1202 0004 Blok-BVGD            R-7                  Rossiya      O 1957 May 15 R-7                  RM02
+1203 0036 R-12                 R-12                 Rossiya      O 1957 Jun 22 R-12                 RM03
+1204 0405 V-1000               V-1000               Rossiya      M 1958        ABM                  RM04
+1205 0037 R-13                 R-13                 Rossiya      M 1959 Jun    R-1                  RM05
+1206 0039 R-21                 R-21                 Rossiya      M 1960 May    R-1                  RM06
+1207 0038 R-14                 R-14                 Rossiya      O 1960 Jun  6 R-12                 RM07
+1208 0063 R-16                 R-16                 Ukraina      M 1960 Oct 24 R-16                 RM08
+1209 0329 R-9                  R-9                  Rossiya      M 1961 Apr  9 R-9                  RM09
+1210 0015 RT-2                 RT-2                 Rossiya      M 1962 Apr 28 Korolev Solid        RM10
+1211 0040 R-5                  R-5                  Rossiya      M 1963 Mar 15 R-1                  RM11
+1212 0059 R-36                 R-36                 Ukraina      O 1963 Sep 28 R-16                 RM12
+1213 0022 UR-200               UR-200               Rossiya      M 1963 Nov  5 UR                   RM13
+1214 0055 UR-100               UR-100               Rossiya      O 1965 Apr 19 UR                   RM14
+1215 0013 RT-15                RT-15                Rossiya      M 1965 Sep 00 Arsenal Solid        RM15
+1216 0041 R-27                 R-27                 Rossiya      M 1965        R-27                 RM16
+1217 0019 RT-20P               RT-20P               Rossiya      M 1967 Oct    Korolev Solid        RM17
+1218 0042 R-29                 R-29                 Rossiya      O 1969 Mar    R-27                 RM18
+1219 0030 MR-UR-100            MR-UR-100            Rossiya      M 1971 Dec 10 R-16                 RM19
+1220 0407 A-350                A-350                Rossiya      R 1971        ABM                  RM20
+1221 0052 Temp-2S              Temp-2S              Rossiya      M 1972 Mar 14 Arsenal Solid        RM21
+1222 0400 UR-100N              UR-100N              Rossiya      M 1972        UR                   RM22
+1223 0044 R-31                 R-31                 Rossiya      M 1974 Dec    R-31                 RM23
+1224 0048 R-39                 R-39                 Rossiya      M 1980 Jan    Arsenal Solid        RM24
+1225 0006 Topol                Topol                Rossiya      O 1982 Oct 27 MITT                 RM25
+1226 0434 Oka                  Oka                  Rossiya      M 1980s?      KBM                  RM26
+1227 0454 V-750                V-750                Rossiya      M 1957        V-750                RM27
+1301 0218 V-2                  V-2                  Germany      M 1942 Oct  3 V-2                  EM01
+1302 0238 Agate                Agate                France       M 1961 Jun  3 PP                   EM02
+1303 0312 BlueStreak           BlueStreak           UK           O 1964 Jun  5 BK                   EM03
+1304 0239 Emeraude             Emeraude             France       O 1964 Jun 15 PP                   EM04
+1305 0253 P-10                 P-10                 France       M 1965 Oct 23 ONERA                EM05
+1306 0254 P-16                 P-16                 France       M 1968 Dec 21 ONERA                EM06
+1307 0074 Alfa                 Alfa                 Italia       M 1973 Feb    FBM                  EM07
+1308 0250 MSBS                 MSBS                 France       M 1980 Nov 28 ONERA                EM08
+1309 0249 Hades                Hades                France       M 1988 Nov 22 Hades                EM09
+1310 0462 M51                  M51                  France       M 2006        ONERA                EM10
+1501 0230 DF-3                 DF3                  China        O 1966 Dec 26 DF                   CM01
+1502 0231 DF-5                 DF5                  China        O 1971 Sep 10 DF                   CM02
+1503 0229 DF-21                DF-21                China        M 1982 Apr 30 DF                   CM03
+1504 0321 DF-15                DF-15                China        M 1988?       DF                   CM04
+1505 0224 DF-31                DF-31                China        M 1992 Apr 29 DF                   CM05
+1506 0441 DF-11                DF-11                China        M 1985        DF                   CM06
+1601 0278 ASLV                 ASLV                 India        O 1979 Aug 10 SLV                  AM01
+1602 0344 Jericho              Jericho              Israel       O 1987 May?   Jericho              AM02
+1603 0279 Prithvi              Prithvi              India        M 1988 Feb 24 Prithvi              AM03
+1604 0340 Abid                 Abid                 Iraq         M 1989 Dec  5 Scud                 AM04
+1605 0349 Nodong               Nodong               Korea        O 1990 May    Scud                 AM05
+1606 0342 Arrow2               Arrow2               Israel       M 1995 Jul 30 Arrow                AM06
+1607 0465 TD2                  TD2                  Korea        M 2006 Jul    TD2                  AM07
+1608 0466 Agni3                Agni3                India        M 2006        Agni 3               AM08
+1609 0452 K-15                 K-15                 India        M 2008        K-15                 AM09
+1610 0459 BlackSparrow         BlackSparrow         Israel       S 1999        BlackSparrow         AM10
+1611 0470 Shourya              Shourya              India        M 2008        Shourya              AM11
+1612 0471 Sejjil               Sejjil               Iran         M 2008        Sejjil               AM12
+2101 0082 Scout                Scout                USA          L 1960 Apr 18 Sergeant             UL01
+2102 0178 Saturn               Saturn               USA          O 1961 Oct 27 Redstone             UL02
+2103 0179 SaturnV              SaturnV              USA          O 1967 Nov  9 Redstone             UL03
+2104 0172 Scout D              ScoutD               USA          O 1972 Aug 13 Sergeant             UL04
+2105 0176 SRB                  SRB                  USA          O 1981 Apr 12 STS                  UL05
+2106 0160 Pegasus              Pegasus              USA          O 1990 Apr  5 Pegasus              UL06
+2107 0419 Atlas5               Atlas5               USA          O 2002 Aug 21 Atlas                UL07
+2108 0422 Delta4               Delta4               USA          O 2002 Nov 20 Delta                UL08
+2109 0460 Falcon1              Falcon1              USA          O 2005 Nov    Falcon 1             UL09
+2110 0468 STS                  STS                  USA          O 1981 Apr 12 STS                  UL10
+2111 0469 OV                   OV                   USA          O 1981 Apr 12 STS                  UL11
+2151 0395 LMAS                 LMAS                 USA          O 1969 Jul 21 LMAS                 UD51
+2201 0021 Proton               Proton               Rossiya      O 1965 Jul 16 UR                   RL01
+2202 0032 N-1                  N-1                  Rossiya      O 1969 Feb 21 N-1                  RL02
+2203 0061 Zenit                Zenit                Ukraina      O 1985 Apr 13 Zenit                RL03
+2204 0028 Energiya             Energiya             Rossiya      O 1987 May 15 Energiya             RL04
+2251 0396 E8                   E8                   Rossiya      O 1970 Sep 21 E8                   RD51
+2301 0259 Black Arrow          BlackArrow           UK           O 1969 Jun 27 BK                   EL01
+2302 0240 Ariane               Ariane               France       O 1979 Dec 24 Ariane               EL02
+2303 0243 Ariane 5             Ariane5              France       O 1996 Jun  4 Ariane               EL03
+2401 0289 Lambda               Lambda               Japan        O 1963 Aug 24 Kappa                JL01
+2402 0291 Mu                   Mu                   Japan        O 1966 Oct 31 Kappa                JL02
+2403 0301 H2                   H2                   Japan        O 1994 Feb  3 H2                   JL03
+2404 0354 MV                   MV                   Japan        O 1997 Feb 12 Kappa                JL04
+2601 0274 PSLV                 PSLV                 India        O 1993 Sep 20 SLV                  AL01
+2602 0467 GSLV                 GSLV                 India        O 2009        SLV                  AL02
+2701 0334 S-40                 S-40                 Brasil       O 1984 Nov 21 Sonda                LL01
+3101 0202 Tiny Tim Booster     TTB                  USA          B 1945 Feb 27 APL Booster          UB01
+3102 0154 Nike                 Nike                 USA          B 1946 Sep 17 ABL JATO             UB02
+3103 0109 Deacon               Deacon               USA          B 1947 Apr    Deacon               UB03
+3104 0069 Aerobee Booster      AerobeeB             USA          B 1947 Sep 25 ABL JATO             UB04
+3105 0203 Terrier              Terrier              USA          B 1948 Apr    APL Booster          UB05
+3106 0201 Talos                Talos                USA          B 1952 Oct 28 APL Booster          UB06
+3107 0168 Sidewinder           Sidewinder           USA          B 1953 Jul 24 NOTS                 UB07
+3108 0138 HJ                   HJ                   USA          B 1955 Sep 15 ABL JATO             UB08
+3109 0096 Loki                 Loki                 USA          B 1955 Sep 23 Loki                 UB09
+3110 0182 Arcas Booster        ArcasB               USA          B 1958 Jul 16 Arcon                UB10
+3111 0184 Sparrow              Sparrow              USA          B 1958 Oct 22 Sparrow              UB11
+3112 0209 Genie                Genie                USA          B 1960 Mar 22 Genie                UB12
+3113 0147 Mk72                 Mk72                 USA          B 1996 Aug  2 ABL JATO             UB13
+3114 0458 Excalibur            Excalibur            Canada       B 2001        Excalibur            UB14
+3201 0406 V-1000.Booster       V-1000.Booster       Rossiya      B 1958        ABM                  RB01
+3301 0332 Long Tom             LongTom              Australia    B 1957 Oct    WRE                  EB01
+3302 0322 Cuckoo               Cuckoo               UK           B 1960 Apr 12 RO                   EB02
+3401 0284 Kappa4               Kappa4               Japan        B 1961 Jun 18 Kappa                JB01
+3501 0432 T-7B                 T-7B                 China        R 1960 Feb 19 PRC                  CB01
+3502 0463 NSPO Booster         NSPOB                Taiwan       B 1999        Sounding Rocket      CB02
+3701 0438 GammaCen Booster     GammaCen             Argentina    R 1965        Argentina            LB01
+4100 0001 Unknown              Unknown              USSR         R -           -                    UR00
+4101 0212 WAC                  WAC                  USA          R 1945 Sep 27 WAC                  UR01
+4102 0114 FFAR                 FFAR                 USA          R 1946 May    FFAR                 UR02
+4103 0415 HVAR                 HVAR                 USA          R 1947 Apr 24 HVAR                 UR03
+4104 0024 Aerobee              Aerobee              USA          R 1947 Sep 25 Aerojet              UR04
+4105 0170 Recruit              Recruit              USA          R 1955 Aug 26 Recruit              UR05
+4106 0119 Lacrosse             Lacrosse             USA          R 1957 Jul    Lacrosse             UR06
+4107 0122 HOTROC               HOTROC               USA          O 1958 Jul  4 NOTS                 UR07
+4108 0087 Arcon                Arcon                USA          R 1958 Jul 16 Arcon                UR08
+4109 0129 Orion                Orion                USA          R 1958 Nov  3 Orion                UR09
+4110 0086 Arcas                Arcas                USA          R 1959 Jul 31 Arcas                UR10
+4111 0140 Aries                Aries                USA          R 1959 Sep 15 Minuteman            UR11
+4112 0227 BB5                  BB5                  Canada       R 1959 Sep    BB                   UR12
+4113 0130 Iris                 Iris                 USA          R 1960 Jul 22 Iris                 UR13
+4114 0121 NOTS 500             NOTS500              USA          R 1960 Jul 28 NOTS                 UR14
+4115 0134 Kiva                 Kiva                 USA          R 1960 Aug 12 Kiva                 UR15
+4116 0226 BB3                  BB3                  Canada       R 1962 Jun 15 BB                   UR16
+4117 0204 Tomahawk             Tomahawk             USA          R 1963 Jun 12 Sandia               UR17
+4118 0410 Martlet              Martlet              Canada       R 1963 Jun 18 Martlet              UR18
+4119 0195 LJ2                  LJ2                  USA          R 1963 Aug 28 Sergeant             UR19
+4120 0165 Pedro                Pedro                USA          R 1964 Feb 10 Pedro                UR20
+4121 0177 Sandhawk             Sandhawk             USA          R 1966 Aug 10 Sandia               UR21
+4122 0097 Bullpup              Bullpup              USA          R 1970 Jan 16 Bullpup              UR22
+4123 0091 AstrobeeD            AstrobeeD            USA          R 1970 Jun  8 Astrobee             UR23
+4124 0183 Castor4              Castor4              USA          R 1971 Apr  3 Castor               UR24
+4125 0152 NOTS 400             NOTS400              USA          R 1971 Nov 18 NOTS                 UR25
+4126 0092 AstrobeeF            AstrobeeF            USA          R 1972 Sep 26 Astrobee             UR26
+4127 0222 BB6                  BB6                  Canada       R 1973 May 16 BB                   UR27
+4128 0146 Malemute             Malemute             USA          R 1974 May 14 Sandia               UR28
+4129 0071 AMROC                AMROC                USA          R 1989 Oct  5 AMROC                UR29
+4130 0442 CSXT                 CSXT                 USA          R 2004 May 18 CSXT                 UR30
+4131 0443 SS1                  SS1                  USA          R 2004 Jun    TierOne              UR31
+4132 0444 DACRoc               DACRoc               USA          R 1963 Oct    DACRoc               UR32
+4133 0445 Rocketsonde          Rocketsonde          Misc         R -           Misc                 UR33
+4134 0448 Rocketsonde2         Rocketsonde2         Misc         R -           Misc                 UR34
+4135 0457 SpaceLoft            SpaceLoft            USA          R 2006 Aug    Misc                 UR35
+4136 0449 Icarus               Icarus               USA          R 2007 Mar    Misc                 UR36
+4137 0450 Icarus2              Icarus2              USA          R 2007 Mar    Misc                 UR37
+4201 0391 M-100                M-100                Rossiya      R 1957 Jul 11 M-100                RR01
+4202 0029 MR-12                MR-12                Rossiya      R 1965 Sep  3 MR-12                RR02
+4203 0437 Ivanov               Ivanov               Rossiya      R 1945        Ivanov               RR03
+4301 0267 Veronique            Veronique            France       R 1950 Aug  2 Veronique            ER01
+4302 0210 Monica               Monica               France       R 1957 Jan    ONERA                ER02
+4303 0320 Raven                Raven                UK           R 1957 Feb 13 RO                   ER03
+4304 0313 BlackKnight          BlackKnight          UK           R 1958 Sep  7 BK                   ER04
+4305 0189 Daniel               Daniel               France       R 1959 Jan 27 ONERA                ER05
+4306 0262 Stromboli            Stromboli            France       R 1959 May  2 ONERA                ER06
+4307 0330 Gosling              Gosling              UK           R 1960 Apr 26 RO                   ER07
+4308 0245 Belier               Belier               France       R 1961 Jun    ONERA                ER08
+4309 0266 Venus                Venus                France       R 1961 Jun    ONERA                ER09
+4310 0327 Skua                 Skua                 UK           R 1962        BAJ                  ER10
+4311 0408 Lex                  Lex                  France       R 1964 Apr 25 Lex                  ER11
+4312 0268 Vesta                Vesta                France       R 1965 Oct 15 Veronique            ER12
+4313 0351 Zenith               Zenith               Suisse       R 1967 Oct 27 Zenit                ER13
+4314 0325 Petrel               Petrel               UK           R 1968 Feb  3 BAJ                  ER14
+4315 0255 Meteor2              Meteor2              Polska       R 1968        Meteor               ER15
+4316 0323 Goose                Goose                UK           R 1969 Jul 19 RO                   ER16
+4317 0328 Stonechat            Stonechat            UK           R 1969 Oct  1 RO                   ER17
+4318 0331 Lupus                Lupus                Australia    R 1969 Dec  9 WRE                  ER18
+4319 0361 FFK                  FFK                  Germany      R 1972 Oct 10 FFK                  ER19
+4320 0426 Cirrus               Cirrus               Germany      R 1961 Sep 16 DRG                  ER20
+4321 0427 Seliger              Seliger              Germany      R 1962 Nov 19 DRG                  ER21
+4322 0428 AlKahir              AlKahir              Egypt        V 1962 Jul    AlKahir              ER22
+4323 0455 INTA-100             INTA-100             Espana       R 1984        INTA                 ER23
+4401 0283 Kappa                Kappa                Japan        R 1956 Sep 24 Kappa                JR01
+4402 0265 K250                 K250                 Japan        R 1957 May    Kappa                JR02
+4403 0285 K420                 K420                 Japan        R 1959 Nov 18 Kappa                JR03
+4404 0304 LS-C                 LS-C                 Japan        R 1963 Aug 10 JCR                  JR04
+4405 0357 STA S                STA                  Japan        R 1963 Aug 10 STA                  JR05
+4406 0305 S-160                S-160                Japan        R 1965        ISAS-S               JR06
+4407 0307 S-300                S-300                Japan        R 1966 Aug    ISAS-S               JR07
+4408 0306 S-210                S-210                Japan        R 1969 Aug  7 ISAS-S               JR08
+4409 0303 JCR                  JCR                  Japan        R 1969 Sep 15 JCR                  JR09
+4410 0308 S-310                S-310                Japan        R 1975 Jan    ISAS-S               JR10
+4411 0356 TT-210               TT-210               Japan        R 1975 Aug 17 JCR                  JR11
+4412 0309 S-520                S-520                Japan        R 1980 Jan 18 ISAS-S               JR12
+4413 0310 TR-1                 TR-1                 Japan        R 1988 Sep  5 TR                   JR13
+4414 0421 K150                 K150                 Japan        R 1956 Sep 24 Kappa                JR14
+4501 0319 T-7                  T-7                  China        R 1960 Feb 19 PRC                  CR01
+4502 0464 NSPO                 NSPO                 Taiwan       R 1999        Sounding Rocket      CR02
+4601 0281 DELETED              RH-300               India        R 1978 Apr 18 RH                   AR01
+4602 0282 DELETED              RH-560               India        R 1980 Feb 16 RH                   AR02
+4603 0314 RX-250               RX-250               Indonesia    R 1987        LAPAN                AR03
+4604 0280 RH-200               RH-200               India        R 1992 Oct 14 RH                   AR04
+4605 0348 KSR                  KSR                  Korea        R 1993 Jun  4 KSR                  AR05
+4606 0424 KSR-3                KSR-3                Korea        R 2002        KSR                  AR06
+4607 0453 RX-320               RX-320               Indonesia    R 2007        LAPAN                AR07
+4607 0472 Kavoshgar            Kavoshgar            Iran         R 2007        Kavoshgar            AR07
+4701 0336 Sonda                Sonda                Brasil       R 1965 Apr    Sonda                LR01
+4702 0286 IIAE.Orion           IIAE.Orion           Argentina    R 1966 Nov  4 ONERA                LR02
+4703 0412 Rigel                Rigel                Argentina    R 1972 Nov  2 ONERA                LR03
+4704 0436 Sonda3               Sonda3               Brasil       R 1980        Sonda                LR04
+4705 0439 GammaCen Sustainer   GammaCenS            Argentina    R 1965        Argentina            LR05
+5101 0100 Sirocco              Sirocco              USA          W 1964 Jul 15 Sirocco              UW01
+5102 0381 BB7                  BB7                  Canada       W 1969        BB                   UW02 
+5201 0411 MMR-06               MMR-06               Rossiya      W 1976 Feb 10 MMR-06               RW01
+5202 0193 Mera                 Mera                 Rossiya      W 1992 Dec    Mera                 RW02
+5301 0194 Emma                 Emma                 France       W 1962 Dec  7 Emma                 EW01
+5302 0333 Meteor               Meteor               Polska       W 1963        Meteor               EW02
+5303 0401 Belenos              Belenos              France       W 1967 Apr    ONERA                EW03
+5304 0404 Belisama             Belisama             France       W 1968 Mar  6 ONERA                EW04
+5305 0429 Meteo                Meteo                France       W 1960?       Meteo                EW05
+5401 0358 MT-135               MT-135               Japan        W 1964 Jul 27 MT-135               JW01
+5501 0263 ZN                   ZN                   China        W 1988 Dec 19 PRC                  CW01
+5601 0257 RH-125               RH-125               India        W 1992 Oct 14 RH                   AW01
+5602 0433 RH-75                RH-75                India        W 1967 Nov    RH                   AW02
+6101 0397 X-15                 X-15                 USA          T 1959 Mar 10 X-15                 UT01
+6102 0350 LJ1                  LJ1                  USA          T 1959 Aug 21 Sergeant             UT02
+6103 0085 Apollo LES           Apollo.LES           USA          T 1963 Nov  7 LES                  UT03
+6104 0110 Dolphin              Dolphin              USA          T 1984 Aug  3 Starstruck           UT04
+6105 0108 DC-X                 DC-X                 USA          T 1993 Aug 18 DC-X                 UT05
+6106 0090 Astrid               Astrid               USA          T 1994 Feb  4 Astrid               UT06
+6107 0425 HYSR                 HYSR                 USA          T 2002 Dec    HYSR                 UT07
+6151 0124 Hermes               Hermes               USA          A 1944 Feb 29 Hermes               UA51
+6152 0143 MX-774               MX-774               USA          A 1948 Jul 13 Atlas                UA52
+6153 0169 RTV                  RTV                  USA          A 1948 May 26 RTV                  UA53
+6154 0094 Air                  Air                  USA          A 1952 Aug 21 None                 UA54
+6155 0190 T-40                 T-40                 USA          A 1954 Oct 14 PARD                 UA55
+6156 0431 HIBEX                HIBEX                USA          A 1965 Feb    Safeguard            UA56
+6301 0339 OTRAG                OTRAG                Germany      T 1977 May 18 OTRAG                ET01
+6302 0347 Zefiro               Zefiro               Italy        T 1992 Mar 18 Zefiro               ET02
+6303 0456 HTR                  HTR                  Norway       T 2007 May    HTR                  ET03
+6401 0294 SB-735               SB-735               Japan        T 1985 Jan  7 Kappa                JT01
+7101 0384 Matador              Matador              USA          C 1948 Dec    Atm                  UC01
+7102 0383 Lark                 Lark                 USA          C 1950 Oct 25 Atm                  UC02
+7103 0385 Snark                Snark                USA          C 1950 Dec 21 Atm                  UC03
+7104 0248 Regulus              Regulus              USA          C 1951 Mar    Regulus              UC04
+7105 0386 Bomarc               Bomarc               USA          C 1952 Sep 10 Atm                  UC05
+7106 0387 X-10                 X-10                 USA          C 1955 Aug 19 Atm                  UC06
+7107 0388 BullGoose            BullGoose            USA          C 1957 Mar 13 Atm                  UC07
+7108 0389 HoundDog             HoundDog             USA          C 1959 Apr 23 Atm                  UC08
+7109 0390 GLCM                 GLCM                 USA          C 1985 Oct 22 Atm                  UC09
+7201 0394 Burya                Burya                Rossiya      C 1957 Aug  1 Atm                  RC01
+8101 0095 Baby Sergeant        BabySergeant         USA          U 1956 Sep 20 Baby Sergeant        UU01
+8102 0105 Cluster              Cluster              USA          U 1956 Sep 20 Baby Sergeant        UU02
+8103 0118 GCR                  GCR                  USA          U 1957 May  1 Altair               UU03
+8104 0075 Able                 Able                 USA          U 1957 Oct 23 Aerojet              UU04
+8105 0083 Altair               Altair               USA          U 1958 Aug 17 Altair               UU05
+8106 0079 Agena                Agena                USA          U 1959 Jan 21 Agena                UU06
+8107 0136 Titan.St2            Titan.St2            USA          U 1959 Feb  6 Titan                UU07
+8108 0076 Ablestar             Ablestar             USA          U 1960 Apr 13 Aerojet              UU08
+8109 0104 Cetus                Cetus                USA          U 1960 Sep 21 Cygnus               UU09 
+8110 0181 SaturnIV             SaturnIV             USA          U 1961 Oct 27 Redstone             UU10
+8111 0103 Centaur              Centaur              USA          U 1961 Oct 27 Centaur              UU11
+8112 0081 BE3                  BE3                  USA          U 1962 Jan 26 Altair               UU12
+8112 0205 Transtage            Transtage            USA          U 1964 Sep  1 Able                 UU12
+8113 0115 FW4                  FW4                  USA          U 1965 May 20 UTC-FW               UU13
+8114 0111 SaturnIVB            SaturnIVB            USA          U 1966 Feb 26 Redstone             UU14
+8115 0187 Star 37              Star37               USA          U 1966 May 30 Star                 UU15
+8116 0180 SaturnII             SaturnII             USA          U 1967 Nov  9 Redstone             UU16
+8117 0185 Star 20              Star20               USA          U 1971 Aug 16 Altair               UU17
+8118 0186 Star 26              Star26               USA          U 1971 Oct 14 Star                 UU18
+8119 0273 Star 27              Star27               USA          U 1976 Jan 17 Star                 UU19
+8120 0188 Star 48              Star48               USA          U 1980 Nov 15 Star                 UU20
+8121 0070 Delta2               Delta2               USA          U 1981 Feb 11 Aerojet              UU21
+8122 0156 Shuttle Orbiter      OV                   USA          U 1981 Apr 12 STS                  UU22
+8123 0113 ET                   ET                   USA          U 1981 Apr 12 STS                  UU23
+8124 0127 Orbus21              Orbus21              USA          U 1982 Oct 30 Orbus                UU24
+8125 0128 Orbus6               Orbus6               USA          U 1982 Oct 30 Orbus                UU25
+8126 0409 PAM-D2               PAM-D2               USA          U 1985 Nov 27 PAM-D2               UU26
+8127 0158 Pegasus.St3          Pegasus.St3          USA          U 1990 Apr  5 Pegasus              UU27
+8128 0120 HAPS                 HAPS                 USA          U 1991 Jul 17 HAPS                 UU28
+8129 0155 OAM                  OAM                  USA          U 1995 Aug 15 OAM                  UU29
+8130 0374 D3SS                 D3SS                 USA          U 1998 Aug 27 Able                 UU30
+8131 0447 D4SS                 D4SS                 USA          U 2004 Dec    Able                 UU31
+8201 0012 Blok-E               Blok-E               Rossiya      U 1958 Sep 23 Korolev Upper        RU01
+8202 0002 Blok-I               Blok-I               Rossiya      U 1960 Oct 10 Korolev Upper        RU02
+8203 0025 Blok-L               Blok-L               Rossiya      U 1960 Oct 10 Korolev Upper        RU03
+8204 0057 Kosmos-2.St2         Kosmos-2.St2         Ukraina      U 1961 Oct 27 Yangel Upper         RU04
+8205 0060 R-36.St2             R-36.St2             Ukraina      U 1963 Sep 28 R-16                 RU05
+8206 0058 Kosmos-3.St2         Kosmos-3.St2         Ukraina      U 1964 Aug 18 Yangel Upper         RU06
+8207 0005 Blok-D               Blok-D               Rossiya      U 1967 Mar 10 Korolev L-3          RU07
+8208 0370 BR                   BR                   Ukraina      U 1971 Dec 10 BR                   RU08
+8209 0065 S-5M                 S5M                  Ukraina      U 1977 Jun 24 Yangel Upper         RU09
+8210 0062 Zenit.St2            Zenit.St2            Ukraina      U 1985 Apr 13 Zenit                RU10
+8211 0026 Briz                 Briz                 Rossiya      U 1990 Nov 20 Briz                 RU11
+8212 0027 DS                   DS                   Rossiya      U 1993 Mar 25 DS                   RU12
+8213 0373 Ikar                 Ikar                 Rossiya      U 1999 Feb  9 Ikar                 RU13
+8214 0162 Fregat               Fregat               Rossiya      U 2000 Feb  8 Fregat               RU14
+8215 0399 GS3                  GS3                  Rossiya      U 2001 Apr 18 GS3                  RU15
+8301 0338 Astris               Astris               Germany      U 1966 May 23 Astris               EU01
+8302 0145 P068                 P068                 France       U 1970 Mar 10 PP                   EU02
+8303 0316 Waxwing              Waxwing              UK           U 1970 Sep  2 BK                   EU03
+8304 0242 Ariane Stage 3       Ariane.St3           France       U 1979 Dec 24 Ariane               EU04
+8305 0144 IRIS.Fiat            IRIS.Fiat            Italia       U 1992 Oct 22 IRIS                 EU05
+8306 0337 EPS                  EPS                  Germany      U 1996 Jun  4 Ariane               EU06
+8401 0287 L480S                L480S                Japan        U 1966 Sep 26 Kappa                JU01
+8402 0293 M-30                 M-30                 Japan        U 1969 Aug 17 Kappa                JU02
+8403 0295 M-40                 M-40                 Japan        U 1970 Sep 25 Kappa                JU03
+8404 0296 LE-3                 LE-3                 Japan        U 1974 Sep  2 Able                 JU04
+8405 0297 LE-5                 LE-5                 Japan        U 1986 Aug 12 Able                 JU05
+8406 0298 UM129A               UM129A               Japan        U 1987 Aug 27 Star                 JU06
+8407 0299 LAPS                 LAPS                 Japan        U 1994 Aug 28 H2                   JU07
+8408 0302 H2.St2               H2.St2               Japan        U 1994 Feb  3 H2                   JU08
+8409 0142 KM-V                 KM-V                 Japan        U 1997 Feb 12 Kappa                JU09
+8410 0363 M-34                 M-34                 Japan        U 1997 Feb 12 Kappa                JU10
+8411 0418 K10S                 K10S                 Japan        U 1965        Kappa                JU11
+8501 0233 GF-02                GF-02                China        U 1970 Apr 24 FG                   CU01
+8502 0234 CZ Stage 2           CZ.St2               China        U 1971 Sep 10 DF                   CU02
+8503 0235 CZ3 Stage 3          CZ3.St3              China        U 1984 Jan 29 DF                   CU03
+8504 0236 L14                  L14                  China        U 1990 Sep  3 DF                   CU04
+8505 0369 SD                   SD                   China        U 1997 Sep  1 FG                   CU05
+8506 0420 KT1-3                KT1-3                China        U 2002 Sep 15 DF-31                CU06
+8601 0272 ASLV Stage 4         ASLV.St4             India        U 1979 Aug 10 SLV                  AU01
+8602 0346 AUS-51               AUS-51               Israel       U 1988 Sep 19 AUS                  AU02
+8603 0277 PSLV Stage 4         PSLV.St4             India        U 1993 Sep 20 SLV                  AU03
+9100 0371 Generic              Dummy                USA          S -           -                    US00
+9101 0352 Atlas Booster        Atlas.Booster        USA          S 1957 Jun 11 Atlas                US01
+9102 0213 X-241                X-241                USA          S 1958 Jul  4 Altair               US02
+9103 0073 Polaris.St2          Polaris.St2          USA          S 1958 Sep 24 FBM                  US03
+9104 0196 TX-238               TX-238               USA          S 1960 Apr 28 Zeus                 US04
+9105 0167 Pershing.St2         Pershing.St2         USA          S 1960 Feb 25 Pershing             US05
+9106 0197 TX-239               TX-239               USA          S 1961 Sep  9 Zeus                 US06
+9107 0318 Skybolt.St2          Skybolt.St2          USA/UK       S 1962 Apr 19 Skybolt              US07
+9108 0214 PolarisA3.St2        PolarisA3.St2        USA          S 1962 Aug  7 FBM                  US08
+9109 0216 X-271                X-271                USA          S 1965 May 26 Zeus                 US09
+9110 0208 Titan.SRM            Titan.SRM            USA          S 1965 Jun 18 SRM                  US10
+9111 0382 Interstage           Interstage           USA          S 1967 Nov  9 None                 US11
+9112 0099 Poseidon.St2         Poseidon.St2         USA          S 1968 Aug 16 FBM                  US12
+9113 0175 SR73                 SR73                 USA          S 1968 Aug 16 Minuteman            US13
+9114 0161 PBS                  PBS                  USA          S 1968 Aug 16 PBS                  US14
+9115 0207 Trident.St2          Trident.St2          USA          S 1977 Jan 18 FBM                  US15
+9116 0225 Trident.St3          Trident.St3          USA          S 1977 Jan 18 FBM                  US16
+9117 0163 MX.St2               MX.St2               USA          S 1983 Jun 17 MX                   US17
+9118 0164 MX.St3               MX.St3               USA          S 1983 Jun 17 MX                   US18
+9119 0353 Peacekeeper S4       MX.St4               USA          S 1983 Jun 17 PAS                  US19
+9120 0010 SICBM2               SICBM2               USA          S 1989 May 11 SICBM                US20
+9121 0011 SICBM3               SICBM3               USA          S 1989 May 11 SICBM                US21
+9122 0198 SICBM4               SICBM4               USA          S 1989 May 11 SICBM                US22
+9123 0159 Pegasus.St2          Pegasus.St2          USA          S 1990 Apr  5 Pegasus              US23
+9124 0355 SRMU                 SRMU                 USA          S 1997 Feb 23 SRMU                 US24
+9125 0141 Minuteman.St3        Minuteman.St3        USA          S 1959 Sep 15 Minuteman            US25
+9150 0199 Standard             Standard             USA          S 1948 Apr    SM                   US50
+9151 0123 Ajax                 Ajax                 USA          S 1951 Nov    Nike Ajax            US51
+9152 0191 T-55                 T-55                 USA          S 1954 Oct 14 PARD                 US52
+9153 0126 Hercules             Hercules             USA          S 1955 Jan 13 Nike Hercules        US53
+9154 0089 Asp                  Asp                  USA          S 1957 Sep 26 Asp                  US54
+9155 0088 Arrow                Arrow                USA          S 1957 Oct  3 Arrow II             US55
+9156 0084 DELETED              Apache               USA          S 1958 Mar 18 Apache               US56
+9157 0017 Plastic              Plastic              USA          S 1958 Apr  7 LaRC                 US57
+9158 0149 NOTS.3inSM           NOTS.3inSM           USA          S 1958 Jul  4 NOTS                 US58
+9159 0150 NOTS.8in             NOTS.8in             USA          S 1958 Jul  4 NOTS                 US59
+9160 0137 Lance                Lance                USA          S 1958 Jun 27 Lance                US60
+9161 0066 5inSM                5inSM                USA          S 1959 Mar  3 Cygnus               US61
+9162 0009 Zeus-A               Zeus-A               USA          S 1959 Aug 26 Zeus                 US62
+9163 0125 10SM                 10SM                 USA          S 1959?       Cygnus               US63
+9164 0014 20SM                 20SM                 USA          S 1959 Mar 17 Cygnus               US64
+9165 0016 25SM                 25SM                 USA          S 1959?       Cygnus               US65
+9166 0217 40SM                 40SM                 USA          S 1959?       Cygnus               US66
+9167 0078 Antares              Antares              USA          S 1960 Apr 18 Altair               US67
+9168 0413 Falcon               Falcon               USA          S 1960 Aug 13 Falcon               US68
+9169 0080 Alcor                Alcor                USA          S 1960 Sep 21 Altair               US69
+9170 0107 Cygnus               Cygnus               USA          S 1961 Dec 14 Cygnus               US70
+9171 0132 Javelin              Javelin              USA          S 1964 Oct 17 Javelin              US71
+9172 0131 Iroquois             Iroquois             USA          S 1964 Nov 27 Iroquois             US72
+9173 0077 AJ60                 AJ60                 USA          S 1964 Dec 11 Aerojet              US73
+9174 0219 NOTS551              NOTS551              USA          S 1965 Oct 20 NOTS                 US74
+9175 0228 Nihka                BB5                  Canada       S 1981 Aug 14 BB                   US75
+9176 0157 Orbus1               Orbus1               USA          S 1990 Dec 18 Orbus                US76
+9177 0223 SM3.TSRM             SM3.TSRM             USA          S 1992 Sep 24 SM3                  US77
+9178 0359 MLRS                 MLRS                 USA          S 1999 Sep  6 MLRS                 US78
+9179 0046 Oriole               Oriole               USA          S 2000 Jul  7 Oriole               US79
+9180 0116 Lynx                 Lynx                 USA          S 2000 Dec 19 Lynx                 US80
+9181 0435 Atlas V SRM          AtlasVSRM            USA          S 2003 Jul    AJ                   US81
+9201 0003 Blok-A               Blok-A               Rossiya      S 1957 May 15 R-7                  RS01
+9202 0378 BOZ                  BOZ                  Rossiya      S 1960 Oct 10 None                 RS02
+9203 0064 R-16.St2             R-16.St2             Ukraina      S 1960 Oct 24 R-16                 RS03
+9204 0375 8K75B                8K75B                Rossiya      S 1961 Apr  9 R-9                  RS04
+9205 0148 RT-1.St3             RT-1.St3             Rossiya      S 1962 Apr 28 Korolev Solid        RS05
+9206 0056 UR-100.St2           UR-100.St2           Rossiya      S 1965 Apr 19 UR                   RS06
+9207 0051 RT-15.St2            RT-15.St2            Rossiya      S 1965 Sep    Arsenal Solid        RS07
+9208 0053 RT-15.St3            RT-15.St3            Rossiya      S 1965 Sep    Arsenal Solid        RS08
+9209 0018 RT-2.St3             RT-2.St3             Rossiya      S 1966 Feb  5 Korolev Solid        RS09
+9210 0023 Proton.St3           Proton.St3           Rossiya      S 1967 Mar 10 UR                   RS10
+9211 0379 SOZ                  SOZ                  Rossiya      S 1967 Mar 10 None                 RS11
+9212 0380 Perekhodnik          Perekhodnik          Rossiya      S 1967 Mar 10 None                 RS12
+9213 0020 RT-20P.St2           RT-20P.St2           Rossiya      S 1967 Oct    Korolev Solid        RS13
+9214 0033 11A52B               11A52B               Rossiya      S 1969 Feb 21 N-1                  RS14
+9215 0034 11A52V               11A52V               Rossiya      S 1969 Feb 21 N-1                  RS15
+9216 0417 BlokG                BlokG                Rossiya      S 1969 Feb 21 L-3                  RS16
+9217 0043 R-29.St2             R-29.St2             Rossiya      S 1969 Mar    R-27                 RS17
+9218 0367 R-29 Stage 3         R-29.St3             Rossiya      S 1969 Mar    Makeev               RS18
+9219 0031 MR-UR-100.St2        MR-UR-100.St2        Ukraina      S 1971 Dec 10 R-16                 RS19
+9220 0414 DELETED              51T6B                Rossiya      S 1971        ABM                  RS20
+9221 0377 RT-21.St2            RT-21.St2            Rossiya      S 1972 Mar 14 Arsenal Solid        RS21
+9222 0402 UR-100N.St2          UR-100N.St2          Rossiya      S 1972        UR                   RS22
+9223 0045 R-31.St2             R-31.St2             Rossiya      S 1974 Dec    R-31                 RS23
+9224 0049 R-39.St2             R-39.St2             Rossiya      S 1980 Jan    Arsenal Solid        RS24
+9225 0050 R-39.St3             R-39.St3             Rossiya      S 1980 Jan    Arsenal Solid        RS25
+9226 0392 RT-23.St2            RT-23.St2            Rossiya      S 1982 Jan    Arsenal Solid        RS26
+9227 0393 RT-23.St3            RT-23.St3            Rossiya      S 1982 Jan    Arsenal Solid        RS27
+9228 0007 Topol.St2            Topol.St2            Rossiya      S 1982 Oct 27 MITT                 RS28
+9229 0008 Topol.St3            Topol.St3            Rossiya      S 1982 Oct 27 MITT                 RS29
+9230 0054 Start                Start                Rossiya      S 1993 Mar 25 MITT                 RS30
+9231 0440 UR-100NU.St3         UR-100NU.St3         Rossiya      S -           NPO Mash             RS31
+9301 0261 Rubis                Rubis                France       S 1964 Dec 18 PP                   ES01
+9302 0260 Rita                 Rita                 France       S 1966 May 26 ONERA                ES02
+9303 0247 Coralie              Coralie              France       S 1966 May 23 Coralie              ES03
+9304 0315 BlackArrow.St2       BlackArrow.St2       UK           S 1969 Jun 27 BK                   ES04
+9305 0241 Ariane Stage 2       Ariane.St2           France       S 1979 Dec 24 Ariane               ES05
+9306 0251 MSBS Stage 2         MSBS.St2             France       S 1980 Nov 28 ONERA                ES06
+9307 0252 MSBS Stage 3         MSBS.St3             France       S 1980 Nov 28 ONERA                ES07
+9309 0256 PAL                  PAL                  France       S 1988 Jun 15 Ariane               ES09
+9310 0258 PAP                  PAP                  France       S 1988 Jun 15 Ariane               ES10
+9311 0244 Ariane 5 EAP         Ariane5.EAP          France       S 1996 Jun  4 Ariane               ES11
+9351 0246 Berenice             Berenice             France       S 1959 Jan 27 ONERA                ES51
+9352 0376 Neptune              Neptune              France       S 1959 May  2 ONERA                ES52
+9353 0416 Mimosa               Mimosa               France       S 1959 May  2 Mimosa               ES53
+9354 0324 Lobster              Lobster              UK           S 1960 Aug 17 RO                   ES54
+9355 0360 LAPSTAR              LAPSTAR              Australia    S 1961 Apr 24 WRE                  ES55
+9356 0366 Chick                Chick                UK           S 1962        Chick                ES56
+9357 0365 Vela                 Vela                 Australia    S 1964        WRE                  ES57
+9358 0364 Musca                Musca                Australia    S 1969 Dec  9 WRE                  ES58
+9359 0403 Aurore               Aurore               France       S 1967 Apr    ONERA                ES59
+9360 0430 SEPR167              SEPR167              France       S 1960        ONERA                ES60
+9401 0290 Lambda.St2           Lambda.St2           Japan        S 1963 Aug 24 Kappa                JS01
+9402 0288 L500                 L500                 Japan        S 1964 Jul 11 Kappa                JS02
+9403 0292 M-20                 M-20                 Japan        S 1969 Aug 17 Kappa                JS03
+9404 0264 H2 SSB               H2.SSB               Japan        S 1995 Mar 18 Kappa                JS04
+9405 0362 M-24                 M-24                 Japan        S 1997 Feb 12 Kappa                JS05
+9451 0269 SB-310               SB-310               Japan        S 1963 Aug 24 Kappa                JS51
+9452 0047 KM-H                 KM-H                 Japan        S 1977 Feb 19 KM                   JS52
+9453 0311 TR-1 Stage 2         TR-1.St2             Japan        S 1988 Sep  5 TR                   JS53
+9454 0220 KM-D                 KM-D                 Japan        S 1989 Feb 21 Kappa                JS54
+9455 0221 KM-L                 KM-L                 Japan        S 1990 Jan 24 Kappa                JS55
+9456 0300 H2 SRB               H2.SRB               Japan        S 1994 Feb  3 H2                   JS56
+9501 0232 CZ1 Stage 2          CZ1.St2              China        S 1970 Jan 30 DF                   CS01
+9502 0237 CZ-LB                CZ.LB                China        S 1990 Jul 16 DF                   CS02
+9601 0270 ASLV Stage 2         ASLV.St2             India        S 1979 Aug 10 SLV                  AS01
+9602 0271 ASLV Stage 3         ASLV.St3             India        S 1979 Aug 10 SLV                  AS02
+9603 0345 Shaviyt              Shaviyt              Israel       S 1988 Sep 19 Jericho              AS03
+9604 0341 Abid.St3             Abid.St3             Iraq         S 1989 Dec  5 Scud                 AS04
+9605 0275 PSLV Stage 2         PSLV.St2             India        S 1993 Sep 20 SLV                  AS05
+9606 0276 PSLV Stage 3         PSLV.St3             India        S 1993 Sep 20 SLV                  AS06
+9607 0343 IAI.Arrow.St2        IAI.Arrow.St2        Israel       S 1995 Jul 30 Arrow                AS07
+9608 0372 TD3                  TD3                  DPRK         S 1998 Aug 31 TD3                  AS08
+9609 0368 Agni II Stage 2      AgniII.St2           India        S 1999 Apr 11 Agni                 AS09
+9610 0461 Safir                Safir                Iran         S 2008 Jan    Safir                AS10
+9701 0335 S-44                 S44                  Brasil       S 1993 Apr  2 Sonda                LS01
+9702 0900 UNK                  UNK                  USSR         R -           -                    XX00

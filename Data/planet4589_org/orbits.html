@@ -1,0 +1,234 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<title>Orbital categories</title>
+</head><body bgcolor="#ffffff" text="#000099">
+<a name="1.5"><h1><b>1.5: Orbital categories</b></h1></a>
+<p>
+A pure Keplerian orbit is described by six classical orbital
+elements:
+</p><p>
+</p><ul>
+<p>
+</p><li> a, the semi-major axis (or mean orbital radius)
+<p>
+</p></li><li> e, the eccentricity,
+<p>
+</p></li><li> i, the inclination to the equatorial plane,
+<p>
+</p></li><li> Omega, the longitude of the ascending node
+at which the orbit crosses the equator northbound.
+<p>
+</p></li><li> Omega, the argument of perigee, the angle
+between the ascending node and the perigee.
+<p>
+</p></li><li> T<sub>0</sub>, the time at which the satellite was at perigee.
+</li></ul>
+<p>
+</p><p>
+At time T<sub>0</sub>, the satellite is at perigee, the closest
+point to the Earth, with distance a(1-e) from the Earth's center.
+</p><p>
+The following terrestrial quantities are of interest:
+</p><p>
+</p><ul>
+<p>
+</p><li> R<sub>E</sub> = 6378.0 km, the nominal Earth equatorial radius.
+<p>
+</p></li><li> T<sub>GEO</sub> = 23:56, the Earth sidereal rotation period.
+(Note: in this section times are expressed as hours:minutes).
+<p>
+</p></li><li> T<sub>s</sub> = 1:24, the orbital period for a satellite
+skimming the Earth surface. It may be found more accurately by
+<p>
+ T<sub>s</sub>  =  4 Pi<sup>2</sup> / GM  R<sub>E</sub><sup>3</sup>
+</p><p>
+where M is the Earth mass.
+</p><p>
+</p></li><li> Theta<sub>n</sub> = -0.986 deg/day, the rate of advance of the sidereal
+longitude of noon.
+</li></ul>
+<p>
+</p><p>
+The Earth is not a point mass; field harmonics and atmospheric
+drag affect the orbit. We therefore consider instantaneous
+Keplerian elements valid at time T<sub>e</sub>, the orbital epoch.
+We also consider the following auxiliary quantities:
+</p><p>
+</p><ul>
+<p>
+</p><li> h<sub>p</sub>, the perigee height
+<p>
+ h<sub>p</sub> = a(1-e)-R<sub>E</sub>
+</p><p>
+</p></li><li> a<sub>p</sub>, the apogee height
+<p>
+ a<sub>p</sub> = a(1+e)-R<sub>E</sub>
+</p><p>
+</p></li><li> Phi, the true anomaly, or angle between perigee and
+the current position.
+<p>
+</p></li><li> T, the orbital period:
+<p>
+ T = T<sub>s</sub> ( a / R<sub>E</sub> ) <sup>3</sup>
+</p><p>
+by Kepler's third law.
+</p><p>
+</p></li><li> t, the time.
+<p>
+</p></li><li> M, the mean anomaly,
+<p>
+ M = 2Pi ( t - T<sub>0</sub> ) / T
+</p><p>
+</p></li><li> T<sub>E</sub>, the time at equator crossing.
+<p>
+</p></li><li> <sup>.</sup>Omega, the precession of the orbital plane;
+for Earth,
+<p>
+ <sup>.</sup>Omega = (9.943  deg/d)( R<sub>E</sub> / a )<sup>3.5</sup> cos i
+</p><p>
+</p></li><li> <sup>.</sup>Omega, the advance of perigee.
+<p>
+ <sup>.</sup>Omega = (9.943  deg/d)( R<sub>E</sub> / a )<sup>3.5</sup> ( 2 - 2.5 sin<sup>2</sup> i)
+</p><p>
+</p></li><li> <sup>.</sup>Theta<sub>l</sub>, the longitude drift rate, or difference
+between the orbital angular velocity and the Earth's
+rotational angular velocity:
+<p>
+<sup>.</sup>Theta<sub>l</sub> = 2Pi  1/T - 1/T<sub>GEO</sub>
+</p><p>
+</p></li></ul>
+<p>
+</p><p>
+Earth satellites use a wide variety of orbital parameters.
+We can, however, group satellite orbits in some broad categories.
+</p><p>
+There are three mathematically special orbits, corresponding
+to <sup>.</sup>Theta<sub>l</sub> = 0 (geostationary), <sup>.</sup>Omega = <sup>.</sup>theta<sub>n</sub>
+(sun-synchronous), and <sup>.</sup>Omega = 0 (Molniya).
+</p><p>
+</p><ul>
+<p>
+</p><li> GEO/S, the geostationary earth orbit with T = 23:56
+satisfies <sup>.</sup>Theta<sub>l</sub> = 0 and in addition,
+the actual geocentric longitude stays constant if i = 0.0 and e = 0.0
+(so that the angular velocity vectors of Earth and the orbit
+coincide).
+<p>
+</p></li><li> SSO, sun-synchronous orbit, with
+<p>
+ T = 3:47 ( - cos i ) <sup> </sup>3/7.
+</p><p>
+This orbit has inclinations between 97 and 103 degrees.
+</p><p>
+</p></li><li> Molniya-type orbit, with  i = 63.43.
+<p>
+</p></li><li> We can also note the natural special cases of i = 0
+(equatorial eastbound) and i = 90 (polar). Since launches
+usually take advantage of the direction of Earth spin to gain
+velocity, the special case i = 180 (equatorial westbound)
+is not of interest.
+<p>
+</p></li><li> Orbits with apogees beyond the lunar sphere of influence
+are strongly affected by lunar gravity, and are lumped
+with deep space probes.
+The lunar orbital radius is 384400 km.
+The L2 point is at 326380 km.
+The lunar sphere of influence begins at 318200 km.
+The Earth-Sun L1 point is at 1497600 km in the solar direction.
+</li></ul>
+<p>
+</p><p>
+We define orbital regimes in broad boxes around these special
+orbits, and adopt the following extra boundaries:
+</p><p>
+</p><ul>
+<p>
+</p><li> a lower boundary of space, at 80 km (the mean mesopause);
+<p>
+</p></li><li> a transition boundary at 150 km (the F layer), below which
+satellite orbits are unstable to decay on timescales of hours.
+<p>
+</p></li><li> The LEO/MEO boundary at 2 hr orbital period, corresponding
+approximately to the lower edge of the intense part of the equatorial
+radiation belts;
+<p>
+</p></li><li> a special, arbitrary value e = 0.5 to divide circular and mildly
+elliptical orbits from highly elliptical orbits.
+</li></ul>
+<p>
+</p><p>
+The mesopause is actually typically at 85-90km; I adopt 80 km to
+be generous and to match the 1960s USAF definition of space.
+The D layer of the ionosphere is 75-95 km; E-layer is 95-150 km;
+F layer is 150 and above. F1 at 170 km and F2 reflecting layer
+at about 250-450 km; topside
+ionosphere is above F2's max (at 300-400 km)
+up to the (O/H-He) transition layer at 500-1000 km.
+</p><p>
+The highest flying non-rocket plane is Helios, which reached 29 km
+on 2001 Aug 14. Balloons reach up to 50 km.
+</p><p>
+<p>
+</p><p>
+</p><p>
+</p><p>
+</p><p>
+</p><p>
+</p><p>
+</p><p>
+</p><p>
+</p><p>
+</p><p>
+</p><p>
+</p><p>
+</p><p>
+</p><p>
+</p><p>
+</p><p>
+</p><p>
+</p><p>
+</p><p>
+</p><p>
+</p><p>
+</p><p>
+</p><p>
+</p><p>
+</p><p>
+</p><p>
+</p><p>
+</p><p>
+</p><table border="1">
+<tbody><tr><td align="LEFT" nowrap="nowrap">Code  &nbsp;</td><td align="LEFT" nowrap="nowrap"> Name       &nbsp;</td><td align="LEFT" nowrap="nowrap">  T            &nbsp;</td><td align="LEFT" nowrap="nowrap"> i         &nbsp;</td><td align="LEFT" nowrap="nowrap">   e &nbsp;</td><td align="LEFT" nowrap="nowrap">  h<sub>p</sub> &nbsp;</td><td align="LEFT" nowrap="nowrap"> h<sub>a</sub> &nbsp;</td></tr>
+<tr><td align="LEFT" nowrap="nowrap"></td></tr><tr><td colspan="7"><hr></td></tr>
+<tr><td align="LEFT" nowrap="nowrap">ATM   &nbsp;</td><td align="LEFT" nowrap="nowrap"> Atmospheric&nbsp;</td><td align="LEFT" nowrap="nowrap">  N/A          &nbsp;</td><td align="LEFT" nowrap="nowrap"> 0.0 - 180.0&nbsp;</td><td align="LEFT" nowrap="nowrap"> 0.0 - 1.0 &nbsp;</td><td align="LEFT" nowrap="nowrap"> &lt;80  &nbsp;</td><td align="LEFT" nowrap="nowrap">  0 - 80 &nbsp;</td></tr>
+<tr><td align="LEFT" nowrap="nowrap">TAO   &nbsp;</td><td align="LEFT" nowrap="nowrap"> Trans-Atm. &nbsp;</td><td align="LEFT" nowrap="nowrap">  N/A          &nbsp;</td><td align="LEFT" nowrap="nowrap"> 0.0 - 180.0&nbsp;</td><td align="LEFT" nowrap="nowrap"> 0.0 - 1.0 &nbsp;</td><td align="LEFT" nowrap="nowrap"> 0-80 &nbsp;</td><td align="LEFT" nowrap="nowrap"> &gt;80 &nbsp;</td></tr>
+<tr><td align="LEFT" nowrap="nowrap">SO    &nbsp;</td><td align="LEFT" nowrap="nowrap"> Suborbital &nbsp;</td><td align="LEFT" nowrap="nowrap">  N/A          &nbsp;</td><td align="LEFT" nowrap="nowrap"> 0.0 - 180.0&nbsp;</td><td align="LEFT" nowrap="nowrap">0.0 - 1.0&nbsp;</td><td align="LEFT" nowrap="nowrap"> &lt;0 &nbsp;</td><td align="LEFT" nowrap="nowrap"> &gt;80 &nbsp;</td></tr>
+<tr><td align="LEFT" nowrap="nowrap">LEO/E &nbsp;</td><td align="LEFT" nowrap="nowrap"> Equatorial&nbsp;</td><td align="LEFT" nowrap="nowrap">   1:26  - 2:00 &nbsp;</td><td align="LEFT" nowrap="nowrap"> 0.0   - 20.0 &nbsp;</td><td align="LEFT" nowrap="nowrap"> 0.0 - 0.21 &nbsp;</td><td align="LEFT" nowrap="nowrap"> 80 - 1682 &nbsp;</td><td align="LEFT" nowrap="nowrap"> 80 - 3284 &nbsp;</td></tr>
+<tr><td align="LEFT" nowrap="nowrap">LEO/I &nbsp;</td><td align="LEFT" nowrap="nowrap"> Intermediate&nbsp;</td><td align="LEFT" nowrap="nowrap"> 1:26  - 2:00 &nbsp;</td><td align="LEFT" nowrap="nowrap"> 20.0  - 85.0 &nbsp;</td><td align="LEFT" nowrap="nowrap"> 0.0 - 0.21 &nbsp;</td><td align="LEFT" nowrap="nowrap"> 80 - 1682 &nbsp;</td><td align="LEFT" nowrap="nowrap"> 80 - 3284 &nbsp;</td></tr>
+<tr><td align="LEFT" nowrap="nowrap">LEO/P &nbsp;</td><td align="LEFT" nowrap="nowrap"> Polar     &nbsp;</td><td align="LEFT" nowrap="nowrap">   1:26  - 2:00 &nbsp;</td><td align="LEFT" nowrap="nowrap"> 85.0  - 95.0 &nbsp;</td><td align="LEFT" nowrap="nowrap"> 0.0 - 0.21 &nbsp;</td><td align="LEFT" nowrap="nowrap"> 80 - 1682 &nbsp;</td><td align="LEFT" nowrap="nowrap"> 80 - 3284 &nbsp;</td></tr>
+<tr><td align="LEFT" nowrap="nowrap">LEO/S &nbsp;</td><td align="LEFT" nowrap="nowrap"> Sun-Synch &nbsp;</td><td align="LEFT" nowrap="nowrap">   1:26  - 2:00 &nbsp;</td><td align="LEFT" nowrap="nowrap"> 95.0 - 104.0 &nbsp;</td><td align="LEFT" nowrap="nowrap"> 0.0 - 0.21 &nbsp;</td><td align="LEFT" nowrap="nowrap"> 80 - 1682 &nbsp;</td><td align="LEFT" nowrap="nowrap"> 80 - 3284 &nbsp;</td></tr>
+<tr><td align="LEFT" nowrap="nowrap">LEO/R &nbsp;</td><td align="LEFT" nowrap="nowrap"> Retrograde&nbsp;</td><td align="LEFT" nowrap="nowrap">   1:26  - 2:00 &nbsp;</td><td align="LEFT" nowrap="nowrap">104.0 - 180.0 &nbsp;</td><td align="LEFT" nowrap="nowrap"> 0.0 - 0.21 &nbsp;</td><td align="LEFT" nowrap="nowrap"> 80 - 1682 &nbsp;</td><td align="LEFT" nowrap="nowrap"> 80 - 3284 &nbsp;</td></tr>
+<tr><td align="LEFT" nowrap="nowrap">MEO   &nbsp;</td><td align="LEFT" nowrap="nowrap"> Medium    &nbsp;</td><td align="LEFT" nowrap="nowrap">   2:00 - 23:00 &nbsp;</td><td align="LEFT" nowrap="nowrap">  0.0 - 180.0 &nbsp;</td><td align="LEFT" nowrap="nowrap"> 0.0 - 0.50 &nbsp;</td><td align="LEFT" nowrap="nowrap"> 80 - 34680&nbsp;</td><td align="LEFT" nowrap="nowrap"> 1682 - 55209&nbsp;</td></tr>
+<tr><td align="LEFT" nowrap="nowrap">HEO   &nbsp;</td><td align="LEFT" nowrap="nowrap"> Highly Ellip&nbsp;</td><td align="LEFT" nowrap="nowrap"> 4:03 - 23:00 &nbsp;</td><td align="LEFT" nowrap="nowrap">  0.0 - 180.0 &nbsp;</td><td align="LEFT" nowrap="nowrap"> 0.50 - 0.92 &nbsp;</td><td align="LEFT" nowrap="nowrap"> 80 - 14331&nbsp;</td><td align="LEFT" nowrap="nowrap">13000 - 69280 &nbsp;</td></tr>
+<tr><td align="LEFT" nowrap="nowrap">HEO/M &nbsp;</td><td align="LEFT" nowrap="nowrap"> Molniya   &nbsp;</td><td align="LEFT" nowrap="nowrap">  11:30 - 12:30 &nbsp;</td><td align="LEFT" nowrap="nowrap"> 62.0 - 64.0 &nbsp;</td><td align="LEFT" nowrap="nowrap"> 0.50 - 0.77 &nbsp;</td><td align="LEFT" nowrap="nowrap"> 80 - 7294 &nbsp;</td><td align="LEFT" nowrap="nowrap"> 19489 - 41854&nbsp;</td></tr>
+<tr><td align="LEFT" nowrap="nowrap">GTO   &nbsp;</td><td align="LEFT" nowrap="nowrap"> GEO Transfer&nbsp;</td><td align="LEFT" nowrap="nowrap">10:00 - 12:30 &nbsp;</td><td align="LEFT" nowrap="nowrap">  0.0 - 85.0 &nbsp;</td><td align="LEFT" nowrap="nowrap"> 0.50 - 0.77 &nbsp;</td><td align="LEFT" nowrap="nowrap">  &nbsp;</td><td align="LEFT" nowrap="nowrap">  &nbsp;</td></tr>
+<tr><td align="LEFT" nowrap="nowrap">GEO/S &nbsp;</td><td align="LEFT" nowrap="nowrap"> Stationary &nbsp;</td><td align="LEFT" nowrap="nowrap"> 23:55.5-23:56.5&nbsp;</td><td align="LEFT" nowrap="nowrap"> 0.0  -  2.0 &nbsp;</td><td align="LEFT" nowrap="nowrap"> 0.00 - 0.01&nbsp;</td><td align="LEFT" nowrap="nowrap"> 35353 - 35795 &nbsp;</td><td align="LEFT" nowrap="nowrap"> 35775 - 36217 &nbsp;</td></tr>
+<tr><td align="LEFT" nowrap="nowrap">GEO/I &nbsp;</td><td align="LEFT" nowrap="nowrap"> Inclined GEO&nbsp;</td><td align="LEFT" nowrap="nowrap">23:55.5-23:56.5&nbsp;</td><td align="LEFT" nowrap="nowrap"> 0.0 - 20.0  &nbsp;</td><td align="LEFT" nowrap="nowrap"> 0.00 - 0.05&nbsp;</td><td align="LEFT" nowrap="nowrap"> 33667 - 35795 &nbsp;</td><td align="LEFT" nowrap="nowrap"> 35775 - 37903 &nbsp;</td></tr>
+<tr><td align="LEFT" nowrap="nowrap">GEO/T &nbsp;</td><td align="LEFT" nowrap="nowrap"> Synchronous &nbsp;</td><td align="LEFT" nowrap="nowrap">23:55.5-23:56.5&nbsp;</td><td align="LEFT" nowrap="nowrap"> 0.0 - 180.0 &nbsp;</td><td align="LEFT" nowrap="nowrap"> 0.00 - 0.85&nbsp;</td><td align="LEFT" nowrap="nowrap">   80 -  35795 &nbsp;</td><td align="LEFT" nowrap="nowrap"> 35775 - 71510 &nbsp;</td></tr>
+<tr><td align="LEFT" nowrap="nowrap">GEO/D &nbsp;</td><td align="LEFT" nowrap="nowrap"> Drift GEO   &nbsp;</td><td align="LEFT" nowrap="nowrap"> 23:00 - 25:00 &nbsp;</td><td align="LEFT" nowrap="nowrap"> 0.0 - 2.0   &nbsp;</td><td align="LEFT" nowrap="nowrap"> 0.00 - 0.05&nbsp;</td><td align="LEFT" nowrap="nowrap"> 32628 - 37028 &nbsp;</td><td align="LEFT" nowrap="nowrap"> 34681 - 39198 &nbsp;</td></tr>
+<tr><td align="LEFT" nowrap="nowrap">GEO/ID&nbsp;</td><td align="LEFT" nowrap="nowrap"> Inclined Drift&nbsp;</td><td align="LEFT" nowrap="nowrap">23:00 - 25:00&nbsp;</td><td align="LEFT" nowrap="nowrap"> 0.0 - 20.0  &nbsp;</td><td align="LEFT" nowrap="nowrap"> 0.00 - 0.05&nbsp;</td><td align="LEFT" nowrap="nowrap"> 32628 - 37028 &nbsp;</td><td align="LEFT" nowrap="nowrap"> 34681 - 39198 &nbsp;</td></tr>
+<tr><td align="LEFT" nowrap="nowrap">GEO/NS&nbsp;</td><td align="LEFT" nowrap="nowrap"> Near-synch &nbsp;</td><td align="LEFT" nowrap="nowrap"> 23:00 - 25:00 &nbsp;</td><td align="LEFT" nowrap="nowrap">  0.0 - 180.0 &nbsp;</td><td align="LEFT" nowrap="nowrap"> 0.0 -  0.85 &nbsp;</td><td align="LEFT" nowrap="nowrap"> 80 -   37028 &nbsp;</td><td align="LEFT" nowrap="nowrap"> 34681 - 73976 &nbsp;</td></tr>
+<tr><td align="LEFT" nowrap="nowrap">DSO   &nbsp;</td><td align="LEFT" nowrap="nowrap"> Deep Space&nbsp;</td><td align="LEFT" nowrap="nowrap">  &gt; 25:00     &nbsp;</td><td align="LEFT" nowrap="nowrap">  0.0 - 180.0&nbsp;</td><td align="LEFT" nowrap="nowrap"> 0.0 - 0.50  &nbsp;</td><td align="LEFT" nowrap="nowrap"> &gt;15325&nbsp;</td><td align="LEFT" nowrap="nowrap"> &gt;37028&nbsp;</td></tr>
+<tr><td align="LEFT" nowrap="nowrap">DHEO  &nbsp;</td><td align="LEFT" nowrap="nowrap"> Deep Eccentric&nbsp;</td><td align="LEFT" nowrap="nowrap"> &gt;25:00   &nbsp;</td><td align="LEFT" nowrap="nowrap">  0.0 - 180.0&nbsp;</td><td align="LEFT" nowrap="nowrap"> 0.50 - 1.00 &nbsp;</td><td align="LEFT" nowrap="nowrap"> &gt;80   &nbsp;</td><td align="LEFT" nowrap="nowrap"> &gt;58731&nbsp;</td></tr>
+<tr><td align="LEFT" nowrap="nowrap">CLO   &nbsp;</td><td align="LEFT" nowrap="nowrap"> Cislunar      &nbsp;</td><td align="LEFT" nowrap="nowrap">            &nbsp;</td><td align="LEFT" nowrap="nowrap">  0.0 - 180.0&nbsp;</td><td align="LEFT" nowrap="nowrap"> 0.0 - 1.00 &nbsp;</td><td align="LEFT" nowrap="nowrap">     &nbsp;</td><td align="LEFT" nowrap="nowrap"> &gt;318200&nbsp;</td></tr>
+<tr><td align="LEFT" nowrap="nowrap">EEO   &nbsp;</td><td align="LEFT" nowrap="nowrap"> Earth Escape &nbsp;</td></tr>
+<tr><td align="LEFT" nowrap="nowrap">HCO   &nbsp;</td><td align="LEFT" nowrap="nowrap"> Heliocentric   &nbsp;</td></tr>
+<tr><td align="LEFT" nowrap="nowrap">PCO   &nbsp;</td><td align="LEFT" nowrap="nowrap"> Planetocentric  &nbsp;</td></tr>
+<tr><td align="LEFT" nowrap="nowrap">PEO   &nbsp;</td><td align="LEFT" nowrap="nowrap"> Planetary escape trajectory &nbsp;</td></tr>
+<tr><td align="LEFT" nowrap="nowrap">SSE   &nbsp;</td><td align="LEFT" nowrap="nowrap"> Solar System Escape&nbsp;</td></tr>
+</tbody></table>
+</p><p>
+<a href="http://planet4589.org/space/log/system.html"><img src="orbits_files/left.htm"></a>
+<a href="http://planet4589.org/space/log/rocket.html"><img src="orbits_files/right.htm"></a>
+<a href="http://planet4589.org/space/basics.html"><img src="orbits_files/up.htm"></a>
+</p></body></html>

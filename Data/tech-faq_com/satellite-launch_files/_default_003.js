@@ -1,0 +1,1 @@
+document.write('<a target="_top" href="http://ad.doubleclick.net/click;h=v8/38cb/0/0/%2a/t;44306;0-0;0;29017957;3454-728/90;0/0/0;u=ns-13129195_1255958427,112a3a7905860cb,it_enterprise_networking,ns.IT_AppDev_General_L;~sscs=%3f"><img src="http://m1.2mdn.net/viewad/817-grey.gif" border=0 alt="Click here to find out more!"></a>');
